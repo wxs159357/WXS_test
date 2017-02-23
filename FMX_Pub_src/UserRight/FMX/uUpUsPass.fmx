@@ -1,0 +1,89 @@
+object fUpUsPass: TfUpUsPass
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = Single
+  Caption = #20462#25913#23494#30721
+  ClientHeight = 192
+  ClientWidth = 369
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object edtConfirm: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 6
+    Position.X = 92.000000000000000000
+    Position.Y = 97.000000000000000000
+    Size.Width = 265.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Label4: TLabel
+    Position.X = 12.000000000000000000
+    Position.Y = 101.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = #30830#35748#23494#30721
+  end
+  object edtOld: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 9
+    Position.X = 92.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 265.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtNew: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 7
+    Position.X = 92.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 265.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Label2: TLabel
+    Position.X = 12.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = #26032#23494#30721
+  end
+  object Label1: TLabel
+    Position.X = 12.000000000000000000
+    Position.Y = 28.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = #26087#23494#30721
+  end
+  object btn1: TButton
+    Position.X = 96.000000000000000000
+    Position.Y = 152.000000000000000000
+    TabOrder = 13
+    Text = #30830#23450
+    OnClick = btn1Click
+  end
+  object Button1: TButton
+    Position.X = 184.000000000000000000
+    Position.Y = 152.000000000000000000
+    TabOrder = 12
+    Text = #21462#28040
+    OnClick = Button1Click
+  end
+  object Line1: TLine
+    LineType = Bottom
+    Position.X = 8.000000000000000000
+    Position.Y = 128.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 7.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Dash = Dot
+    Stroke.Join = Bevel
+  end
+end

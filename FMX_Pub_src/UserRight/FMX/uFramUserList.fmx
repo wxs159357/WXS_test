@@ -1,0 +1,94 @@
+object famUserList: TfamUserList
+  Tag = 1
+  Align = Client
+  Size.Width = 502.000000000000000000
+  Size.Height = 371.000000000000000000
+  Size.PlatformDefault = False
+  object strGrdUser: TStringGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    PopupMenu = PopupMenu1
+    Size.Width = 502.000000000000000000
+    Size.Height = 371.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    TabOrder = 3
+    RowHeight = 21.000000000000000000
+    RowCount = 0
+    Options = [ColumnResize, ColLines, RowLines, RowSelect, Header]
+    Viewport.Width = 498.000000000000000000
+    Viewport.Height = 346.000000000000000000
+    object strngclmn1: TStringColumn
+      Header = '   '#29992#25143#21517
+      Size.Width = 80.000000000000000000
+    end
+    object strngclmn2: TStringColumn
+      Header = '        '#29992#25143#20840#31216
+      Size.Width = 120.000000000000000000
+    end
+    object strngclmn3: TStringColumn
+      Header = '        '#29992#25143#35828#26126
+      Size.Width = 159.000000000000000000
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 232
+    Top = 136
+    object MenuItem1: TMenuItem
+      Action = actAddUser
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem2: TMenuItem
+      Text = '-'
+    end
+    object MenuItem3: TMenuItem
+      Action = actUserUpPass
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem4: TMenuItem
+      Action = actEditUser
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem5: TMenuItem
+      Action = actDel
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem6: TMenuItem
+      Text = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = actRefresh
+      Enabled = True
+      ImageIndex = -1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 232
+    Top = 56
+    object actAddUser: TAction
+      Text = #28155#21152#29992#25143
+      OnExecute = actAddUserExecute
+    end
+    object actRefresh: TAction
+      Text = #21047#26032
+      OnExecute = actRefreshExecute
+    end
+    object actEditUser: TAction
+      Text = #32534#36753#29992#25143
+      OnExecute = actEditUserExecute
+    end
+    object actDel: TAction
+      Text = #21024#38500#29992#25143
+      OnExecute = actDelExecute
+    end
+    object actUserUpPass: TAction
+      Text = #20462#25913#23494#30721
+      OnExecute = actUserUpPassExecute
+    end
+  end
+end

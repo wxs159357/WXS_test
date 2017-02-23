@@ -1,0 +1,292 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btn1: TButton
+    Position.X = 32.000000000000000000
+    Position.Y = 24.000000000000000000
+    TabOrder = 0
+    Text = #20851#20110#30028#38754
+    OnClick = btn1Click
+  end
+  object btn2: TButton
+    Position.X = 136.000000000000000000
+    Position.Y = 24.000000000000000000
+    TabOrder = 1
+    Text = #31243#24207#36335#24452
+    OnClick = btn2Click
+  end
+  object btn3: TButton
+    Position.X = 416.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'FDQuery '#27979#35797
+    OnClick = btn3Click
+  end
+  object mmo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 360.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 289.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Viewport.Width = 293.000000000000000000
+    Viewport.Height = 285.000000000000000000
+  end
+  object btn4: TButton
+    Position.X = 232.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 145.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = #25968#25454#24211#21319#32423
+    OnClick = btn4Click
+  end
+  object grpbx1: TGroupBox
+    StyledSettings = [Size, Style, FontColor, Other]
+    Position.X = 32.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 281.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = #20018#21475#25805#20316
+    TextSettings.Font.Family = #23435#20307
+    TabOrder = 8
+    object btn5: TButton
+      StyledSettings = [Size, Style, FontColor]
+      Position.X = 16.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #25171#24320#20018#21475
+      TextSettings.Font.Family = #23435#20307
+      OnClick = btn5Click
+    end
+    object btn6: TButton
+      StyledSettings = [Size, Style, FontColor]
+      Position.X = 104.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 1
+      Text = #20851#38381#20018#21475
+      TextSettings.Font.Family = #23435#20307
+      OnClick = btn6Click
+    end
+    object btn7: TButton
+      StyledSettings = [Size, Style, FontColor]
+      Position.X = 192.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 2
+      Text = #21457#36865
+      TextSettings.Font.Family = #23435#20307
+      OnClick = btn7Click
+    end
+  end
+  object grpbx2: TGroupBox
+    Position.X = 32.000000000000000000
+    Position.Y = 128.000000000000000000
+    Size.Width = 321.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'TCP '#23458#25143#31471' 127.0.0.1 10000'
+    TabOrder = 12
+    object btn8: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #36830#25509
+      OnClick = btn8Click
+    end
+    object btn9: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 1
+      Text = #26029#24320
+      OnClick = btn9Click
+    end
+    object btn10: TButton
+      Position.X = 192.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 2
+      Text = #21457#36865
+      OnClick = btn10Click
+    end
+  end
+  object grpbx3: TGroupBox
+    Position.X = 32.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 321.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'TCP '#26381#21153#22120' 10000'
+    TabOrder = 11
+    object btn11: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #30417#21548
+      OnClick = btn11Click
+    end
+    object btn12: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 1
+      Text = #20572#27490#30417#21548
+      OnClick = btn12Click
+    end
+    object btn13: TButton
+      Position.X = 192.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 2
+      Text = #21457#36865
+      OnClick = btn13Click
+    end
+  end
+  object grpbx4: TGroupBox
+    Position.X = 32.000000000000000000
+    Position.Y = 241.000000000000000000
+    Size.Width = 321.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'UDP '#26381#21153#22120' 11000'
+    TabOrder = 10
+    object btn15: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #30417#21548
+      OnClick = btn15Click
+    end
+    object btn16: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 1
+      Text = #20572#27490#30417#21548
+      OnClick = btn16Click
+    end
+    object btn17: TButton
+      Position.X = 192.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 2
+      Text = #21457#36865
+      OnClick = btn17Click
+    end
+  end
+  object tmr1: TTimer
+    OnTimer = tmr1Timer
+    Top = 336
+  end
+  object btn14: TButton
+    Position.X = 32.000000000000000000
+    Position.Y = 299.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 15
+    Text = #24322#24120#25552#31034#27979#35797
+    OnClick = btn14Click
+  end
+  object grpbx5: TGroupBox
+    Position.X = 32.000000000000000000
+    Position.Y = 322.000000000000000000
+    Size.Width = 377.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    Text = #26102#38047#27979#35797
+    TabOrder = 16
+    object btn18: TButton
+      Position.X = 200.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #24320#22987
+      OnClick = btn18Click
+    end
+    object btn19: TButton
+      Position.X = 200.000000000000000000
+      Position.Y = 48.000000000000000000
+      TabOrder = 1
+      Text = #20572#27490
+      OnClick = btn19Click
+    end
+    object btn20: TButton
+      Position.X = 288.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 2
+      Text = #26242#20572
+      OnClick = btn20Click
+    end
+    object btn21: TButton
+      Position.X = 288.000000000000000000
+      Position.Y = 48.000000000000000000
+      TabOrder = 3
+      Text = #32487#32493
+      OnClick = btn21Click
+    end
+    object cbb1: TComboBox
+      Items.Strings = (
+        #26102#38047
+        #27491#35745#26102
+        #20498#35745#26102)
+      ItemIndex = 0
+      Position.X = 120.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 73.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
+    object tmdt1: TTimeEdit
+      Time = 0.638194444444444400
+      TimeFormatKind = Long
+      Position.X = 16.000000000000000000
+      Position.Y = 42.000000000000000000
+      TabOrder = 7
+    end
+    object tmdt2: TTimeEdit
+      Time = 0.638194444444444400
+      TimeFormatKind = Long
+      Position.X = 16.000000000000000000
+      Position.Y = 18.000000000000000000
+      TabOrder = 6
+    end
+  end
+  object grpbx6: TGroupBox
+    Position.X = 40.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 225.000000000000000000
+    Size.Height = 100.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'HTTP Server'
+    TabOrder = 19
+    object btn22: TButton
+      Position.X = 24.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 0
+      Text = #21551#21160
+      OnClick = btn22Click
+    end
+    object btn23: TButton
+      Position.X = 112.000000000000000000
+      Position.Y = 24.000000000000000000
+      TabOrder = 1
+      Text = #20572#27490
+      OnClick = btn23Click
+    end
+  end
+  object fdqry1: TFDQuery
+    Left = 544
+    Top = 24
+  end
+end

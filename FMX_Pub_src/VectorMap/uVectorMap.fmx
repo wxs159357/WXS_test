@@ -1,0 +1,180 @@
+object fVectorMap: TfVectorMap
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 404
+  ClientWidth = 660
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  DesignerMasterStyle = 0
+  object rctngl1: TRectangle
+    Align = Client
+    Size.Width = 445.000000000000000000
+    Size.Height = 404.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object pnl1: TPanel
+    Align = Right
+    Position.X = 448.000000000000000000
+    Size.Width = 212.000000000000000000
+    Size.Height = 404.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object grpbx1: TGroupBox
+      Align = Top
+      Size.Width = 212.000000000000000000
+      Size.Height = 193.000000000000000000
+      Size.PlatformDefault = False
+      Text = #21521#37327#20449#24687
+      TabOrder = 0
+      object edtVName: TComboEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        ItemHeight = 19.000000000000000000
+        Items.Strings = (
+          'Ua'
+          'Ia'
+          'Ub'
+          'Ib'
+          'Uc'
+          'Ic'
+          'Uab'
+          'Ucb'
+          'Uac'
+          'Ubc'
+          'Uba'
+          'Uca')
+        ItemIndex = -1
+        Position.X = 72.000000000000000000
+        Position.Y = 24.000000000000000000
+        OnChange = edtVNameChange
+        object lbl1: TLabel
+          Position.X = -43.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = #21517#31216
+        end
+      end
+      object cmbclrbxVColor: TComboColorBox
+        Color = claWhite
+        Position.X = 72.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnChange = cmbclrbxVColorChange
+        object lbl2: TLabel
+          Position.X = -43.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = #39068#33394
+        end
+      end
+      object edtVValue: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        Position.X = 72.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = edtVValueChange
+        object lbl5: TLabel
+          Position.X = -43.000000000000000000
+          Position.Y = 2.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = #25968#20540
+        end
+      end
+      object cmbtrckbrVAngle: TComboTrackBar
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Cursor = crIBeam
+        Max = 360.000000000000000000
+        ValueType = Float
+        DecimalDigits = 2
+        Position.X = 72.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = cmbtrckbrVAngleChange
+        object lbl4: TLabel
+          Position.X = -43.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = #35282#24230
+        end
+      end
+      object cbbVType: TComboBox
+        Items.Strings = (
+          #30005#21387
+          #30005#27969)
+        ItemIndex = 0
+        Position.X = 72.000000000000000000
+        Position.Y = 88.000000000000000000
+        TabOrder = 4
+        OnChange = cbbVTypeChange
+        object lbl3: TLabel
+          Position.X = -42.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 17.000000000000000000
+          Size.PlatformDefault = False
+          Text = #31867#22411
+        end
+      end
+    end
+    object btn1: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 208.000000000000000000
+      TabOrder = 1
+      Text = #28155#21152
+      OnClick = btn1Click
+    end
+    object btn2: TButton
+      Enabled = False
+      Position.X = 112.000000000000000000
+      Position.Y = 208.000000000000000000
+      TabOrder = 2
+      Text = #21024#38500
+      OnClick = btn2Click
+    end
+    object btnDelArc: TButton
+      Enabled = False
+      Position.X = 112.000000000000000000
+      Position.Y = 240.000000000000000000
+      TabOrder = 3
+      Text = #21024#38500#24359#32447
+      OnClick = btnDelArcClick
+    end
+    object btnAddArc: TButton
+      Enabled = False
+      Position.X = 16.000000000000000000
+      Position.Y = 240.000000000000000000
+      TabOrder = 4
+      Text = #28155#21152#24359#32447
+      OnClick = btnAddArcClick
+    end
+  end
+  object spltr2: TSplitter
+    Align = Right
+    Cursor = crHSplit
+    MinSize = 20.000000000000000000
+    Position.X = 445.000000000000000000
+    Size.Width = 3.000000000000000000
+    Size.Height = 404.000000000000000000
+    Size.PlatformDefault = False
+  end
+end

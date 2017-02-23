@@ -1,0 +1,117 @@
+object fSortList: TfSortList
+  Left = 0
+  Top = 0
+  Caption = #39064#24211#21015#34920
+  ClientHeight = 377
+  ClientWidth = 532
+  Position = OwnerFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object strngrdSortList: TStringGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    ControlType = Platform
+    DisableFocusEffect = True
+    Size.Width = 532.000000000000000000
+    Size.Height = 341.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Options = [ColumnResize, ColLines, RowLines, RowSelect, AlwaysShowSelection, Tabs, Header, HeaderClick, AutoDisplacement]
+    Viewport.Width = 512.000000000000000000
+    Viewport.Height = 316.000000000000000000
+    object strngclmn1: TStringColumn
+      Header = #32534#21495
+      ReadOnly = True
+      Size.Width = 41.000000000000000000
+    end
+    object strngclmn2: TStringColumn
+      Header = #39064#24211#21517#31216
+      ReadOnly = True
+    end
+    object strngclmn3: TStringColumn
+      Header = #39064#24211#22791#27880
+      ReadOnly = True
+      Size.Width = 369.000000000000000000
+    end
+  end
+  object pnl2: TPanel
+    Align = Bottom
+    Position.Y = 341.000000000000000000
+    Size.Width = 532.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btnAdd: TButton
+      Action = actAdd
+      Enabled = True
+      ImageIndex = 3
+      Position.X = 22.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 3
+      Visible = True
+    end
+    object btnDel: TButton
+      Action = actDel
+      Enabled = True
+      ImageIndex = 9
+      Position.X = 108.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 2
+      Visible = True
+    end
+    object btnEdit: TButton
+      Action = actUpdate
+      Enabled = True
+      ImageIndex = 11
+      Position.X = 194.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Visible = True
+    end
+    object btn1: TButton
+      Action = actClear
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 281.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 0
+      Visible = True
+    end
+  end
+  object actnlstList: TActionList
+    Left = 104
+    Top = 104
+    object actAdd: TAction
+      Text = #28155#21152
+      ImageIndex = 3
+      OnExecute = actAddExecute
+      ImageIndex = 3
+    end
+    object actDel: TAction
+      Text = #21024#38500
+      ImageIndex = 9
+      OnExecute = actDelExecute
+      ImageIndex = 9
+    end
+    object actUpdate: TAction
+      Text = #20462#25913
+      ImageIndex = 11
+      OnExecute = actUpdateExecute
+      ImageIndex = 11
+    end
+    object actLoadList: TAction
+      Text = 'actLoadList'
+      OnExecute = actLoadListExecute
+    end
+    object actClear: TAction
+      Text = #28165#31354
+      OnExecute = actClearExecute
+    end
+  end
+end

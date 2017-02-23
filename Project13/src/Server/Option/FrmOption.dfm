@@ -1,0 +1,111 @@
+object fOption: TfOption
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = #35774#32622
+  ClientHeight = 482
+  ClientWidth = 639
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlCatagory: TPanel
+    Left = 0
+    Top = 0
+    Width = 161
+    Height = 441
+    Align = alLeft
+    Caption = 'pnlCatagory'
+    TabOrder = 0
+    ExplicitHeight = 316
+    object btnCateGoryList: TCategoryButtons
+      Left = 1
+      Top = 1
+      Width = 159
+      Height = 439
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      ButtonFlow = cbfVertical
+      ButtonWidth = 80
+      ButtonOptions = [boFullSize, boGradientFill, boShowCaptions]
+      Categories = <>
+      GradientDirection = gdVertical
+      RegularButtonColor = 15660791
+      SelectedButtonColor = 13361893
+      TabOrder = 0
+      OnButtonClicked = btnCateGoryListButtonClicked
+      ExplicitHeight = 314
+    end
+  end
+  object pnl1: TPanel
+    Left = 161
+    Top = 0
+    Width = 478
+    Height = 441
+    Align = alClient
+    TabOrder = 1
+    ExplicitWidth = 343
+    ExplicitHeight = 316
+    object pnlOption: TPanel
+      Left = 1
+      Top = 42
+      Width = 476
+      Height = 398
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 0
+      ExplicitTop = 34
+      ExplicitWidth = 341
+      ExplicitHeight = 281
+    end
+    object pnl3: TPanel
+      Left = 1
+      Top = 1
+      Width = 476
+      Height = 41
+      Align = alTop
+      Caption = 'pnl3'
+      TabOrder = 1
+      ExplicitLeft = 48
+      ExplicitTop = 80
+      ExplicitWidth = 185
+    end
+  end
+  object pnl2: TPanel
+    Left = 0
+    Top = 441
+    Width = 639
+    Height = 41
+    Align = alBottom
+    TabOrder = 2
+    ExplicitTop = 316
+    ExplicitWidth = 504
+    object btnOK: TButton
+      Left = 312
+      Top = 7
+      Width = 75
+      Height = 25
+      Caption = #30830#23450
+      TabOrder = 0
+      OnClick = btnOKClick
+    end
+    object btnCancle: TButton
+      Left = 400
+      Top = 7
+      Width = 75
+      Height = 25
+      Caption = #21462#28040
+      TabOrder = 1
+      OnClick = btnCancleClick
+    end
+  end
+end

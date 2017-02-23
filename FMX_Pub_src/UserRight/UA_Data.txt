@@ -1,0 +1,139 @@
+/* TS_C01, UA模块初始化数据 */
+
+use TS_C01
+
+go
+
+insert into UA_GROUP( G_ID, G_NAME, G_DESCRIPTION, G_EMBEDDED )
+values( 1, '管理员组', '管理员组', 1 )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 1, '用户帐号管理' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 2, '修改密码' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 3, '系统设置' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 4, '学员管理' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 5, '题库管理' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 6, '考试信息管理' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 7, '教案管理' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 8, '数据库备份' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 9, '培训' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 10, '练习' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 11, '考试控制' )
+
+go
+
+insert into UA_RIGHT( R_ID, R_NAME )
+values( 12, '答卷管理' )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 1 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 2 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 3 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 4 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 5 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 6 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 7 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 8 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 9 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 10 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 11 )
+
+go
+
+insert into UA_GROUP_RIGHT( G_ID, R_ID )
+values( 1, 12 )
+
+go
+
+insert into UA_USER( U_ID, G_ID, U_NAME, U_PASSWORD, U_FULL_NAME, U_DESCRIPTION, U_CHANGE_PWD, U_DISABLEED, U_EMBEDDED )
+values( 1, 1, 'admin', 'D41D8CD98F00B204E9800998ECF8427E', '管理员', '系统管理', 1, 0, 1 )
+
+go
+
+
+
+

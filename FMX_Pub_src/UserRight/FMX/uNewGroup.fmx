@@ -1,0 +1,203 @@
+object fNewGroup: TfNewGroup
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = Single
+  Caption = #32452#20449#24687
+  ClientHeight = 320
+  ClientWidth = 404
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pgc1: TTabControl
+    Align = Top
+    Size.Width = 404.000000000000000000
+    Size.Height = 265.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      404s
+      237s
+      404s
+      237s)
+    object ts1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Margins.Right = 1.000000000000000000
+      Size.Width = 67.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = #29992#25143#20449#24687
+      ExplicitSize.cx = 67.000000000000000000
+      ExplicitSize.cy = 28.000000000000000000
+      object Label1: TLabel
+        Position.X = 24.000000000000000000
+        Position.Y = 28.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = #20998#32452#21517#31216
+      end
+      object Label2: TLabel
+        Position.X = 24.000000000000000000
+        Position.Y = 70.000000000000000000
+        Size.Width = 65.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = #20998#32452#35828#26126
+      end
+      object edtGroupName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Position.X = 118.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 265.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object edtGroupDesc: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        Position.X = 118.000000000000000000
+        Position.Y = 66.000000000000000000
+        Size.Width = 265.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object ts2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Margins.Left = 2.000000000000000000
+      Size.Width = 42.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = #26435#38480
+      ExplicitSize.cx = 42.000000000000000000
+      ExplicitSize.cy = 28.000000000000000000
+      object Label6: TLabel
+        Position.X = 18.000000000000000000
+        Position.Y = 36.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = #25152#26377#26435#38480
+      end
+      object Label7: TLabel
+        Position.X = 226.000000000000000000
+        Position.Y = 36.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = #20998#32452#26435#38480
+      end
+      object lstAllRight: TListBox
+        Position.X = 18.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 153.000000000000000000
+        Size.Height = 173.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        OnDblClick = Button3Click
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 149.000000000000000000
+        Viewport.Height = 169.000000000000000000
+      end
+      object lstCurrRight: TListBox
+        Position.X = 226.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 152.000000000000000000
+        Size.Height = 173.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        OnDblClick = Button4Click
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 148.000000000000000000
+        Viewport.Height = 169.000000000000000000
+      end
+      object Button3: TButton
+        Position.X = 180.000000000000000000
+        Position.Y = 68.000000000000000000
+        Size.Width = 33.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Text = '>'
+        OnClick = Button3Click
+      end
+      object Button4: TButton
+        Position.X = 180.000000000000000000
+        Position.Y = 100.000000000000000000
+        Size.Width = 33.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Text = '<'
+        OnClick = Button4Click
+      end
+      object Button5: TButton
+        Position.X = 180.000000000000000000
+        Position.Y = 132.000000000000000000
+        Size.Width = 33.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Text = '>>'
+        OnClick = Button5Click
+      end
+      object Button6: TButton
+        Position.X = 180.000000000000000000
+        Position.Y = 164.000000000000000000
+        Size.Width = 33.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = '<<'
+        OnClick = Button6Click
+      end
+    end
+  end
+  object lblNotice: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Notice'
+    Visible = False
+  end
+  object Button1: TButton
+    Position.X = 199.000000000000000000
+    Position.Y = 280.000000000000000000
+    Size.Width = 82.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = #30830#23450
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Position.X = 288.000000000000000000
+    Position.Y = 280.000000000000000000
+    TabOrder = 1
+    Text = #21462#28040
+  end
+end

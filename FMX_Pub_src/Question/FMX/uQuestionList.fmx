@@ -1,0 +1,196 @@
+object fQuestionList: TfQuestionList
+  Left = 0
+  Top = 0
+  Caption = #32771#39064#21015#34920
+  ClientHeight = 375
+  ClientWidth = 580
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object pnl1: TPanel
+    Align = Top
+    Size.Width = 580.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object cbbSortList: TComboBox
+      Anchors = [akLeft, akTop, akRight]
+      Position.X = 40.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 449.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnChange = cbbSortListChange
+    end
+    object btnSortManage: TButton
+      Anchors = [akTop, akRight]
+      Position.X = 494.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = #31649#29702
+      OnClick = btnSortManageClick
+    end
+    object lbl1: TLabel
+      Align = MostLeft
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 41.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      Text = #39064#24211
+    end
+  end
+  object strngrdQuestionList: TStringGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    ControlType = Platform
+    Size.Width = 580.000000000000000000
+    Size.Height = 270.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Options = [ColumnResize, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+    Viewport.Width = 560.000000000000000000
+    Viewport.Height = 245.000000000000000000
+    object strngclmn1: TStringColumn
+      Header = #32534#21495
+      ReadOnly = True
+      Size.Width = 41.000000000000000000
+    end
+    object strngclmn2: TStringColumn
+      Header = #32771#39064#21517#31216
+      ReadOnly = True
+    end
+    object strngclmn3: TStringColumn
+      Header = #32771#39064#25551#36848
+      ReadOnly = True
+      Size.Width = 135.000000000000000000
+    end
+    object strngclmn4: TStringColumn
+      Header = #32771#39064#22791#27880
+      ReadOnly = True
+      Size.Width = 266.000000000000000000
+    end
+  end
+  object pnl2: TPanel
+    Align = Bottom
+    Position.Y = 307.000000000000000000
+    Size.Width = 580.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object btnAdd: TButton
+      Action = actAdd
+      Enabled = True
+      ImageIndex = 3
+      Position.X = 14.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 2
+      Visible = True
+    end
+    object btnDel: TButton
+      Action = actDel
+      Enabled = True
+      ImageIndex = 9
+      Position.X = 100.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 1
+      Visible = True
+    end
+    object btnEdit: TButton
+      Action = actUpdate
+      Enabled = True
+      ImageIndex = 11
+      Position.X = 186.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 0
+      Visible = True
+    end
+    object btn3: TButton
+      Action = actClearAll
+      Enabled = True
+      ImageIndex = 2
+      Position.X = 272.000000000000000000
+      Position.Y = 8.000000000000000000
+      TabOrder = 3
+      Visible = True
+    end
+  end
+  object pnl3: TPanel
+    Align = Bottom
+    Position.Y = 343.000000000000000000
+    Size.Width = 580.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    object btnOK: TButton
+      Anchors = [akTop, akRight]
+      ImageIndex = 13
+      ModalResult = 1
+      Position.X = 403.000000000000000000
+      Position.Y = 5.000000000000000000
+      TabOrder = 1
+      Text = #30830#23450
+    end
+    object btnCancel: TButton
+      Anchors = [akTop, akRight]
+      ImageIndex = 12
+      ModalResult = 2
+      Position.X = 492.000000000000000000
+      Position.Y = 5.000000000000000000
+      TabOrder = 0
+      Text = #21462#28040
+    end
+  end
+  object actnlstList: TActionList
+    Left = 104
+    Top = 104
+    object actAdd: TAction
+      Text = #28155#21152
+      ImageIndex = 3
+      OnExecute = actAddExecute
+      ImageIndex = 3
+    end
+    object actDel: TAction
+      Text = #21024#38500
+      ImageIndex = 9
+      OnExecute = actDelExecute
+      ImageIndex = 9
+    end
+    object actUpdate: TAction
+      Text = #20462#25913
+      ImageIndex = 11
+      OnExecute = actUpdateExecute
+      ImageIndex = 11
+    end
+    object actSearch: TAction
+      Text = #26597#35810
+      ImageIndex = 8
+      ImageIndex = 8
+    end
+    object actSearchAll: TAction
+      Text = #26597#35810#25152#26377#23398#21592
+      ImageIndex = 8
+      ImageIndex = 8
+    end
+    object actClearAll: TAction
+      Text = #28165#31354
+      ImageIndex = 2
+      OnExecute = actClearAllExecute
+      ImageIndex = 2
+    end
+    object actLoadSort: TAction
+      Text = #21152#36733#39064#24211
+      OnExecute = actLoadSortExecute
+    end
+  end
+end

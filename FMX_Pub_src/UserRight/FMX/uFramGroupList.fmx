@@ -1,0 +1,80 @@
+object famGroupList: TfamGroupList
+  Align = Client
+  Size.Width = 495.000000000000000000
+  Size.Height = 344.000000000000000000
+  Size.PlatformDefault = False
+  object strGrdGroup: TStringGrid
+    Align = Client
+    CanFocus = True
+    ClipChildren = True
+    PopupMenu = PopupMenu1
+    Size.Width = 495.000000000000000000
+    Size.Height = 344.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    TabOrder = 3
+    RowHeight = 21.000000000000000000
+    RowCount = 0
+    Options = [ColumnResize, ColLines, RowLines, RowSelect, Header]
+    Viewport.Width = 491.000000000000000000
+    Viewport.Height = 319.000000000000000000
+    object strngclmn2: TStringColumn
+      Header = '        '#32452#21517#31216
+      Size.Width = 120.000000000000000000
+    end
+    object strngclmn3: TStringColumn
+      Header = '      '#32452#35828#26126
+      Size.Width = 152.000000000000000000
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 224
+    Top = 128
+    object MenuItem1: TMenuItem
+      Action = actAddGroup
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem2: TMenuItem
+      Text = '-'
+    end
+    object MenuItem4: TMenuItem
+      Action = actEditGroup
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem5: TMenuItem
+      Action = actDel
+      Enabled = True
+      ImageIndex = -1
+    end
+    object MenuItem6: TMenuItem
+      Text = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = actRefresh
+      Enabled = True
+      ImageIndex = -1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 224
+    Top = 56
+    object actAddGroup: TAction
+      Text = #28155#21152#20998#32452
+      OnExecute = actAddGroupExecute
+    end
+    object actRefresh: TAction
+      Text = #21047#26032
+      OnExecute = actRefreshExecute
+    end
+    object actEditGroup: TAction
+      Text = #32534#36753#20998#32452
+      OnExecute = actEditGroupExecute
+    end
+    object actDel: TAction
+      Text = #21024#38500#20998#32452
+      OnExecute = actDelExecute
+    end
+  end
+end

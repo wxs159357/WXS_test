@@ -1,0 +1,82 @@
+object Form5: TForm5
+  Left = 0
+  Top = 0
+  Caption = 'Form5'
+  ClientHeight = 616
+  ClientWidth = 855
+  Quality = HighQuality
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btn4: TButton
+    Position.X = 536.000000000000000000
+    Position.Y = 224.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = #30011#22270
+    OnClick = btn4Click
+  end
+  object mmo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 24.000000000000000000
+    Position.Y = 376.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 177.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 397.000000000000000000
+    Viewport.Height = 173.000000000000000000
+  end
+  object btn5: TButton
+    Position.X = 536.000000000000000000
+    Position.Y = 264.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = #22270#36716#25442#25104#23383#31526#20018
+    OnClick = btn5Click
+  end
+  object btn6: TButton
+    Position.X = 536.000000000000000000
+    Position.Y = 296.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = #23383#31526#20018#36716#25442#25104#22270
+    OnClick = btn6Click
+  end
+  object arc2: TArc
+    Position.X = 352.000000000000000000
+    Position.Y = 312.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    StartAngle = -70.000000000000000000
+    EndAngle = 50.000000000000000000
+  end
+  object rctngl1: TRectangle
+    Position.X = 24.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 353.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object btn2: TButton
+    Position.X = 536.000000000000000000
+    Position.Y = 328.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Text = #32534#36753#21521#37327#22270
+    OnClick = btn2Click
+  end
+end

@@ -1,0 +1,78 @@
+object fUserOption: TfUserOption
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = Single
+  Caption = #29992#25143#31649#29702
+  ClientHeight = 480
+  ClientWidth = 640
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object TabUserOption: TTabControl
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    OnChange = TabUserOptionChange
+    Sizes = (
+      640s
+      454s
+      640s
+      454s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Margins.Left = 1.000000000000000000
+      Margins.Right = 1.000000000000000000
+      Size.Width = 66.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = #29992#25143#31649#29702
+      ExplicitSize.cx = 66.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object pnlUserlOption: TPanel
+        Align = Client
+        Size.Width = 640.000000000000000000
+        Size.Height = 454.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Margins.Left = 2.000000000000000000
+      Margins.Right = 1.000000000000000000
+      Size.Width = 53.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = #32452#31649#29702
+      ExplicitSize.cx = 53.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object pnlGroupOption: TPanel
+        Align = Client
+        Size.Width = 640.000000000000000000
+        Size.Height = 454.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+    end
+  end
+end

@@ -1,0 +1,27 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btn1: TButton
+    Position.X = 88.000000000000000000
+    Position.Y = 32.000000000000000000
+    TabOrder = 1
+    Text = #35835#22320#22336
+    OnClick = btn1Click
+  end
+  object btn2: TButton
+    Position.X = 208.000000000000000000
+    Position.Y = 32.000000000000000000
+    TabOrder = 3
+    Text = #35835#25968#25454
+    OnClick = btn2Click
+  end
+end
