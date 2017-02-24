@@ -248,6 +248,7 @@ end;
 procedure TProtocolBase.ReceivedData(aPacks: TBytes; sParam1, sParam2 : string);
 begin
   BeforeRev;
+  ParseData(aPacks);
   CommSenRev(aPacks, False);
 
   AfterRev;
