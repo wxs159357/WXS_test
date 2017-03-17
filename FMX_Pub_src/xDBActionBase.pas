@@ -13,6 +13,7 @@ uses xDBConn, FireDAC.Stan.Intf,
 
 type
   TDBActionBase = class
+  private
 
   protected
     FQuery :TFDQuery;
@@ -21,6 +22,8 @@ type
   public
     constructor Create; virtual;
     destructor Destroy; override;
+
+    property Query : TFDQuery read FQuery write FQuery;
 
     /// <summary>
     /// Ö´ÐÐSQL Óï¾ä

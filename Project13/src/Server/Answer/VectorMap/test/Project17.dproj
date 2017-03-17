@@ -1,14 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{572A06A3-BE3F-43CA-A617-2A8B791CF629}</ProjectGuid>
-        <ProjectVersion>18.2</ProjectVersion>
-        <FrameworkType>VCL</FrameworkType>
-        <MainSource>Project13_Server.dpr</MainSource>
+        <ProjectGuid>{FE6F7882-0EA7-40FD-B4BA-5F1FEF6F72F2}</ProjectGuid>
+        <MainSource>Project17.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>18.2</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -23,18 +23,12 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
-        <Cfg_1_Win32>true</Cfg_1_Win32>
-        <CfgParent>Cfg_1</CfgParent>
-        <Cfg_1>true</Cfg_1>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
@@ -46,236 +40,97 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <SanitizedProjectName>Project13_Server</SanitizedProjectName>
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
-        <DCC_E>false</DCC_E>
-        <DCC_N>false</DCC_N>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
+        <SanitizedProjectName>Project17</SanitizedProjectName>
+        <DCC_K>false</DCC_K>
+        <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+        <DCC_N>true</DCC_N>
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
-        <DCC_K>false</DCC_K>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>2052</VerInfo_Locale>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_E>false</DCC_E>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;svnui;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;Intraweb;svn;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;Package1;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;IocompDelphiXE2;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;TMSFMXPackPkgDXE10;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Icon_MainIcon>Project17_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;Intraweb;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>Project17_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <DCC_Optimize>false</DCC_Optimize>
-        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
-        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <DCC_RemoteDebug>true</DCC_RemoteDebug>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <DCC_RemoteDebug>false</DCC_RemoteDebug>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
-        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Exam\FrmExam.pas">
-            <Form>fExam</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="FrmTest.pas">
+            <Form>Form17</Form>
         </DCCReference>
-        <DCCReference Include="Exercise\VCL\FrmExercise.pas">
-            <Form>fExercise</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Frame\FrmAbout.pas">
-            <Form>fAbout</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Frame\FrmLoadForm.pas">
-            <Form>fLoadform</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Frame\FrmMain.pas">
-            <Form>fMain</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Log\FrmLog.pas">
-            <Form>fLog</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Paper\FrmPaper.pas">
-            <Form>fPaper</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Training\FrmTrain.pas">
-            <Form>fTrain</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Option\FrmOption.pas">
-            <Form>fOption</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Option\FrmOptionBase.pas">
-            <Form>fOptionBase</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="WiringError\FrmErrorSelect.pas">
-            <Form>fErrorSelect</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="WiringError\U_WIRINGF_ERROR.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_CKM_DEVICE.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_PUB_FUN.pas"/>
-        <DCCReference Include="WiringError\WiringError\FrmWEDetails2.pas">
-            <Form>fWEDetails2</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="WiringError\WiringError\U_DIAGRAM_TYPE.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_POWER_PHASE_MAP.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_POWER_STATUS.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_EQUATION.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_EQUATION_DRAW.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_EQUATION_MATH.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_EXPRESSION.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WIRING_ERROR.pas"/>
-        <DCCReference Include="WiringError\WiringError\AnalysisMap\U_POWER_LIST_INFO.pas"/>
-        <DCCReference Include="WiringError\WiringError\V2\U_WE_ORGAN.pas"/>
-        <DCCReference Include="WiringError\WiringError\V2\U_WE_VECTOR_EQUATION.pas"/>
-        <DCCReference Include="WiringError\WiringError\V2\U_WE_VECTOR_MAP.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_DIAGRAM2.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_PHASE_MAP.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_WE_POWER_ANALYSIS.pas"/>
-        <DCCReference Include="WiringError\U_ERRORF_TO_WIRING.pas"/>
-        <DCCReference Include="Question\FrmQInfoC.pas">
-            <Form>fQInfo</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\VCL\xDBConn.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xQuestionAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xQuestionInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortControl.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xConsts.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xDBActionBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uQuestionInfo.pas">
-            <Form>fQuestionInfo</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uQuestionList.pas">
-            <Form>fQuestionList</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uSortInfo.pas">
-            <Form>fSortInfo</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uSortList.pas">
-            <Form>fSortList</Form>
-        </DCCReference>
-        <DCCReference Include="Question\FrmQuestionListC.pas">
-            <Form>fQuestionListC</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\VCL\xVCL_FMX.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentControl.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentTabelOutOrIn.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\VCL\uStudentInfo.pas">
-            <Form>fStudentInfo</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\VCL\uStudentList.pas">
-            <Form>fStudentList</Form>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xFunction.pas"/>
-        <DCCReference Include="Exercise\xExerciseInfo.pas"/>
-        <DCCReference Include="Exercise\xExerciseAction.pas"/>
-        <DCCReference Include="Exercise\xExerciseControl.pas"/>
-        <DCCReference Include="Exam\FrmPosState.pas">
-            <Form>fPosState</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Exam\xClientInfo.pas"/>
-        <DCCReference Include="Exam\xExamControl.pas"/>
-        <DCCReference Include="FrmRanking.pas">
-            <Form>fRanking</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xTypes.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xCommBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xSerialBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xTCPClientBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xTCPServerBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xUDPServerBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xThreadBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xProtocolBase.pas"/>
-        <DCCReference Include="Exam\xClientType.pas"/>
-        <DCCReference Include="TCP\xTCPServer.pas"/>
-        <DCCReference Include="UDP\xUDPServer.pas"/>
-        <DCCReference Include="Exam\FrmExamineeList.pas">
-            <Form>fExamineeList</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xDataDictionary.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Exam\xExamInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Exam\uExamInfo.pas">
-            <Form>fExamInfo</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Answer\TestData\uTestData.pas">
-            <Form>fTestData</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="Answer\TestData\xTestDataInfo.pas"/>
-        <DCCReference Include="Answer\VectorMap\FrmVectorMapInfo.pas">
+        <DCCReference Include="..\U_VECTOR_LIEN_INFO.pas"/>
+        <DCCReference Include="..\U_VECTOR_CONTROL.pas"/>
+        <DCCReference Include="..\FrmVectorMapInfo.pas">
             <Form>fVectorMapInfo</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Answer\VectorMap\U_VECTOR_CONTROL.pas"/>
-        <DCCReference Include="Answer\VectorMap\U_VECTOR_LIEN_INFO.pas"/>
-        <BuildConfiguration Include="Release">
+        <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
-        <BuildConfiguration Include="Debug">
+        <BuildConfiguration Include="Release">
             <Key>Cfg_1</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Delphi.Personality.12</Borland.Personality>
-        <Borland.ProjectType>Application</Borland.ProjectType>
+        <Borland.ProjectType/>
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Project13_Server.dpr</Source>
+                    <Source Name="MainSource">Project17.dpr</Source>
                 </Source>
-                <Excluded_Packages/>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\Project13_Server.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Project17.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>Project13_Server.exe</RemoteName>
+                        <RemoteName>Project17.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -667,10 +522,6 @@
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
-            <Platforms>
-                <Platform value="Win32">True</Platform>
-                <Platform value="Win64">False</Platform>
-            </Platforms>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

@@ -17,6 +17,8 @@ type
 //    FTCPServer : TTCPServer;
     FExamStuList: TStringList;
     FOnTCPLog: TGetStrProc;
+    FExamStartTime: TDateTime;
+    FIsExamStart: Boolean;
 
 
     function GetClientInfo(nIndex: Integer): TClientInfo;
@@ -72,6 +74,26 @@ type
     /// 添加考生
     /// </summary>
     procedure AddStu(AStu : TStudentInfo);
+
+    /// <summary>
+    /// 考试开始时间
+    /// </summary>
+    property ExamStartTime : TDateTime read FExamStartTime write FExamStartTime;
+
+    /// <summary>
+    /// 考试是否开始
+    /// </summary>
+    property IsExamStart : Boolean read FIsExamStart write FIsExamStart;
+
+    /// <summary>
+    /// 考试开始
+    /// </summary>
+    procedure ExamStart;
+
+    /// <summary>
+    /// 考试停止
+    /// </summary>
+    procedure ExamStop;
 
   public
     /// <summary>
@@ -134,6 +156,8 @@ begin
 //  FTCPServer.OnLog := TCPLog;
 //  FTCPServer.Connect;
 
+  FIsExamStart := False;
+
   ReadINI;
 end;
 
@@ -146,6 +170,17 @@ begin
   FClientList.Free;
   FExamStuList.Free;
   inherited;
+end;
+
+procedure TExamControl.ExamStart;
+begin
+  FIsExamStart := True;
+  FExamStartTime := Now;
+end;
+
+procedure TExamControl.ExamStop;
+begin
+  FIsExamStart := False
 end;
 
 function TExamControl.GetClient(sIP: string; nPort: Integer): TClientInfo;
@@ -185,8 +220,8 @@ begin
 end;
 
 procedure TExamControl.LoginEvent(Sender: TObject; nStuID: Integer);
-var
-  nIndex : Integer;
+//var
+//  nIndex : Integer;
 begin
   with TClientInfo(Sender) do
   begin

@@ -77,6 +77,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfClientMain, fClientMain);
-  Application.CreateForm(TfAnswerQuestion, fAnswerQuestion);
   Application.Run;
 end.

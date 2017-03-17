@@ -33,7 +33,7 @@ object fExam: TfExam
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 0
-    object pnl1: TPanel
+    object pnlLastTime: TPanel
       Left = 0
       Top = 0
       Width = 289
@@ -70,7 +70,6 @@ object fExam: TfExam
       PopupMenu = pmn2
       TabOrder = 1
       ViewStyle = vsReport
-      ExplicitHeight = 401
     end
     object pnl3: TPanel
       Left = 0
@@ -79,7 +78,6 @@ object fExam: TfExam
       Height = 34
       Align = alBottom
       TabOrder = 2
-      ExplicitTop = 407
       object btnAddQuestion: TButton
         Left = 16
         Top = 5
@@ -114,6 +112,7 @@ object fExam: TfExam
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
+    OnDblClick = pnlExamNameDblClick
     DesignSize = (
       764
       50)
@@ -130,6 +129,7 @@ object fExam: TfExam
       Font.Name = #40657#20307
       Font.Style = [fsBold]
       ParentFont = False
+      OnDblClick = pnlExamNameDblClick
     end
   end
   object pnlBottom: TPanel
@@ -153,7 +153,7 @@ object fExam: TfExam
     end
     object btnLogin: TButton
       Left = 24
-      Top = 8
+      Top = 9
       Width = 75
       Height = 25
       Action = actLogin
@@ -161,7 +161,7 @@ object fExam: TfExam
     end
     object btnReadyExam: TButton
       Left = 105
-      Top = 10
+      Top = 9
       Width = 75
       Height = 25
       Action = actReadyExam
@@ -169,10 +169,11 @@ object fExam: TfExam
     end
     object btnExamStart: TButton
       Left = 593
-      Top = 10
+      Top = 9
       Width = 75
       Height = 25
       Action = actExamStart
+      Anchors = [akTop, akRight]
       TabOrder = 3
     end
   end
@@ -197,7 +198,7 @@ object fExam: TfExam
     Left = 384
     Top = 136
     Bitmap = {
-      494C010105000900300020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900380020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FDF6
@@ -1261,7 +1262,7 @@ object fExam: TfExam
       000000000000}
   end
   object tmr1: TTimer
-    Enabled = False
+    OnTimer = tmr1Timer
     Left = 304
     Top = 136
   end
@@ -1282,7 +1283,7 @@ object fExam: TfExam
     Left = 416
     Top = 136
     Bitmap = {
-      494C010105000900300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000FF25FF00FFB6E000FFEAB000FFD79800FED79500FED99D00FFF0C200FFBD
@@ -1596,6 +1597,10 @@ object fExam: TfExam
     object actExamStop: TAction
       Caption = #20572#27490#32771#35797
       OnExecute = actExamStopExecute
+    end
+    object actEditExam: TAction
+      Caption = #32534#36753#32771#35797
+      OnExecute = actEditExamExecute
     end
   end
   object pmn2: TPopupMenu

@@ -3,7 +3,7 @@ unit xUDPServer;
 interface
 
 uses System.Types,System.Classes, xFunction, system.SysUtils, xUDPServerBase,
-  xConsts, System.IniFiles, xClientType;
+  xConsts, System.IniFiles, xClientType, Winapi.WinInet, winsock;
 
 type
   TUDPServer = class(TUDPServerBase)
@@ -59,10 +59,41 @@ begin
 end;
 
 procedure TUDPServer.ReadINI;
+  function GetLocalIP(var LocalIp: string): Boolean;
+
+  var
+    HostEnt: PHostEnt;
+    IP: String;
+    Addr: PAnsiChar;
+    Buffer: array [0..63] of Char;
+    WSData: TWSADATA;
+  begin
+    Result := False;
+    try
+      WSAStartUp(2, WSData);
+      GetHostName(@Buffer, SizeOf(Buffer));
+      // Buffer:='ZhiDa16';
+      HostEnt := GetHostByName(@Buffer);
+      if HostEnt = nil then
+        exit;
+      Addr := HostEnt^.h_addr_list^;
+      IP := Format('%d.%d.%d.%d', [Byte(Addr[0]), Byte(Addr[1]), Byte(Addr[2]),
+        Byte(Addr[3])]);
+      LocalIp := IP;
+      Result := True;
+    finally
+      WSACleanup;
+    end;
+  end;
+
 begin
   with TIniFile.Create(sPubIniFileName) do
   begin
     FInfoServerIP := ReadString('UPDOption', 'ServerIP', '');
+
+    if FInfoServerIP = '' then
+      GetLocalIP(FInfoServerIP);
+
     FInfoServerPort := ReadInteger('UPDOption', 'ServerPort', 15000);
 
     ListenPort := ReadInteger('UPDOption', 'ListenPort', 16000);

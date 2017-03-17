@@ -76,7 +76,14 @@ uses
   xTCPServer in 'TCP\xTCPServer.pas',
   xUDPServer in 'UDP\xUDPServer.pas',
   FrmExamineeList in 'Exam\FrmExamineeList.pas' {fExamineeList},
-  xDataDictionary in '..\..\..\FMX_Pub_src\xDataDictionary.pas';
+  xDataDictionary in '..\..\..\FMX_Pub_src\xDataDictionary.pas',
+  xExamInfo in '..\..\..\FMX_Pub_src\Exam\xExamInfo.pas',
+  uExamInfo in '..\..\..\FMX_Pub_src\Exam\uExamInfo.pas' {fExamInfo},
+  uTestData in 'Answer\TestData\uTestData.pas' {fTestData},
+  xTestDataInfo in 'Answer\TestData\xTestDataInfo.pas',
+  FrmVectorMapInfo in 'Answer\VectorMap\FrmVectorMapInfo.pas' {fVectorMapInfo},
+  U_VECTOR_CONTROL in 'Answer\VectorMap\U_VECTOR_CONTROL.pas',
+  U_VECTOR_LIEN_INFO in 'Answer\VectorMap\U_VECTOR_LIEN_INFO.pas';
 
 {$R *.res}
 

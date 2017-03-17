@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.StdCtrls, Vcl.ComCtrls,
   Vcl.ExtCtrls, xExamControl, xStudentControl, xStudentInfo, uStudentList,
-  System.ImageList, Vcl.ImgList;
+  System.ImageList, Vcl.ImgList, uStudentInfo;
 
 type
   TfExamineeList = class(TForm)
@@ -25,6 +25,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure actaddExecute(Sender: TObject);
     procedure actDelExecute(Sender: TObject);
+    procedure lvStuListDblClick(Sender: TObject);
   private
     { Private declarations }
     procedure RefurshList;
@@ -106,6 +107,19 @@ end;
 procedure TfExamineeList.FormCreate(Sender: TObject);
 begin
   RefurshList;
+end;
+
+procedure TfExamineeList.lvStuListDblClick(Sender: TObject);
+begin
+  if Assigned(lvStuList.Selected) then
+  begin
+    with TfStudentInfo.Create(nil) do
+    begin
+      ShowStu(TStudentInfo(lvStuList.Selected.Data));
+      ShowModal;
+      free;
+    end;
+  end;
 end;
 
 procedure TfExamineeList.RefurshList;

@@ -1,9 +1,9 @@
-object fPaper: TfPaper
+object fPaperBase: TfPaperBase
   Left = 0
   Top = 0
-  Caption = #32771#21367
-  ClientHeight = 484
-  ClientWidth = 711
+  Caption = #32771#29983#32771#21367
+  ClientHeight = 590
+  ClientWidth = 854
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,222 +11,252 @@ object fPaper: TfPaper
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
+  Position = poOwnerFormCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object spltr1: TSplitter
-    Left = 483
+  object spl1: TSplitter
+    Left = 628
     Top = 0
-    Height = 484
+    Height = 590
     Align = alRight
-    ExplicitLeft = 328
-    ExplicitTop = 200
+    ExplicitLeft = 416
+    ExplicitTop = 248
     ExplicitHeight = 100
   end
-  object grp1: TGroupBox
+  object pnlSearch: TPanel
+    AlignWithMargins = True
+    Left = 634
+    Top = 3
+    Width = 217
+    Height = 584
+    Align = alRight
+    BevelOuter = bvNone
+    TabOrder = 0
+    object grpbx1: TGroupBox
+      Left = 0
+      Top = 177
+      Width = 217
+      Height = 96
+      Align = alTop
+      Caption = #25805#20316
+      TabOrder = 0
+      object btnDetaileInfo1: TSpeedButton
+        Left = 17
+        Top = 24
+        Width = 75
+        Height = 25
+        Action = actDetaileInfo
+      end
+      object btnDelete1: TSpeedButton
+        Left = 125
+        Top = 24
+        Width = 75
+        Height = 25
+        Action = actDelete
+      end
+      object btnPrint2: TSpeedButton
+        Left = 17
+        Top = 55
+        Width = 75
+        Height = 25
+        Action = actPrint
+      end
+      object btnPrintview: TSpeedButton
+        Left = 125
+        Top = 55
+        Width = 75
+        Height = 25
+        Action = actPrintview
+      end
+    end
+    object grpbx2: TGroupBox
+      Left = 0
+      Top = 0
+      Width = 217
+      Height = 177
+      Align = alTop
+      Caption = #26597#35810
+      TabOrder = 1
+      object lbl3: TLabel
+        Left = 60
+        Top = 113
+        Width = 12
+        Height = 13
+        Caption = #33267
+      end
+      object lbl2: TLabel
+        Left = 24
+        Top = 59
+        Width = 48
+        Height = 13
+        Caption = #32771#29983#22995#21517
+      end
+      object lbl1: TLabel
+        Left = 24
+        Top = 32
+        Width = 48
+        Height = 13
+        Caption = #32771#35797#21517#31216
+      end
+      object btnSearch: TSpeedButton
+        Left = 78
+        Top = 137
+        Width = 121
+        Height = 25
+        Action = actSearch
+      end
+      object dtmpckrEnd: TDateTimePicker
+        Left = 78
+        Top = 110
+        Width = 121
+        Height = 21
+        Date = 41365.636901215280000000
+        Format = 'yyyy-MM-dd'
+        Time = 41365.636901215280000000
+        DateFormat = dfLong
+        TabOrder = 0
+      end
+      object dtmpckrStart: TDateTimePicker
+        Left = 78
+        Top = 83
+        Width = 121
+        Height = 21
+        Date = 41365.636901215280000000
+        Format = 'yyyy-MM-dd'
+        Time = 41365.636901215280000000
+        DateFormat = dfLong
+        TabOrder = 1
+      end
+      object chkDate: TCheckBox
+        Left = 8
+        Top = 85
+        Width = 69
+        Height = 17
+        Caption = #32771#35797#26085#26399
+        TabOrder = 2
+      end
+      object cbbExamnieeName: TComboBox
+        Left = 78
+        Top = 56
+        Width = 121
+        Height = 21
+        TabOrder = 3
+      end
+      object cbbExamName: TComboBox
+        Left = 78
+        Top = 29
+        Width = 121
+        Height = 21
+        TabOrder = 4
+      end
+    end
+  end
+  object grpbx3: TGroupBox
     Left = 0
     Top = 0
-    Width = 483
-    Height = 484
+    Width = 628
+    Height = 590
     Align = alClient
     Caption = #32771#21367#21015#34920
-    TabOrder = 0
-    ExplicitWidth = 490
+    TabOrder = 1
     object dbgrd1: TDBGrid
       Left = 2
       Top = 15
-      Width = 479
-      Height = 467
+      Width = 624
+      Height = 573
       Align = alClient
+      DataSource = ds
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+      PopupMenu = pctnbr1
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = #32771#21367#32534#21495
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #32771#35797#21517#31216
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #23398#21592#21517#31216
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #32771#39064#32534#21495
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #32771#35797#24471#20998
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #24320#22987#26102#38388
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = #32467#26463#26102#38388
-          Visible = True
-        end>
     end
   end
-  object pnl1: TPanel
-    Left = 486
-    Top = 0
-    Width = 225
-    Height = 484
-    Align = alRight
-    TabOrder = 1
-    ExplicitLeft = 493
-    object grp2: TGroupBox
-      Left = 1
-      Top = 1
-      Width = 223
-      Height = 193
-      Align = alTop
+  object ds: TDataSource
+    Left = 488
+    Top = 24
+  end
+  object pctnbr1: TPopupActionBar
+    OnPopup = pctnbr1Popup
+    Left = 520
+    Top = 24
+    object mniDetaileInfo: TMenuItem
+      Action = actDetaileInfo
+    end
+    object mniDelete: TMenuItem
+      Action = actDelete
+    end
+    object mniRefresh: TMenuItem
+      Action = actRefresh
+    end
+  end
+  object actmgr1: TActionManager
+    ActionBars = <
+      item
+        Items = <
+          item
+            Action = actDetaileInfo
+            Caption = #35814#32454#20449#24687'(&Y)'
+            ImageIndex = 3
+          end
+          item
+            Action = actDelete
+            Caption = #21024#38500'(&X)'
+            ImageIndex = 2
+          end
+          item
+            Action = actRefresh
+            Caption = #21047#26032'(&W)'
+            ImageIndex = 4
+          end>
+      end>
+    Images = il1
+    Left = 456
+    Top = 24
+    StyleName = 'XP Style'
+    object actDetaileInfo: TAction
+      Caption = #35814#32454#20449#24687
+      OnExecute = actDetaileInfoExecute
+    end
+    object actDelete: TAction
+      Caption = #21024#38500
+      OnExecute = actDeleteExecute
+    end
+    object actRefresh: TAction
+      Caption = #21047#26032
+      ImageIndex = 4
+      OnExecute = actRefreshExecute
+    end
+    object actSearch: TAction
       Caption = #26597#35810
-      TabOrder = 0
-      object lbl1: TLabel
-        Left = 32
-        Top = 40
-        Width = 48
-        Height = 13
-        Caption = #32771#35797#21517#31216
-      end
-      object lbl2: TLabel
-        Left = 32
-        Top = 69
-        Width = 48
-        Height = 13
-        Caption = #23398#21592#21517#31216
-      end
-      object lbl3: TLabel
-        Left = 68
-        Top = 126
-        Width = 12
-        Height = 13
-        Caption = #33267
-      end
-      object chk1: TCheckBox
-        Left = 15
-        Top = 96
-        Width = 67
-        Height = 17
-        Caption = #32771#35797#26085#26399
-        TabOrder = 0
-      end
-      object cbb1: TComboBox
-        Left = 87
-        Top = 37
-        Width = 119
-        Height = 21
-        TabOrder = 1
-        Text = 'cbb1'
-      end
-      object cbb2: TComboBox
-        Left = 87
-        Top = 66
-        Width = 119
-        Height = 21
-        TabOrder = 2
-        Text = 'cbb1'
-      end
-      object dtmpckr1: TDateTimePicker
-        Left = 87
-        Top = 94
-        Width = 119
-        Height = 21
-        Date = 42549.580988483790000000
-        Time = 42549.580988483790000000
-        TabOrder = 3
-      end
-      object dtmpckr2: TDateTimePicker
-        Left = 87
-        Top = 123
-        Width = 119
-        Height = 21
-        Date = 42549.580988483790000000
-        Time = 42549.580988483790000000
-        TabOrder = 4
-      end
-      object btn1: TButton
-        Left = 88
-        Top = 152
-        Width = 120
-        Height = 25
-        Caption = #26597#35810
-        ImageIndex = 0
-        Images = imglstil1
-        TabOrder = 5
-      end
+      ImageIndex = 0
+      OnExecute = actSearchExecute
     end
-    object grp3: TGroupBox
-      Left = 1
-      Top = 194
-      Width = 223
-      Height = 127
-      Align = alTop
-      Caption = #25805#20316
-      TabOrder = 1
-      object btn2: TButton
-        Left = 32
-        Top = 28
-        Width = 75
-        Height = 25
-        Caption = #35814#32454#20449#24687
-        TabOrder = 0
-      end
-      object btn3: TButton
-        Left = 120
-        Top = 28
-        Width = 75
-        Height = 25
-        Caption = #21024#38500
-        TabOrder = 1
-      end
-      object btn4: TButton
-        Left = 32
-        Top = 59
-        Width = 75
-        Height = 25
-        Caption = #25171#21360#25253#34920
-        TabOrder = 2
-      end
-      object btn5: TButton
-        Left = 120
-        Top = 59
-        Width = 75
-        Height = 25
-        Caption = #25171#21360#32771#21367
-        TabOrder = 3
-      end
-      object btn6: TButton
-        Left = 32
-        Top = 90
-        Width = 75
-        Height = 25
-        Caption = #32771#21367#20998#26512
-        TabOrder = 4
-      end
+    object actClose: TAction
+      Caption = #36864#20986
+      ImageIndex = 9
+      OnExecute = actCloseExecute
+    end
+    object actPrint: TAction
+      Caption = #25171#21360#25253#34920
+      OnExecute = actPrintExecute
+    end
+    object actPrintview: TAction
+      Caption = #25171#21360#32771#21367
     end
   end
-  object imglstil1: TImageList
-    Left = 392
-    Top = 32
+  object il1: TImageList
+    Left = 424
+    Top = 24
     Bitmap = {
-      494C01010A000E00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000E00480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -628,5 +658,273 @@ object fPaper: TfPaper
       F800F01F0000FFFFF800E03F80010FFFFC01E03F80010801FC01C03FC0030FFF
       FE03C07FE0070FFFFF8FF8FFF81FFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object frxsrdtst1: TfrxUserDataSet
+    UserName = 'frxsrdtst1'
+    Left = 552
+    Top = 24
+  end
+  object frxrprtExam: TfrxReport
+    Version = '5.2.12'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 41473.570071608800000000
+    ReportOptions.LastChange = 41478.398444733790000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    OnGetValue = frxrprtExamGetValue
+    Left = 584
+    Top = 24
+    Datasets = <
+      item
+        DataSet = frxsrdtst1
+        DataSetName = 'frxsrdtst1'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Height = 105.826840000000000000
+        Top = 18.897650000000000000
+        Width = 793.701300000000000000
+        object Memo2: TfrxMemoView
+          Align = baCenter
+          Left = 336.378170000000000000
+          Top = 18.897650000000000000
+          Width = 120.944960000000000000
+          Height = 37.795300000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            #32771#21367#21015#34920)
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 147.401670000000000000
+          Top = 79.370130000000000000
+          Width = 185.196970000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#35797#21517#31216)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo4: TfrxMemoView
+          Left = 332.598640000000000000
+          Top = 79.370130000000000000
+          Width = 94.488250000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#29983#22995#21517)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo6: TfrxMemoView
+          Left = 427.086890000000000000
+          Top = 79.370130000000000000
+          Width = 94.488250000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#29983#24471#20998)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo7: TfrxMemoView
+          Left = 521.575140000000000000
+          Top = 79.370130000000000000
+          Width = 117.165430000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#35797#24320#22987#26102#38388)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo8: TfrxMemoView
+          Left = 638.740570000000000000
+          Top = 79.370130000000000000
+          Width = 117.165430000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#35797#32467#26463#26102#38388)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo16: TfrxMemoView
+          Left = 37.795300000000000000
+          Top = 79.370130000000000000
+          Width = 109.606370000000000000
+          Height = 26.456692910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            #32771#21367#32534#21495)
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 37.795282910000000000
+        Top = 185.196970000000000000
+        Width = 793.701300000000000000
+        DataSet = frxsrdtst1
+        DataSetName = 'frxsrdtst1'
+        RowCount = 0
+        object Memo10: TfrxMemoView
+          Left = 147.401670000000000000
+          Width = 185.196970000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[ExamName]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo12: TfrxMemoView
+          Left = 332.598640000000000000
+          Width = 94.488250000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Name]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo13: TfrxMemoView
+          Left = 427.086890000000000000
+          Width = 94.488250000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Mark]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo14: TfrxMemoView
+          Left = 521.575140000000000000
+          Width = 117.165430000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[StartTime]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo15: TfrxMemoView
+          Left = 638.740570000000000000
+          Width = 117.165430000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[StopTime]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo9: TfrxMemoView
+          Left = 37.795300000000000000
+          Width = 109.606370000000000000
+          Height = 37.795282910000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[ExamID]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
+    end
   end
 end

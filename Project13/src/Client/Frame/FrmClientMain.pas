@@ -369,7 +369,7 @@ procedure TfClientMain.TCPConn;
     sIP : string;
     nPort : Integer;
   begin
-    UDPClient.GetTCPServerIPPort(sIP, nPort, 1000);
+    UDPClient.GetTCPServerIPPort(sIP, nPort, 2000);
 
     if sIP <> '' then
     begin

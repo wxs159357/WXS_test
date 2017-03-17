@@ -7,13 +7,14 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ExtCtrls, Vcl.ImgList,
   Vcl.ComCtrls, Vcl.StdCtrls, System.ImageList, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, FrmPosState, xExamControl,
-  xTCPServer, xDataDictionary, xQuestionInfo, xSortControl, uQuestionList;
+  xTCPServer, xDataDictionary, xQuestionInfo, xSortControl, uQuestionList, uExamInfo,
+  Vcl.Buttons;
 
 type
   TfExam = class(TForm)
     spltrspl1: TSplitter;
     pnl2: TPanel;
-    pnl1: TPanel;
+    pnlLastTime: TPanel;
     pnlExamName: TPanel;
     lblExamTime: TLabel;
     imglstil1: TImageList;
@@ -49,6 +50,7 @@ type
     pnl3: TPanel;
     btnAddQuestion: TButton;
     btnDelQuestion: TButton;
+    actEditExam: TAction;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -58,6 +60,9 @@ type
     procedure actExamStopExecute(Sender: TObject);
     procedure actAddQuestionExecute(Sender: TObject);
     procedure actDelQuestionExecute(Sender: TObject);
+    procedure actEditExamExecute(Sender: TObject);
+    procedure pnlExamNameDblClick(Sender: TObject);
+    procedure tmr1Timer(Sender: TObject);
   private
     { Private declarations }
     FromPosState : TfPosState;
@@ -118,14 +123,37 @@ begin
   end;
 end;
 
+procedure TfExam.actEditExamExecute(Sender: TObject);
+var
+  sExamName: string;
+  nExamTime: Integer;
+begin
+  sExamName := DataDict.Dictionary['考试名称'].Text;
+  trystrtoint(DataDict.Dictionary['考试时间'].Text, nExamTime);
+
+
+  with TfExamInfo.Create(nil) do
+  begin
+    EditInfo(sExamName, nExamTime);
+    DataDict.Dictionary['考试名称'].Text := sExamName;
+    DataDict.Dictionary['考试时间'].Text := inttostr(nExamTime);
+    pnlExamName.Caption := sExamName;
+    lblExamTime.Caption := inttostr(nExamTime);
+  end;
+end;
+
 procedure TfExam.actExamStartExecute(Sender: TObject);
 begin
+  ExamControl.ExamStart;
+
   TCPServer.StartExam;
+  tmr1Timer(nil);
 end;
 
 procedure TfExam.actExamStopExecute(Sender: TObject);
 begin
   TCPServer.StopExam;
+  ExamControl.ExamStop;
 end;
 
 procedure TfExam.actLoginExecute(Sender: TObject);
@@ -162,6 +190,11 @@ begin
   FromPosState.Show;
 end;
 
+procedure TfExam.pnlExamNameDblClick(Sender: TObject);
+begin
+  actEditExamExecute(nil);
+end;
+
 procedure TfExam.RefurshQuestionList;
 var
   slList : TStringList;
@@ -188,6 +221,24 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfExam.tmr1Timer(Sender: TObject);
+var
+  nTime : Integer;
+  dtTime : TDateTime;
+begin
+  TryStrToInt(DataDict.Dictionary['考试时间'].text, nTime);
+
+  if ExamControl.IsExamStart then
+  begin
+    dtTime := ExamControl.ExamStartTime + nTime/MinsPerDay - now;
+  end
+  else
+  begin
+    dtTime := nTime/MinsPerDay;
+  end;
+  pnlLastTime.Caption := FormatDateTime('hh:mm:ss', dtTime);
 end;
 
 end.
