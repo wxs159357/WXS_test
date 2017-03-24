@@ -225,8 +225,8 @@ begin
     if FTimerOrderEnable and not FIsStop then
       ExecuteTimerOrder;
 
-    Sleep(1);
-    MyProcessMessages;
+//    Sleep(1);
+//    MyProcessMessages;
   end;
 end;
 
@@ -274,7 +274,7 @@ begin
   repeat
     MyProcessMessages;
     Result := OrdersFinished;
-    Sleep(5);
+    Sleep(1);
   until Result or ( GetTickCount - nTick  > nCmdTimeOut );
 end;
 

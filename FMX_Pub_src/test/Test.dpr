@@ -7,7 +7,6 @@ uses
   xConsts in '..\xConsts.pas',
   xFunction in '..\xFunction.pas',
   uAbout in '..\About\uAbout.pas' {FrmAbout},
-  xDBConn in '..\xDBConn.pas',
   xDBActionBase in '..\xDBActionBase.pas',
   xDBUpdate in '..\xDBUpdate.pas',
   xCommBase in '..\Comm\xCommBase.pas',
@@ -21,12 +20,16 @@ uses
   xProtocolType in '..\xProtocolType.pas',
   xProtocolDev in '..\xProtocolDev.pas',
   xExceptionCatch in '..\xExceptionCatch.pas',
-  xHttpServer in '..\xHttpServer.pas';
+  xHttpServer in '..\xHttpServer.pas',
+  xVCL_FMX in '..\FMX\xVCL_FMX.pas',
+  xBaseForm in '..\FMX\xBaseForm.pas' {fBaseForm},
+  xDBConn in '..\FMX\xDBConn.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TfBaseForm, fBaseForm);
   Application.Run;
 end.

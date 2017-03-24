@@ -24,7 +24,6 @@ object fVectorMapInfo: TfVectorMapInfo
     Height = 472
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 428
     object spltr1: TSplitter
       Left = 540
       Top = 1
@@ -52,7 +51,6 @@ object fVectorMapInfo: TfVectorMapInfo
       Height = 470
       Align = alRight
       TabOrder = 0
-      ExplicitHeight = 426
       object grp1: TGroupBox
         Left = 1
         Top = 1
@@ -61,7 +59,6 @@ object fVectorMapInfo: TfVectorMapInfo
         Align = alClient
         Caption = #21521#37327#20449#24687
         TabOrder = 0
-        ExplicitHeight = 424
         object lblColor: TLabel
           Left = 28
           Top = 60
@@ -159,7 +156,6 @@ object fVectorMapInfo: TfVectorMapInfo
           ScrollBars = ssBoth
           TabOrder = 4
           Visible = False
-          ExplicitTop = 249
         end
         object btnModify: TButton
           Left = 92

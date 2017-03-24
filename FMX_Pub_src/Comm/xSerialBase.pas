@@ -109,6 +109,7 @@ begin
 {$IFDEF MSWINDOWS}
   FCommPort:= TComm.Create(application);
   FCommPort.OnReceiveData := ReceiveData;
+  FCommPort.Outx_XonXoffFlow := False;
 {$ENDIF}
   BaudRate := '9600';
   DataBits := '8';

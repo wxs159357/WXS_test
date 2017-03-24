@@ -21,12 +21,8 @@ object fTestData: TfTestData
     ActivePage = tbsht1
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 536
-    ExplicitHeight = 382
     object tbsht1: TTabSheet
       Caption = #19977#30456#19977#32447
-      ExplicitWidth = 281
-      ExplicitHeight = 165
       object grpbx1: TGroupBox
         Left = 0
         Top = 0
@@ -35,10 +31,6 @@ object fTestData: TfTestData
         Align = alClient
         Caption = #27979#37327#20540
         TabOrder = 0
-        ExplicitLeft = -80
-        ExplicitTop = -8
-        ExplicitWidth = 765
-        ExplicitHeight = 385
         object lbl1: TLabel
           Left = 40
           Top = 39
@@ -715,8 +707,6 @@ object fTestData: TfTestData
     object tbsht2: TTabSheet
       Caption = #19977#30456#22235#32447
       ImageIndex = 1
-      ExplicitWidth = 281
-      ExplicitHeight = 165
       object grpbx2: TGroupBox
         Left = 0
         Top = 0
@@ -725,10 +715,6 @@ object fTestData: TfTestData
         Align = alClient
         Caption = #27979#37327#20540
         TabOrder = 0
-        ExplicitLeft = -176
-        ExplicitTop = -40
-        ExplicitWidth = 765
-        ExplicitHeight = 449
         object lbl41: TLabel
           Left = 45
           Top = 41

@@ -162,11 +162,11 @@ end;
 
 procedure TForm2.btn1Click(Sender: TObject);
 begin
-  with TFrmAbout.Create(nil) do
-  begin
-    ShowModal;
-    Free;
-  end;
+//  with TFrmAbout.Create(nil) do
+//  begin
+//    ShowModal;
+//    Free;
+//  end;
 end;
 
 procedure TForm2.btn20Click(Sender: TObject);
