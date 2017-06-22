@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GB2312"?>
+<Answer>
+	<操作信息 ShowName="电力培训系统" ItemType="0" FileName="">
+	</操作信息>
+	
+	<计量装置信息 型号="" 等级="" 出厂编号="" 规格="" 厂家=""></计量装置信息>
+	
+	<测量值 U1="" U2="" U3="" I1="" I2="" I3="" U1I1="" U2I2="" U3I3="" U1U2="" 相序="" 负载性质="" 电压极性=""></测量值>
+	
+	<向量图 ShowName="电力培训系统" ItemType="0" FileName="">
+	</向量图>	
+	
+	<功率表达式 ShowName="电力培训系统" ItemType="0" FileName="">
+	</功率表达式>	
+	
+	<其他信息 ShowName="电力培训系统" ItemType="0" FileName="">
+	</其他信息>	
+		
+</Answer>
