@@ -13,7 +13,7 @@ uses
   FrmOption in 'Option\FrmOption.pas' {fOption},
   FrmOptionBase in 'Option\FrmOptionBase.pas' {fOptionBase},
   FrmErrorSelect in 'WiringError\FrmErrorSelect.pas' {fErrorSelect},
-  U_WIRINGF_ERROR in 'WiringError\U_WIRINGF_ERROR.pas',
+  xWiringError in '..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas',
   U_CKM_DEVICE in '..\..\..\Pub_src\U_CKM_DEVICE.pas',
   U_PUB_FUN in '..\..\..\Pub_src\U_PUB_FUN.pas',
   FrmWEDetails2 in 'WiringError\WiringError\FrmWEDetails2.pas' {fWEDetails2},
@@ -74,7 +74,7 @@ uses
   xProtocolBase in '..\..\..\FMX_Pub_src\xProtocolBase.pas',
   xClientType in 'Exam\xClientType.pas',
   xTCPServer in 'TCP\xTCPServer.pas',
-  xUDPServer in 'UDP\xUDPServer.pas',
+  xThreadUDPSendScreen in 'SendScreen\xThreadUDPSendScreen.pas',
   FrmExamineeList in 'Exam\FrmExamineeList.pas' {fExamineeList},
   xDataDictionary in '..\..\..\FMX_Pub_src\xDataDictionary.pas',
   xExamInfo in '..\..\..\FMX_Pub_src\Exam\xExamInfo.pas',
@@ -83,7 +83,9 @@ uses
   xTestDataInfo in 'Answer\TestData\xTestDataInfo.pas',
   FrmVectorMapInfo in 'Answer\VectorMap\FrmVectorMapInfo.pas' {fVectorMapInfo},
   U_VECTOR_CONTROL in 'Answer\VectorMap\U_VECTOR_CONTROL.pas',
-  U_VECTOR_LIEN_INFO in 'Answer\VectorMap\U_VECTOR_LIEN_INFO.pas';
+  U_VECTOR_LIEN_INFO in 'Answer\VectorMap\U_VECTOR_LIEN_INFO.pas',
+  xUDPServer in 'UDP\xUDPServer.pas',
+  xProtocolSendScreen in 'SendScreen\xProtocolSendScreen.pas';
 
 {$R *.res}
 

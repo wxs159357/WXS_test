@@ -184,14 +184,7 @@ var
 begin
   aBuf := BuildData(aData);
 
-  if (sIP = '') or (nPort = 0) or (nPort > 900000) then
-  begin
-    SendPacksData(aBuf);
-  end
-  else
-  begin
-    SendPacksData(sIP, nPort, aBuf);
-  end;
+  SendPacksDataTCP(sIP, nPort, aBuf);
 end;
 
 procedure TTCPServer.SendOrder(sIP: string; nPort: Integer; nData: Byte);

@@ -30,6 +30,7 @@ type
 
     procedure ClinetChanged(Sender: TObject);
     procedure LoginEvent(Sender: TObject; nStuID : Integer);
+    procedure ExamReady(Sender: TObject);
     procedure RevPacksData(sIP: string; nPort :Integer;aPacks: TArray<Byte>);
     procedure ClientChange( AIP: string; nPort: Integer; AConnected: Boolean );
 
@@ -172,6 +173,37 @@ begin
   inherited;
 end;
 
+procedure TExamControl.ExamReady(Sender: TObject);
+var
+  i : Integer;
+  nTotal, nReadyCount : Integer;
+  AInfo : TClientInfo;
+begin
+  with TClientInfo(Sender) do
+  begin
+    ClientState := esWorkReady;
+
+
+
+  end;
+  nTotal := 0;
+  nReadyCount := 0;
+  for i := 0 to FClientList.Count - 1 do
+  begin
+    AInfo := ClientInfo[i];
+
+    if AInfo.ClientState in [esLogin, esWorkReady] then
+      Inc(nTotal);
+
+    if AInfo.ClientState = esWorkReady then
+    begin
+      Inc(nReadyCount);
+    end;
+  end;
+
+  TCPServer.SendProgress(nReadyCount, nTotal);
+end;
+
 procedure TExamControl.ExamStart;
 begin
   FIsExamStart := True;
@@ -301,6 +333,7 @@ begin
       AClientInfo.ClientSN := i+1;
       AClientInfo.OnChanged := ClinetChanged;
       AClientInfo.OnStuLogin := LoginEvent;
+      AClientInfo.OnStuReady := ExamReady;
 
       FClientList.AddObject('', AClientInfo);
     end;

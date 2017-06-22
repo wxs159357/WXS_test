@@ -2,7 +2,7 @@ unit U_ERRORF_TO_WIRING;
 
 interface
 
-uses Classes, SysUtils, U_CKM_DEVICE, U_WIRING_ERROR, U_WIRINGF_ERROR;
+uses Classes, SysUtils, U_CKM_DEVICE, U_WIRING_ERROR, xWiringError;
 
 /// <summary>
 /// 2002F错误转换成两表位错误

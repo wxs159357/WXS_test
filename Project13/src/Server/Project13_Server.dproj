@@ -144,7 +144,7 @@
             <Form>fErrorSelect</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="WiringError\U_WIRINGF_ERROR.pas"/>
+        <DCCReference Include="..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas"/>
         <DCCReference Include="..\..\..\Pub_src\U_CKM_DEVICE.pas"/>
         <DCCReference Include="..\..\..\Pub_src\U_PUB_FUN.pas"/>
         <DCCReference Include="WiringError\WiringError\FrmWEDetails2.pas">
@@ -228,7 +228,7 @@
         <DCCReference Include="..\..\..\FMX_Pub_src\xProtocolBase.pas"/>
         <DCCReference Include="Exam\xClientType.pas"/>
         <DCCReference Include="TCP\xTCPServer.pas"/>
-        <DCCReference Include="UDP\xUDPServer.pas"/>
+        <DCCReference Include="SendScreen\xThreadUDPSendScreen.pas"/>
         <DCCReference Include="Exam\FrmExamineeList.pas">
             <Form>fExamineeList</Form>
             <FormType>dfm</FormType>
@@ -250,6 +250,8 @@
         </DCCReference>
         <DCCReference Include="Answer\VectorMap\U_VECTOR_CONTROL.pas"/>
         <DCCReference Include="Answer\VectorMap\U_VECTOR_LIEN_INFO.pas"/>
+        <DCCReference Include="UDP\xUDPServer.pas"/>
+        <DCCReference Include="SendScreen\xProtocolSendScreen.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

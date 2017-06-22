@@ -26,6 +26,7 @@ type
     FCanRevData : Boolean; // 是否可以接收数据
     FRevData : TBytes;     // 接收的数据包
     FOnStuLogin: TLoginEvent;
+    FOnStuReady: TNotifyEvent;
 
     procedure ReadINI;
     procedure WriteINI;
@@ -114,6 +115,11 @@ type
     /// 学员请求登录事件
     /// </summary>
     property OnStuLogin : TLoginEvent read FOnStuLogin write FOnStuLogin;
+
+    /// <summary>
+    /// 学员考试准备事件
+    /// </summary>
+    property OnStuReady : TNotifyEvent read FOnStuReady write FOnStuReady;
   end;
 
 implementation
@@ -147,7 +153,20 @@ begin
 
         FOnStuLogin(Self, nStuID);
       end;
+    end
+    // 考试准备
+    else if Length(aBuf) = 4 then
+    begin
+      // 反馈状态
+      if aBuf[1] = $08 then
+      begin
+        if Assigned(FOnStuReady) then
+        begin
+          FOnStuReady(Self);
+        end;
+      end;
     end;
+
   end;
 end;
 

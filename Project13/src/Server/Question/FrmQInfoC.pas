@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls,
-  uQuestionInfo, FrmErrorSelect, xQuestionInfo, U_WIRINGF_ERROR, FrmWEDetails2,
+  uQuestionInfo, FrmErrorSelect, xQuestionInfo, xWiringError, FrmWEDetails2,
   U_WIRING_ERROR, U_ERRORF_TO_WIRING, U_DIAGRAM_TYPE;
 
 type
@@ -76,7 +76,7 @@ end;
 procedure TfQInfo.FormCreate(Sender: TObject);
 begin
   inherited;
-  FError := TWIRINGF_ERROR.Create(nil);
+  FError := TWIRINGF_ERROR.Create;
   FWError := TWIRING_ERROR.Create;
   spltr1.Parent := tbsht2;
   pnl1.Parent := tbsht2;

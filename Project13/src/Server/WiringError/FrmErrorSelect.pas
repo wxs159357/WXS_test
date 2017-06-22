@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, ExtCtrls, U_WIRINGF_ERROR;
+  Dialogs, ComCtrls, StdCtrls, ExtCtrls, xWiringError;
 
 type
   TfErrorSelect = class(TForm)

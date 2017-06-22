@@ -9,11 +9,11 @@ uses
   jpeg, FrmOption, FrmPaper,
    ActnCtrls,  StdCtrls,
    System.Actions, FrmTrain, FrmExercise, FrmRanking, FrmLog,
-  System.ImageList, FrmExam, FrmErrorSelect, U_WIRINGF_ERROR,
+  System.ImageList, FrmExam, FrmErrorSelect, xWiringError,
   U_POWER_PHASE_MAP, U_WE_PHASE_MAP, xStudentControl, uStudentList,
   xExerciseControl, FrmPosState, xExamControl, xUDPServer, xFunction, xTCPServer,
   IdContext, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer,
-  FrmExamineeList, xDataDictionary;
+  FrmExamineeList, xDataDictionary, xThreadUDPSendScreen, xUDPServerBase;
 
 const
   WM_FORM_LOADING = WM_USER + 1;
@@ -75,6 +75,8 @@ type
     idtcpsrvr1: TIdTCPServer;
     actSetExaminee: TAction;
     btn1: TButton;
+    btn2: TButton;
+    img1: TImage;
     procedure FormDestroy(Sender: TObject);
     procedure actHelpOnAboutExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -97,6 +99,10 @@ type
     procedure actSetExamineeExecute(Sender: TObject);
   private
     { Private declarations }
+
+    Fullscreen:Tbitmap;
+    AJpeg : TJPEGImage;
+//    FUDPServer : TUDPServerBase;
 
     procedure ReadsysINI;
     procedure WritesysINI;
@@ -132,6 +138,8 @@ type
     procedure UDPLog(const S: string);
     procedure TCPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
     procedure UDPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
+
+    procedure GetSreen(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -266,6 +274,10 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
+  Fullscreen:=TBitmap.Create;
+  AJpeg := TJPEGImage.Create;
+  Fullscreen.PixelFormat := pf8bit;
+
   SetPubInfo;
   ReadsysINI;
 
@@ -317,6 +329,9 @@ procedure TfMain.FormDestroy(Sender: TObject);
 begin
   Screen.Cursor := crHourGlass;
   try
+    Fullscreen.Free;
+    AJpeg.Free;
+
     WritesysINI;
 
     Unload;
@@ -325,6 +340,29 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
+end;
+
+procedure TfMain.GetSreen(Sender: TObject);
+var
+  Fullscreen:Tbitmap;
+  AJpeg : TJPEGImage;
+  SrcRect, DstRect : TRect;
+begin
+  Fullscreen:=TBitmap.Create;
+  Fullscreen.Width:=Self.Width;
+  Fullscreen.Height:=Self.Height;
+  SrcRect := Rect(0,0,Self.Width,Self.Height);
+  DstRect := Rect(0,0,Self.Width,Self.Height);
+  AJpeg := TJPEGImage.Create;
+  Fullscreen.Canvas.CopyRect(DstRect, Self.Canvas, SrcRect); //把整个屏幕复制到BITMAP中
+  Fullscreen.PixelFormat := pf8bit;
+  AJpeg.Assign( Fullscreen );
+
+  TMemoryStream(Sender).Clear;
+  AJpeg.SaveToStream(TMemoryStream(Sender));
+
+  fullscreen.free;
+  AJpeg.Free;
 end;
 
 procedure TfMain.IniDBConn;
@@ -359,6 +397,10 @@ begin
     UDPServer.SendConnServer;
 
     DataDict := TDataDictionary.Create;
+
+    UDPSendScreen := TThreadUDPSendScreen.Create(False);
+    UDPSendScreen.Connect;
+    UDPSendScreen.OnGetScreen :=  GetSreen;
 
     IniMapColor;
 
@@ -399,21 +441,7 @@ end;
 
 procedure TfMain.ReadsysINI;
 begin
-//  if sPubSysIniFileName = '' then
-//    Exit;
 
-//  with TIniFile.Create(sPubSysIniFileName) do
-//  begin
-//    C_SYS_COMPANY      := ReadString('System', 'Company',     '****公司');
-//    C_SYS_WEB          := ReadString('System', 'Web',         '');
-//    C_SYS_OBJECT_MODEL := ReadString('System', 'ObjectModel', '****型号');
-//    C_SYS_OBJECT_NAME  := ReadString('System', 'ObjectName',  '****系统');
-//    nPubAdmin          := ReadBool(  'System', 'IsAdmin',     False);
-//    bPubIsShowMain     := ReadBool(  'System', 'IsShowMain',     True);
-//    bPubIsEdit         := ReadBool(  'System', 'PubIsEdit',     False);
-//    nPubDevType         := ReadInteger(  'System', 'PubDevType',     1);
-//    free;
-//  end;
 end;
 
 procedure TfMain.SetPubInfo;
@@ -451,8 +479,9 @@ end;
 
 procedure TfMain.tmr1Timer(Sender: TObject);
 begin
-  statMain.Panels.Items[1].Text :=
-    formatdatetime('hh:mm:ss', Now);
+  statMain.Panels.Items[1].Text := '系统时间：' +
+    formatdatetime('YYYY年MM月DD日 hh:mm:ss',now);
+
 end;
 
 procedure TfMain.UDPLog(const S: string);
@@ -492,6 +521,8 @@ begin
     UDPServer.free;
     TCPServer.Free;
     DataDict.Free;
+    UDPSendScreen.Free;
+//    FUDPServer.Free;
   finally
 
   end;
@@ -499,22 +530,7 @@ end;
 
 procedure TfMain.WritesysINI;
 begin
-//  if sPubSysIniFileName = '' then
-//    Exit;
-//  with TIniFile.Create(sPubSysIniFileName) do
-//  begin
-//    WriteString('System', 'Company',     C_SYS_COMPANY);
-//    WriteString('System', 'Web',         C_SYS_WEB);
-//    WriteString('System', 'ObjectModel', C_SYS_OBJECT_MODEL);
-//    WriteString('System', 'ObjectName',  C_SYS_OBJECT_NAME);
-//    WriteBool(  'System', 'IsAdmin',     nPubAdmin);
-//
-//    WriteBool(  'System', 'IsShowMain',     bPubIsShowMain);
-//    WriteBool(  'System', 'PubIsEdit',     bPubIsEdit);
-//    WriteInteger(  'System', 'PubDevType',     nPubDevType);
-//
-//    free;
-//  end;
+
 end;
 
 end.
