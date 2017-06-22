@@ -15,7 +15,6 @@ type
     mmo1: TMemo;
     btn5: TButton;
     btn6: TButton;
-    arc2: TArc;
     rctngl1: TRectangle;
     btn2: TButton;
     procedure FormCreate(Sender: TObject);
@@ -53,6 +52,9 @@ var
   AVectorU, AVectorI : TVectorLineInfo;
   AArc : TVectorArc;
 begin
+  AVectorControl.VectorList.Clear;
+
+
   AVectorControl.Canvas := rctngl1;
   AVectorControl.Rect := RectF(rctngl1.Position.X, rctngl1.Position.Y,
     rctngl1.Position.X + rctngl1.Width, rctngl1.Position.Y + rctngl1.Height);

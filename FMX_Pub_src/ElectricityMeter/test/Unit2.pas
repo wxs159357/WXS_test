@@ -252,8 +252,8 @@ begin
   AMeter := TElecMeter.Create;
   APower := TElecPower.Create;
 
-//  INIMeter4;
-  INIMeter3;
+  INIMeter4;
+//  INIMeter3;
 end;
 
 procedure TForm2.FormDestroy(Sender: TObject);
@@ -321,7 +321,7 @@ end;
 procedure TForm2.INIMeter4;
 begin
   APower.INIPower4;
-  AMeter.ElecPhase := epFourReactive;
+  AMeter.ElecPhase := epFour;
 
   APower.VolA.ConnPointAdd(AMeter.TerminalInfoByName['Ua']);
   APower.VolB.ConnPointAdd(AMeter.TerminalInfoByName['Ub']);

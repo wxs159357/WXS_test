@@ -244,67 +244,9 @@ begin
 end;
 
 function TElecOrgan.GetOrganCurrent: TElecPoint;
-var
-  i : Integer;
-  APointA, APointB, APointC : TElecPoint;
-  nWID, nWValueIn, nWValueOut : Integer;
-  AElecLineIn : TElecLine;
 begin
-  APointA := TElecPoint.Create;
-  APointB := TElecPoint.Create;
-  APointC := TElecPoint.Create;
-
-  if FCurrentPointIn.CurrentList.Count > 0 then
-  begin
-    for i := 0 to FCurrentPointIn.CurrentList.Count - 1 do
-    begin
-      AElecLineIn := TElecLine(FCurrentPointIn.CurrentList.Objects[i]);
-
-      nWID := AElecLineIn.WID;
-      nWValueIn := FCurrentPointIn.Current.WeightValue[nWID].WValue;
-      nWValueOut := FCurrentPointOut.Current.WeightValue[nWID].WValue;
-
-
-      if (nWID <> C_WEIGHT_VALUE_INVALID) and
-        (nWValueIn <> C_WEIGHT_VALUE_INVALID) and
-        (nWValueOut <> C_WEIGHT_VALUE_INVALID) then
-      begin
-        APointA.Value := AElecLineIn.Current.Value;
-
-        if nWValueOut > nWValueIn then
-        begin
-          APointA.Angle := AdjustAngle(AElecLineIn.Current.Angle + 180);
-        end
-        else
-        begin
-          APointA.Angle := AElecLineIn.Current.Angle;
-        end;
-
-
-        if i = 0 then
-        begin
-          APointC.Value := APointA.Value;
-          APointC.Angle := APointA.Angle;
-        end
-        else
-        begin
-          GetCValue(APointA, APointB, APointC);
-        end;
-
-        APointB.Value := APointC.Value;
-        APointB.Angle := APointC.Angle;
-      end;
-
-    end;
-  end;
-  FCurrentPoint.Angle := APointC.Angle;
-  FCurrentPoint.Value := APointC.Value;
-
+  GetTwoPointCurrent(FCurrentPointIn, FCurrentPointOut, FCurrentPoint);
   Result := FCurrentPoint;
-
-  APointA.Free;
-  APointB.Free;
-  APointC.Free;
 end;
 
 function TElecOrgan.GetPositiveActivePower: Double;

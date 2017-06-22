@@ -16,7 +16,7 @@ type
   TIPSendRevPack = procedure ( sIP : string; nPort: Integer; aPacks: TArray<Byte>; bSend : Boolean) of object;
 
 type
-  TSendPack = function(APacks: TArray<Byte>): Boolean of object;
+  TSendPack = function(APacks: TArray<Byte>; sParam1: string = ''; sParam2 : string=''): Boolean of object;
 
 type
   TOrderObject = function( nOrderType: Integer):TObject of object;

@@ -25,12 +25,13 @@ type
     procedure TCPServerConnect(AContext: TIdContext);
     procedure TCPServerDisConnect(AContext: TIdContext);
 
+    function SendIPData(sIP: string; nPort :Integer; APacks: TArray<Byte>) : Boolean;
   protected
 
     /// <summary>
     ///真实发送 串口或以太网发送
     /// </summary>
-    function RealSend(APacks: TArray<Byte>): Boolean; override;
+    function RealSend(APacks: TArray<Byte>; sParam1: string = ''; sParam2 : string=''): Boolean; override;
 
     /// <summary>
     /// 真实连接
@@ -54,8 +55,8 @@ type
     /// <summary>
     /// 发送数据
     /// </summary>
-    function SendPacksData(sIP: string; nPort :Integer; APacks: TArray<Byte>): Boolean; overload; virtual;
-    function SendPacksData(sIP: string; nPort :Integer; sStr: string): Boolean; overload; virtual;
+    function SendPacksDataTCP(sIP: string; nPort :Integer; APacks: TArray<Byte>): Boolean; overload; virtual;
+    function SendPacksDataTCP(sIP: string; nPort :Integer; sStr: string): Boolean; overload; virtual;
 
 
     /// <summary>
@@ -130,31 +131,15 @@ begin
   Log(FormatDateTime('hh:mm:ss:zzz', Now) + ' 停止侦听端口'+inttostr(FListenPort));
 end;
 
-function TTCPServerBase.RealSend(APacks: TArray<Byte>): Boolean;
+function TTCPServerBase.RealSend(APacks: TArray<Byte>; sParam1, sParam2 : string): Boolean;
 var
-  i : Integer;
-  Context : TIdContext;
+  sIP : string;
+  nPort : Integer;
 begin
-  Result := False;
+  sIP := sParam1;
+  TryStrToInt(sParam2, nPort);
 
-  try
-    with FTCPServer.Contexts.LockList do
-    begin
-      for i := 0 to Count -1 do
-      begin
-        Context := TIdContext(Items[i]);
-        Context.Connection.IOHandler.Write(PacksToStr(APacks));
-
-        if Assigned(FOnIPSendRev) then
-          FOnIPSendRev(Context.Connection.Socket.Binding.PeerIP,
-            Context.Connection.Socket.Binding.PeerPort, APacks, True);
-
-        Result := True;
-      end;
-    end;
-  finally
-    FTCPServer.Contexts.UnlockList;
-  end;
+  Result := SendIPData(sIP, nPort, APacks);
 end;
 
 procedure TTCPServerBase.RevPacksData(sIP: string; nPort: Integer;
@@ -171,51 +156,75 @@ begin
   RevStrData( sStr);
 end;
 
-function TTCPServerBase.SendPacksData(sIP: string; nPort: Integer;
+function TTCPServerBase.SendPacksDataTCP(sIP: string; nPort: Integer;
   APacks: TArray<Byte>): Boolean;
-var
-  i : Integer;
 begin
-  BeforeSend;
-
-  Result := True;
-
-  try
-    for i := 0 to FTCPServer.Contexts.LockList.Count - 1 do
-    begin
-      with TIdContext(FTCPServer.Contexts.LockList.Items[i]).Connection do
-      begin
-        if (Socket.Binding.PeerIP = sIP) and (Socket.Binding.PeerPort = nPort) then
-        begin
-          try
-            if Connected then
-            begin
-              IOHandler.Write(PacksToStr(APacks));
-              if Assigned(FOnIPSendRev) then
-                FOnIPSendRev(sIP, nPort, APacks, True);
-            end;
-
-          except
-            Result := False;
-          end;
-          Break;
-        end;
-      end;
-    end;
-  finally
-    FTCPServer.Contexts.UnlockList;
-  end;
-
-  if Result and Assigned(OnSendRevPack) then
-    OnSendRevPack(APacks, True);
-
-  AfterSend;
+  Result := SendPacksDataBase(APacks, sIP, IntToStr(nPort));
 end;
 
-function TTCPServerBase.SendPacksData(sIP: string; nPort: Integer;
+function TTCPServerBase.SendIPData(sIP: string; nPort: Integer;
+  APacks: TArray<Byte>) : Boolean;
+var
+  i : Integer;
+  Context : TIdContext;
+begin
+  Result := False;
+
+  if (sIP <> '') and (nPort > 10) then
+  begin
+    try
+      for i := 0 to FTCPServer.Contexts.LockList.Count - 1 do
+      begin
+        with TIdContext(FTCPServer.Contexts.LockList.Items[i]).Connection do
+        begin
+          if (Socket.Binding.PeerIP = sIP) and (Socket.Binding.PeerPort = nPort) then
+          begin
+            try
+              if Connected then
+              begin
+                IOHandler.Write(PacksToStr(APacks));
+                Result := True;
+
+                if Assigned(FOnIPSendRev) then
+                  FOnIPSendRev(sIP, nPort, APacks, True);
+              end;
+            except
+
+            end;
+            Break;
+          end;
+        end;
+      end;
+    finally
+      FTCPServer.Contexts.UnlockList;
+    end;
+  end
+  else
+  begin
+    try
+      with FTCPServer.Contexts.LockList do
+      begin
+        for i := 0 to Count -1 do
+        begin
+          Context := TIdContext(Items[i]);
+          Context.Connection.IOHandler.Write(PacksToStr(APacks));
+          Result := True;
+
+          if Assigned(FOnIPSendRev) then
+            FOnIPSendRev(Context.Connection.Socket.Binding.PeerIP,
+              Context.Connection.Socket.Binding.PeerPort, APacks, True);
+        end;
+      end;
+    finally
+      FTCPServer.Contexts.UnlockList;
+    end;
+  end;
+end;
+
+function TTCPServerBase.SendPacksDataTCP(sIP: string; nPort: Integer;
   sStr: string): Boolean;
 begin
-  Result :=SendPacksData(sIP, nPort, StrToPacks(sStr));
+  Result := SendPacksDataTCP(sIP, nPort, StrToPacks(sStr));
 end;
 
 procedure TTCPServerBase.TCPServerConnect(AContext: TIdContext);

@@ -71,8 +71,9 @@ type
 
     /// <summary>
     ///真实发送 串口或以太网发送
+    /// 第一个参数为IP地址，第二个参数为端口
     /// </summary>
-    function RealSend(APacks: TArray<Byte>): Boolean; virtual;
+    function RealSend(APacks: TArray<Byte>; sParam1: string = ''; sParam2 : string=''): Boolean; virtual;
 
     /// <summary>
     /// 真实连接
@@ -93,8 +94,8 @@ type
     /// <summary>
     /// 发送数据
     /// </summary>
-    function SendPacksData(APacks: TArray<Byte>): Boolean; overload; virtual;
-    function SendPacksData(sStr: string): Boolean; overload; virtual;
+    function SendPacksDataBase(APacks: TArray<Byte>; sParam1,sParam2 : string): Boolean; overload; virtual;
+    function SendPacksDataBase(sStr: string; sParam1,sParam2 : string): Boolean; overload; virtual;
 
     /// <summary>
     /// 连接
@@ -238,7 +239,7 @@ begin
   FActive := False;
 end;
 
-function TCommBase.RealSend(APacks: TArray<Byte>): Boolean;
+function TCommBase.RealSend(APacks: TArray<Byte>; sParam1, sParam2 : string): Boolean;
 begin
   Result := True;
 end;
@@ -257,16 +258,15 @@ begin
 
 end;
 
-function TCommBase.SendPacksData(sStr: string): Boolean;
+function TCommBase.SendPacksDataBase(sStr: string; sParam1,sParam2 : string): Boolean;
 begin
-  Result := SendPacksData(StrToPacks(sStr));
+  Result := SendPacksDataBase(StrToPacks(sStr),sParam1,sParam2);
 end;
 
-function TCommBase.SendPacksData(APacks: TArray<Byte>): Boolean;
+function TCommBase.SendPacksDataBase(APacks: TArray<Byte>; sParam1,sParam2 : string): Boolean;
 begin
   BeforeSend;
-
-  Result := RealSend(APacks);
+  Result := RealSend(APacks, sParam1, sParam2);
 
   if Result and Assigned(FOnSendRevPack) then
     FOnSendRevPack(APacks, True);

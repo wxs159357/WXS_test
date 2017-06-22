@@ -29,7 +29,7 @@ type
     /// <summary>
     /// 发送接收
     /// </summary>
-    procedure CommSenRev( aPacks : TBytes; bSend : Boolean );
+    procedure CommSenRev( aPacks : TBytes; bSend : Boolean; sParam1, sParam2 : string );
 
     /// <summary>
     /// 发送之前函数
@@ -98,7 +98,7 @@ type
     /// <summary>
     /// 发送数据包
     /// </summary>
-    function SendData(nOrderType: Integer; ADev: TObject) : Boolean; virtual;
+    function SendData(nOrderType: Integer; ADev: TObject; sParam1, sParam2 : string) : Boolean; virtual;
 
     /// <summary>
     /// 退出
@@ -170,7 +170,7 @@ begin
   // nothing
 end;
 
-procedure TProtocolBase.CommSenRev(aPacks: TBytes; bSend: Boolean);
+procedure TProtocolBase.CommSenRev(aPacks: TBytes; bSend: Boolean; sParam1, sParam2 : string);
 begin
   if Length(aPacks) > 0 then
   begin
@@ -180,12 +180,12 @@ begin
     if bSend then
     begin
       if Assigned(FOnSendData) then
-        FOnSendData(aPacks);
+        FOnSendData(aPacks, sParam1, sParam2);
     end
     else
     begin
       if Assigned(FOnRevData) then
-        FOnRevData(aPacks);
+        FOnRevData(aPacks, sParam1, sParam2);
     end;
   end;
 end;
@@ -249,18 +249,18 @@ procedure TProtocolBase.ReceivedData(aPacks: TBytes; sParam1, sParam2 : string);
 begin
   BeforeRev;
   ParseData(aPacks);
-  CommSenRev(aPacks, False);
+  CommSenRev(aPacks, False, sParam1, sParam2);
 
   AfterRev;
 end;
 
-function TProtocolBase.SendData(nOrderType: Integer; ADev: TObject): Boolean;
+function TProtocolBase.SendData(nOrderType: Integer; ADev: TObject; sParam1, sParam2 : string): Boolean;
 begin
   FOrderType := nOrderType;
   FDev := ADev;
 
   BeforeSend;
-  CommSenRev(CreatePacks, True);
+  CommSenRev(CreatePacks, True, sParam1, sParam2);
   AfterSend;
 
   if FIsReplay then

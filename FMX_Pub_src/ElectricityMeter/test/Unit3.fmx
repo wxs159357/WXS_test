@@ -1,0 +1,112 @@
+object Form3: TForm3
+  Left = 0
+  Top = 0
+  Caption = 'Form3'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object pnl1: TPanel
+    Align = Right
+    Position.X = 408.000000000000000000
+    Size.Width = 232.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btn1: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 0
+      Text = #36830#25509#21015#34920
+      OnClick = btn1Click
+    end
+    object btn2: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 72.000000000000000000
+      TabOrder = 2
+      Text = #30005#21387#20540
+      OnClick = btn2Click
+    end
+    object btn3: TButton
+      Position.X = 104.000000000000000000
+      Position.Y = 104.000000000000000000
+      TabOrder = 3
+      Text = #30005#27969#20540
+      OnClick = btn3Click
+    end
+    object btn4: TButton
+      Position.X = 56.000000000000000000
+      Position.Y = 152.000000000000000000
+      TabOrder = 1
+      Text = #26435#20540#21015#34920
+      OnClick = btn4Click
+    end
+    object edt1: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 11
+      Text = '100'
+      Position.X = 143.000000000000000000
+      Position.Y = 152.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btn6: TButton
+      Position.X = 88.000000000000000000
+      Position.Y = 192.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 12
+      Text = #21047#26032#30005#21387#30005#27969
+      OnClick = btn6Click
+    end
+    object btn7: TButton
+      Position.Y = 192.000000000000000000
+      TabOrder = 13
+      Text = #21151#29575#20540
+      OnClick = btn7Click
+    end
+    object btn5: TButton
+      Position.X = 88.000000000000000000
+      Position.Y = 376.000000000000000000
+      TabOrder = 14
+      Text = #28165#31354
+      OnClick = btn5Click
+    end
+    object lbl1: TLabel
+      StyledSettings = [Family, Size, Style]
+      Position.X = 24.000000000000000000
+      Position.Y = 272.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claCrimson
+      Text = #20004#28857#25165#33021#27979#35797#20986#30005#27969#20540
+    end
+  end
+  object mmo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Client
+    Size.Width = 404.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 400.000000000000000000
+    Viewport.Height = 476.000000000000000000
+  end
+  object spltr1: TSplitter
+    Align = Right
+    Cursor = crHSplit
+    MinSize = 20.000000000000000000
+    Position.X = 404.000000000000000000
+    Size.Width = 4.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+  end
+end

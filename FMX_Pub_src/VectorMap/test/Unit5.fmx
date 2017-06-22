@@ -11,6 +11,13 @@ object Form5: TForm5
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
+  object rctngl1: TRectangle
+    Position.X = 24.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 425.000000000000000000
+    Size.Height = 353.000000000000000000
+    Size.PlatformDefault = False
+  end
   object btn4: TButton
     Position.X = 536.000000000000000000
     Position.Y = 224.000000000000000000
@@ -52,22 +59,6 @@ object Form5: TForm5
     TabOrder = 3
     Text = #23383#31526#20018#36716#25442#25104#22270
     OnClick = btn6Click
-  end
-  object arc2: TArc
-    Position.X = 352.000000000000000000
-    Position.Y = 312.000000000000000000
-    Size.Width = 50.000000000000000000
-    Size.Height = 50.000000000000000000
-    Size.PlatformDefault = False
-    StartAngle = -70.000000000000000000
-    EndAngle = 50.000000000000000000
-  end
-  object rctngl1: TRectangle
-    Position.X = 24.000000000000000000
-    Position.Y = 16.000000000000000000
-    Size.Width = 401.000000000000000000
-    Size.Height = 353.000000000000000000
-    Size.PlatformDefault = False
   end
   object btn2: TButton
     Position.X = 536.000000000000000000

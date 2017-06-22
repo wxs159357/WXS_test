@@ -6,7 +6,7 @@ uses SysUtils, Classes;
 
 const
   /// <summary>
-  /// 无线权值
+  /// 无效权值
   /// </summary>
   C_WEIGHT_VALUE_INVALID = 9999;
 
@@ -55,7 +55,6 @@ type
     FIsVolRoot: Boolean;
     FIsHighPoint: Boolean;
     FWValueList: TStringList;
-    FIsClear: Boolean;
     procedure SetValue(const Value: Double);
     procedure SetAngle(const Value: Double);
 
@@ -126,11 +125,6 @@ type
     property IsVolRoot : Boolean read FIsVolRoot write FIsVolRoot;
 
     /// <summary>
-    /// 是否清空值
-    /// </summary>
-    property IsClear : Boolean read FIsClear write FIsClear;
-
-    /// <summary>
     /// 改变事件
     /// </summary>
     property OnChange : TNotifyEvent read FOnChange write FOnChange;
@@ -164,7 +158,6 @@ procedure TElecPoint.ClearValue;
 begin
   FAngle := 0;
   FValue := 0;
-  FIsClear := True;
 end;
 
 procedure TElecPoint.ClearWValue;
@@ -189,17 +182,11 @@ begin
   FIsLowPoint:= False;
   FIsVolRoot := False;
   FIsHighPoint := False;
-  FIsClear := True;
 end;
 
 destructor TElecPoint.Destroy;
-var
-  i : Integer;
 begin
-  for i := 0 to FWValueList.Count - 1 do
-    FWValueList.Objects[i].Free;
-
-  FWValueList.Clear;
+  ClearWValue;
   FWValueList.Free;
 
   inherited;

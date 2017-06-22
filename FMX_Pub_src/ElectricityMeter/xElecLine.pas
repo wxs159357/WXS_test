@@ -18,8 +18,12 @@ type
     FOnwner: TObject;
     FCurrentList: TStringList;
     FWID: Integer;
+    FOnChangeCurrent: TNotifyEvent;
+    FOnChangeVol: TNotifyEvent;
 
     procedure ValueChange(Sender : TObject);
+    procedure ValueChangeVol(Sender : TObject);
+    procedure ValueChangeCurrent(Sender : TObject);
     function GetConnPointInfo(nIndex: Integer): TElecLine;
   public
     constructor Create;
@@ -49,6 +53,16 @@ type
     /// 改变事件
     /// </summary>
     property OnChange : TNotifyEvent read FOnChange write FOnChange;
+
+    /// <summary>
+    /// 改变事件
+    /// </summary>
+    property OnChangeVol : TNotifyEvent read FOnChangeVol write FOnChangeVol;
+
+    /// <summary>
+    /// 改变事件
+    /// </summary>
+    property OnChangeCurrent : TNotifyEvent read FOnChangeCurrent write FOnChangeCurrent;
 
     /// <summary>
     /// 值赋值
@@ -111,7 +125,7 @@ type
 
   public
     /// <summary>
-    ///  实际流经原件电流列表
+    ///  实际流经电流列表
     /// </summary>
     property CurrentList : TStringList read FCurrentList write FCurrentList;
 
@@ -124,6 +138,13 @@ type
     /// 添加电流到列表
     /// </summary>
     procedure AddCurrent(AElecLine : TElecLine);
+
+    /// <summary>
+    /// 设置值
+    /// </summary>
+    procedure SetValue(sLineName: string; dVolValue, dVolAngle, dCurrValue,
+      dCurrAngle : Double; bIsLowPoint, bIsHighPoint, bVolRoot : Boolean);
+
   end;
 
 implementation
@@ -134,7 +155,7 @@ uses xElecFunction;
 
 procedure TElecLine.AddCurrent(AElecLine: TElecLine);
 begin
-  FCurrentList.AddObject('', AElecLine)
+  FCurrentList.AddObject('', AElecLine);
 end;
 
 procedure TElecLine.AssignValue(ALine: TElecLine);
@@ -194,11 +215,16 @@ procedure TElecLine.CalcCurrWValue;
   end;
 var
   AW : TWeightValue;
+  j : Integer;
 begin
   if FCurrent.IsLowPoint and (FCurrent.WValueList.Count > 0) then
   begin
-    AW := TWeightValue(FCurrent.WValueList.Objects[0]);
-    SetValue(AW.WValue, AW.WID, Self);
+    for j := 0  to FCurrent.WValueList.Count - 1 do
+    begin
+      AW := TWeightValue(FCurrent.WValueList.Objects[j]);
+      SetValue(AW.WValue, AW.WID, Self);
+    end;
+
   end;
 
 end;
@@ -262,9 +288,9 @@ begin
   FVoltage:= TElecPoint.Create;
   FConnPoints:= TStringList.Create;
   FCurrentList:= TStringList.Create;
+  FCurrent.OnChange := ValueChangeCurrent;
+  FVoltage.OnChange := ValueChangeVol;
 
-  FCurrent.OnChange := ValueChange;
-  FVoltage.OnChange := ValueChange;
   FCurrent.Owner := Self;
   FVoltage.Owner := Self;
   FWID := C_WEIGHT_VALUE_INVALID;
@@ -336,11 +362,10 @@ procedure TElecLine.SendVolValue;
       for i := 0 to AElec.ConnPoints.Count - 1 do
       begin
         AConn := TElecLine(AElec.ConnPoints.Objects[i]);
-        if Abs(AConn.Voltage.Value) < 0.0001 then
+        if (Abs(AConn.Voltage.Value) < 0.0001) then
         begin
-          AConn.Voltage.Value := dVolValue;
           AConn.Voltage.Angle := dAngle;
-          AConn.Voltage.IsClear := False;
+          AConn.Voltage.Value := dVolValue;
 
           SetValue(dVolValue,dAngle, AConn);
         end;
@@ -351,10 +376,39 @@ begin
   SetValue(FVoltage.Value, FVoltage.Angle, Self);
 end;
 
+procedure TElecLine.SetValue(sLineName: string; dVolValue, dVolAngle,
+  dCurrValue, dCurrAngle: Double; bIsLowPoint, bIsHighPoint, bVolRoot: Boolean);
+begin
+  FLineName := sLineName;
+  FVoltage.Value := dVolValue;
+  FVoltage.Angle := dVolAngle;
+  FCurrent.Value := dCurrValue;
+  FCurrent.Angle := dCurrAngle;
+  FCurrent.IsLowPoint := bIsLowPoint;
+  FCurrent.IsHighPoint := bIsHighPoint;
+  FVoltage.IsVolRoot := bVolRoot;
+end;
+
 procedure TElecLine.ValueChange(Sender: TObject);
 begin
   if Assigned(FOnChange) then
     FOnChange(Self);
+end;
+
+procedure TElecLine.ValueChangeCurrent(Sender: TObject);
+begin
+  ValueChange(Sender);
+
+  if Assigned(FOnChangeCurrent) then
+    FOnChangeCurrent(Self);
+end;
+
+procedure TElecLine.ValueChangeVol(Sender: TObject);
+begin
+  ValueChange(Sender);
+
+  if Assigned(FOnChangeVol) then
+    FOnChangeVol(Self);
 end;
 
 end.

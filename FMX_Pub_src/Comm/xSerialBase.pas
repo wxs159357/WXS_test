@@ -46,7 +46,7 @@ type
     /// <summary>
     ///真实发送 串口或以太网发送
     /// </summary>
-    function RealSend(APacks: TArray<Byte>): Boolean; override;
+    function RealSend(APacks: TArray<Byte>; sParam1: string = ''; sParam2 : string=''): Boolean; override;
 
     /// <summary>
     /// 真实连接
@@ -150,7 +150,7 @@ begin
 {$ENDIF}
 end;
 
-function TSerialBase.RealSend(APacks: TArray<Byte>): Boolean;
+function TSerialBase.RealSend(APacks: TArray<Byte>; sParam1, sParam2 : string): Boolean;
 var
   sStr : string;
 begin

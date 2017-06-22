@@ -10,6 +10,36 @@ uses System.SysUtils, System.Classes, xProtocolBase,xFunction, xVCL_FMX,
   xCommBase, xSerialBase, xTCPClientBase, xTCPServerBase, xUDPServerBase;
 
 type
+  TOrderObject = class
+  private
+    FOrderType: Integer;
+    FOrderObject: TObject;
+    FOrderIP: string;
+    FOrderPort: Integer;
+
+  public
+    /// <summary>
+    /// 命令类型
+    /// </summary>
+    property OrderType : Integer read FOrderType write FOrderType;
+    /// <summary>
+    /// 命令对象
+    /// </summary>
+    property OrderObject : TObject read FOrderObject write FOrderObject;
+
+    /// <summary>
+    /// 命令IP
+    /// </summary>
+    property OrderIP : string read FOrderIP write FOrderIP;
+
+    /// <summary>
+    /// 命令端口
+    /// </summary>
+    property OrderPort : Integer read FOrderPort write FOrderPort;
+
+  end;
+
+type
   /// <summary>
   /// 线路类型
   /// </summary>
@@ -19,24 +49,6 @@ type
                ctTCPServer, // TCP服务器
                ctUDPServer  // UDP服务器
                );
-
-type
-  TTIME_ORDER_INFO = class
-  private
-    FCmdType: Integer;
-    FCmdObject: TObject;
-
-  public
-    /// <summary>
-    /// 命令类型
-    /// </summary>
-    property CmdType : Integer read FCmdType write FCmdType;
-
-    /// <summary>
-    /// 命令对象
-    /// </summary>
-    property CmdObject : TObject read FCmdObject write FCmdObject;
-  end;
 
 type
   /// <summary>
@@ -68,7 +80,7 @@ type
     /// <summary>
     /// 执行实时命令
     /// </summary>
-    procedure ExecuteOrder(ACmdType: Integer; ADevice: TObject); virtual;
+    procedure ExecuteOrder(ACmdType: Integer; ADevice: TObject; sIP : string; nPort : Integer); virtual;
 
     /// <summary>
     /// 执行定时命令 （如果定时命令要执行列表需要判断 FIsStop 是佛停止运行，如果挺尸运行需要跳出循环）
@@ -104,7 +116,8 @@ type
     /// <param name="ACmdType">命令类型</param>
     /// <param name="ADevice">命令对象</param>
     /// <param name="bWairtExecute">是否等待执行完命令才推出函数</param>
-    procedure AddOrder( ACmdType: Integer; ADevice: TObject; bWairtExecute : Boolean = True); virtual;
+    procedure AddOrder( ACmdType: Integer; ADevice: TObject;
+      bWairtExecute : Boolean = True; sIP : string = ''; nPort : Integer = 0); virtual;
 
     /// <summary>
     /// 命令是否执行完
@@ -147,13 +160,21 @@ implementation
 { TThreadBase }
 
 procedure TThreadBase.AddOrder(ACmdType: Integer; ADevice: TObject;
-  bWairtExecute: Boolean);
+  bWairtExecute: Boolean;sIP : string; nPort : Integer);
 var
   nTimeOut : Integer;
+  AOderObject : TOrderObject;
 begin
   if IsConned then
   begin
-    FOrderList.AddObject( IntToStr( Integer(ACmdType) ), ADevice);
+    AOderObject := TOrderObject.Create;
+    AOderObject.OrderType   := ACmdType;
+    AOderObject.OrderObject := ADevice;
+    AOderObject.OrderIP     := sIP;
+    AOderObject.OrderPort   := nPort;
+
+
+    FOrderList.AddObject( IntToStr( Integer(ACmdType) ), AOderObject);
 
     if bWairtExecute then
     begin
@@ -188,7 +209,7 @@ end;
 
 procedure TThreadBase.Execute;
 var
-  nOrderType : Integer;
+  AOrderObject : TOrderObject;
 begin
   inherited;
   while not Terminated do
@@ -213,11 +234,18 @@ begin
 
       if Assigned( FOrderList.Objects[ 0 ] ) then
       begin
-        TryStrToInt(FOrderList[ 0 ], nOrderType);
-        ExecuteOrder(nOrderType, FOrderList.Objects[ 0 ] );
+        AOrderObject := TOrderObject(FOrderList.Objects[ 0 ]);
+
+        with AOrderObject do
+        begin
+          ExecuteOrder(OrderType, OrderObject, OrderIP, OrderPort);
+        end;
 
         if FOrderList.Count > 0 then
+        begin
+          AOrderObject.Free;
           FOrderList.Delete( 0 );
+        end;
       end;
     end;
 
@@ -230,10 +258,11 @@ begin
   end;
 end;
 
-procedure TThreadBase.ExecuteOrder(ACmdType: Integer; ADevice: TObject);
+procedure TThreadBase.ExecuteOrder(ACmdType: Integer; ADevice: TObject;
+  sIP : string; nPort : Integer);
 begin
   if Assigned(FProtocol) then
-    FOrderReplayed := FProtocol.SendData(ACmdType, ADevice)
+    FOrderReplayed := FProtocol.SendData(ACmdType, ADevice, sIP, IntToStr(nPort))
   else
     FOrderReplayed := False;
 end;
@@ -242,10 +271,10 @@ procedure TThreadBase.ExecuteTimerOrder;
 begin
   if TimeOrderList.Count > FTempIndex then
   begin
-    with TTIME_ORDER_INFO(TimeOrderList.Objects[FTempIndex]) do
+    with TOrderObject(TimeOrderList.Objects[FTempIndex]) do
     begin
       if Assigned(FProtocol) and not FIsStop then
-        FProtocol.SendData(CmdType, CmdObject);
+        FProtocol.SendData(OrderType, OrderObject, OrderIP, IntToStr(OrderPort));
     end;
   end;
 
@@ -315,7 +344,8 @@ begin
         FCommBase := TSerialBase.Create;
       end;
 
-      FProtocol.OnSendData := FCommBase.SendPacksData;
+      // FProtocol 必须先创建
+      FProtocol.OnSendData := FCommBase.SendPacksDataBase;
       FCommBase.OnRevPacks := FProtocol.ReceivedData;
 
     end;
@@ -335,7 +365,7 @@ begin
         FCommBase := TTCPClientBase.Create;
       end;
 
-      FProtocol.OnSendData := FCommBase.SendPacksData;
+      FProtocol.OnSendData := FCommBase.SendPacksDataBase;
       FCommBase.OnRevPacks := FProtocol.ReceivedData;
 
 
@@ -359,7 +389,7 @@ begin
         FCommBase := TTCPServerBase.Create;
       end;
 
-      FProtocol.OnSendData := FCommBase.SendPacksData;
+      FProtocol.OnSendData := FCommBase.SendPacksDataBase;
       FCommBase.OnRevPacks := FProtocol.ReceivedData;
 
 
@@ -380,7 +410,7 @@ begin
         FCommBase := TUDPServerBase.Create;
       end;
 
-      FProtocol.OnSendData := FCommBase.SendPacksData;
+      FProtocol.OnSendData := FCommBase.SendPacksDataBase;
       FCommBase.OnRevPacks := FProtocol.ReceivedData;
     end;
   end;

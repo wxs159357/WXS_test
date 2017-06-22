@@ -304,6 +304,7 @@ begin
   FText.Position.Y := 1- FText.Width/2;
   FText.Color := GetVectorColor;
   FText.Font.Family := 'Times New Roman';
+  FText.Font.Style := [TFontStyle.fsItalic];
   FText.RotationAngle := -FLine.RotationAngle;
 
   if FIsDrawPoint then
@@ -314,7 +315,7 @@ begin
     FCircle.Parent := FText;
     FCircle.Width := 2;
     FCircle.Height := 2;
-    FCircle.Position.X := 3.5*Length(FVName);
+    FCircle.Position.X := 5.5*Length(FVName);
     FCircle.Position.y := -3;
     FCircle.Stroke.Color := GetVectorColor;
   end;
