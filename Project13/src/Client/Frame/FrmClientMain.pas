@@ -9,7 +9,8 @@ uses
   Vcl.ActnMan, Vcl.ToolWin, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons, xConfig,
   xDBConn, xClientControl, xUDPClient1, xClientType, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, xFunction, xTCPClient, FrmLogin,
-  uStudentInfo, xExerciseControl, FrmExercise, System.IniFiles, xConsts;
+  uStudentInfo, xExerciseControl, FrmExercise, System.IniFiles, xConsts,FrmExamReady,
+  xUDPRevScreen, Vcl.Imaging.jpeg;
 const
   WM_FORM_LOADING = WM_USER + 1;
 type
@@ -80,6 +81,7 @@ type
     btnExercise: TToolButton;
     pmn1: TPopupMenu;
     mntmN5: TMenuItem;
+    img1: TImage;
     procedure actExitExecute(Sender: TObject);
     procedure actAboutExecute(Sender: TObject);
     procedure actOptionExecute(Sender: TObject);
@@ -92,6 +94,8 @@ type
     procedure pmn1Popup(Sender: TObject);
   private
     { Private declarations }
+    FExamReadyForm : TfExamReady;
+    FRevScreen : TUDPRevScreen;
     /// <summary>
     /// 系统启动处理
     /// </summary>
@@ -124,10 +128,13 @@ type
     procedure TCPConnect(Sender: TObject);
     procedure TCPDisconnect(Sender: TObject);
 
+    procedure RevJpg(Sender: TObject);
+
     procedure TCPLog(const S: string);
     procedure UDPLog(const S: string);
     procedure TCPPacksLog(  aPacks: TBytes; bSend : Boolean);
     procedure UDPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
+    procedure UDPPacksLog1( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
     /// <summary>
     /// TCP连接
     /// </summary>
@@ -135,6 +142,9 @@ type
     procedure ConnServer(Sender: TObject);
 
     procedure Login(Sender: TObject);
+    procedure StuReady( nTotalCount : Integer);
+    procedure StuProgress( nReadyCount, nTotalCount : Integer);
+
   public
     { Public declarations }
   end;
@@ -253,6 +263,9 @@ begin
     TCPClient.OnLog := TCPLog;
     TCPClient.OnSendRevPack := TCPPacksLog;
     TCPClient.OnStuLogin := Login;
+    TCPClient.OnStuReady := StuReady;
+    TCPClient.OnStuProgress := StuProgress;
+
 
     UDPClient.OnConnServer := ConnServer;
 
@@ -266,7 +279,15 @@ begin
 
     IniDBConn;
 
+    FRevScreen := TUDPRevScreen.Create;
+    FRevScreen.ListenPort := 16101;
+    FRevScreen.Connect;
+    FRevScreen.OnRevJpg := RevJpg;
+    FRevScreen.OnIPSendRev := UDPPacksLog1;
+
+
     ExerciseControl := TExerciseControl.Create;
+    FExamReadyForm := TfExamReady.Create(nil);
 
     with TIniFile.Create(sPubIniFileName) do
     begin
@@ -341,6 +362,16 @@ begin
   end;
 end;
 
+procedure TfClientMain.RevJpg(Sender: TObject);
+begin
+  if Sender is TJPEGImage then
+  begin
+    mmo2.Lines.Add('刷新图片' + IntToStr(TJPEGImage(Sender).Width) + ';' + IntToStr(TJPEGImage(Sender).Height));
+
+    img1.Picture.Bitmap.Assign(TJPEGImage(Sender));
+  end;
+end;
+
 procedure TfClientMain.SetPubInfo;
 begin
 
@@ -361,6 +392,18 @@ begin
     btnStu.Caption := '未登录';
     imgStu.Picture.LoadFromFile('OutLine.bmp');
   end;
+end;
+
+procedure TfClientMain.StuProgress(nReadyCount, nTotalCount: Integer);
+begin
+  FExamReadyForm.Show;
+  FExamReadyForm.ShowReadyProgress(nReadyCount, nTotalCount);
+end;
+
+procedure TfClientMain.StuReady(nTotalCount: Integer);
+begin
+  FExamReadyForm.ShowReady(nTotalCount);
+  FExamReadyForm.Show;
 end;
 
 procedure TfClientMain.TCPConn;
@@ -488,12 +531,46 @@ begin
   UDPLog(FormatDateTime('hh:mm:ss:zzz', Now) + s + sIP +':' + IntToStr(nPort) + ' ' + PacksToStr(aPacks) );
 end;
 
+procedure TfClientMain.UDPPacksLog1(sIP: string; nPort: Integer; aPacks: TBytes;
+  bSend: Boolean);
+var
+  s : string;
+  aBuf : TBytes;
+begin
+  if bsend then
+    s := '发送'
+  else
+    s := '接收';
+
+
+  SetLength(aBuf, 10);
+
+  aBuf[0] := aPacks[0];
+  aBuf[1] := aPacks[1];
+  aBuf[2] := aPacks[2];
+  aBuf[3] := aPacks[3];
+  aBuf[4] := aPacks[4];
+  aBuf[5] := aPacks[5];
+  aBuf[6] := aPacks[6];
+  aBuf[7] := aPacks[7];
+  aBuf[8] := aPacks[Length(aPacks)-2];
+  aBuf[9] := aPacks[Length(aPacks)-1];
+
+
+
+
+
+  UDPLog(FormatDateTime('hh:mm:ss:zzz', Now) + s + sIP +':' + IntToStr(nPort) + ' ' + BCDPacksToStr(aBuf) );
+end;
+
 procedure TfClientMain.Unload;
 begin
   ClientControl.Free;
   UDPClient.Free;
   TCPClient.Free;
   ExerciseControl.Free;
+  FExamReadyForm.Free;
+  FRevScreen.Free;
 end;
 
 end.

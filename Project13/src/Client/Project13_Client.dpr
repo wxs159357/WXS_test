@@ -65,11 +65,13 @@ uses
   U_WE_VECTOR_EQUATION in '..\Server\WiringError\WiringError\V2\U_WE_VECTOR_EQUATION.pas',
   U_WE_VECTOR_MAP in '..\Server\WiringError\WiringError\V2\U_WE_VECTOR_MAP.pas',
   U_POWER_LIST_INFO in '..\Server\WiringError\WiringError\AnalysisMap\U_POWER_LIST_INFO.pas',
-  U_WIRINGF_ERROR in '..\Server\WiringError\U_WIRINGF_ERROR.pas',
   U_CKM_DEVICE in '..\..\..\Pub_src\U_CKM_DEVICE.pas',
   U_PUB_FUN in '..\..\..\Pub_src\U_PUB_FUN.pas',
   xDataDictionary in '..\..\..\FMX_Pub_src\xDataDictionary.pas',
-  FrmAnswerQuestion in 'AnswerQuestion\FrmAnswerQuestion.pas' {fAnswerQuestion};
+  FrmAnswerQuestion in 'AnswerQuestion\FrmAnswerQuestion.pas' {fAnswerQuestion},
+  xWiringError in '..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas',
+  FrmExamReady in 'Exam\FrmExamReady.pas' {fExamReady},
+  xUDPRevScreen in 'RevScreen\xUDPRevScreen.pas';
 
 {$R *.res}
 
@@ -77,5 +79,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfClientMain, fClientMain);
+  Application.CreateForm(TfExamReady, fExamReady);
   Application.Run;
 end.

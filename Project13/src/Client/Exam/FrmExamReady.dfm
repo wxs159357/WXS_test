@@ -1,0 +1,56 @@
+object fExamReady: TfExamReady
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsToolWindow
+  Caption = #32771#35797#20934#22791#36827#24230
+  ClientHeight = 109
+  ClientWidth = 618
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl1: TLabel
+    Left = 0
+    Top = 33
+    Width = 618
+    Height = 21
+    Align = alTop
+    Alignment = taRightJustify
+    Caption = 'lbl1'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlue
+    Font.Height = -21
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+    Layout = tlCenter
+    ExplicitLeft = 570
+    ExplicitWidth = 48
+  end
+  object prgrsbr1: TProgressBar
+    Left = 0
+    Top = 0
+    Width = 618
+    Height = 33
+    Align = alTop
+    TabOrder = 0
+    ExplicitWidth = 608
+  end
+  object btnReady: TButton
+    Left = 208
+    Top = 58
+    Width = 201
+    Height = 41
+    Caption = #20934#22791
+    TabOrder = 1
+    OnClick = btnReadyClick
+  end
+end

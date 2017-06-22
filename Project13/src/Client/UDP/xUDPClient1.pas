@@ -69,7 +69,7 @@ begin
   nPort := 0;
   FList.Clear;
   bGetInfo := True;
-  SendPacksData('255.255.255.255', 16000, 'GetServerInfo');
+  SendPacksDataUDP('255.255.255.255', 16000, 'GetServerInfo');
   repeat
     MyProcessMessages;
     Sleep(1);

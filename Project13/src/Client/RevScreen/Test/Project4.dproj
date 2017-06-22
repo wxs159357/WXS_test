@@ -1,9 +1,9 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{7C7493B0-3382-4B29-8E17-6B2A7DD180F9}</ProjectGuid>
+        <ProjectGuid>{83EF2B58-490B-4CCA-9DB6-5AD535919970}</ProjectGuid>
         <ProjectVersion>18.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>Project13_Client.dpr</MainSource>
+        <MainSource>Project4.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -46,11 +46,12 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <SanitizedProjectName>Project13_Client</SanitizedProjectName>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <Custom_Styles>&quot;Emerald Light Slate|VCLSTYLE|$(BDSCOMMONDIR)\Styles\EmeraldLightSlate.vsf&quot;</Custom_Styles>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+        <SanitizedProjectName>Project4</SanitizedProjectName>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
@@ -60,16 +61,16 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;dxHttpIndyRequestRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;fs24;HTTPBBoxCliD24;emsclientfiredac;HTTPBBoxSrvD24;DataSnapFireDAC;tethering;svnui;PGPLDAPBBoxD24;FireDACADSDriver;dxFireDACServerModeRS24;DBXMSSQLDriver;FTPSBBoxCliD24;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;dxWizardControlRS24;vcltouch;DCBBoxD24;SAMLBBoxD24;vcldb;bindcompfmx;Intraweb;svn;DBXOracleDriver;inetdb;EDIBBoxD24;DAVBBoxSrvD24;frxADO24;dxADOServerModeRS24;FmxTeeUI;emsedge;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;frx24;vclib;frxDBX24;FireDACDBXDriver;dbexpress;IndyCore;tmsexdXE10;vclx;dsnap;DataSnapCommon;emsclient;fsADO24;FireDACCommon;cxDataRS24;XMLBBoxSecD24;BaseBBoxD24;RESTBackendComponents;DataSnapConnectors;MailBBoxD24;PGPSSHBBoxD24;VCLRESTComponents;soapserver;cxExportRS24;XMLBBoxD24;vclie;CPortLibDXE;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;fsDB24;flashTLB;ZIPBBoxD24;EmbeddedWebBrowser;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;PGPBBoxD24;frxcs24;inet;OfficeBBoxD24;SSHBBoxSrvD24;bindcompdbx;IndyIPCommon;SAMLBBoxSrvD24;vcl;DBXSybaseASEDriver;IndyIPServer;fsIBX24;dxCoreRS24;IndySystem;SMIMEBBoxD24;FireDACDb2Driver;dxThemeRS24;MIMEBBoxD24;tmsxlsdXE10;dsnapcon;SOAPBBoxCliD24;PGPTLSBBoxD24;DCPKIBBoxD24;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;SSLBBoxCliD24;TeeDB;FireDAC;PKISSHBBoxD24;SFTPBBoxSrvD24;emshosting;PackageSpeech;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;ASiCBBoxD24;DBXOdbcDriver;FireDACTDataDriver;FMXTee;dxServerModeRS24;soaprtl;DbxCommonDriver;ibxpress;Tee;SSLBBoxSrvD24;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;frxIBX24;DBXSybaseASADriver;frxTee24;CustomIPTransport;vcldsnap;dxLayoutControlRS24;cxGridRS24;cxLibraryRS24;TMSFMXPackPkgDXE10;DAVBBoxCliD24;LDAPBBoxD24;bindcomp;appanalytics;SSHBBoxCliD24;DBXInformixDriver;tmswizdXE10;fsTee24;IndyIPClient;dxDBXServerModeRS24;SMIMECAdESBBoxD24;bindcompvcl;ByxSoftPack;PKIPDFBBoxD24;pdf;TeeUI;cxPageControlRS24;DsgnBBoxD24;cxEditorsRS24;FTPSBBoxSrvD24;dbxcds;VclSmp;SFTPBBoxCliD24;adortl;FireDACODBCDriver;dxComnRS24;DataSnapIndy10ServerTransport;PKIBBoxD24;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;TMSFMXPackPkgDEDXE10;PGPMIMEBBoxD24;PDFBBoxD24;CloudBBoxD24;tmsdXE10;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;svnui;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;Intraweb;svn;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;emshosting;PackageSpeech;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <BT_BuildType>Debug</BT_BuildType>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;emsclientfiredac;DataSnapFireDAC;tethering;FireDACADSDriver;DBXMSSQLDriver;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;Intraweb;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;RESTBackendComponents;DataSnapConnectors;VCLRESTComponents;soapserver;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;inet;bindcompdbx;IndyIPCommon;vcl;DBXSybaseASEDriver;IndyIPServer;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;TeeDB;FireDAC;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;soaprtl;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;RESTComponents;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;dxHttpIndyRequestRS24;vclactnband;dxSpreadSheetRS24;vclFireDAC;HTTPBBoxCliD24;emsclientfiredac;HTTPBBoxSrvD24;DataSnapFireDAC;tethering;PGPLDAPBBoxD24;FireDACADSDriver;dxFireDACServerModeRS24;DBXMSSQLDriver;FTPSBBoxCliD24;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;dxWizardControlRS24;vcltouch;DCBBoxD24;SAMLBBoxD24;vcldb;bindcompfmx;Intraweb;DBXOracleDriver;inetdb;EDIBBoxD24;DAVBBoxSrvD24;dxADOServerModeRS24;FmxTeeUI;emsedge;dxGDIPlusRS24;FireDACIBDriver;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;tmsexdXE10;vclx;dsnap;DataSnapCommon;emsclient;FireDACCommon;cxDataRS24;XMLBBoxSecD24;BaseBBoxD24;RESTBackendComponents;DataSnapConnectors;MailBBoxD24;PGPSSHBBoxD24;VCLRESTComponents;soapserver;cxExportRS24;XMLBBoxD24;vclie;bindengine;DBXMySQLDriver;CloudService;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ZIPBBoxD24;FireDACCommonODBC;FireDACCommonDriver;DataSnapClient;PGPBBoxD24;inet;OfficeBBoxD24;SSHBBoxSrvD24;bindcompdbx;IndyIPCommon;SAMLBBoxSrvD24;vcl;DBXSybaseASEDriver;IndyIPServer;dxCoreRS24;IndySystem;SMIMEBBoxD24;FireDACDb2Driver;dxThemeRS24;MIMEBBoxD24;dsnapcon;SOAPBBoxCliD24;PGPTLSBBoxD24;DCPKIBBoxD24;FireDACMSAccDriver;FireDACInfxDriver;fmxFireDAC;vclimg;SSLBBoxCliD24;TeeDB;FireDAC;PKISSHBBoxD24;SFTPBBoxSrvD24;emshosting;FireDACSqliteDriver;FireDACPgDriver;ibmonitor;FireDACASADriver;ASiCBBoxD24;DBXOdbcDriver;FireDACTDataDriver;FMXTee;dxServerModeRS24;soaprtl;DbxCommonDriver;ibxpress;Tee;SSLBBoxSrvD24;DataSnapServer;xmlrtl;DataSnapNativeClient;ibxbindings;fmxobj;FireDACDSDriver;soapmidas;rtl;vclwinx;DbxClientDriver;DBXSybaseASADriver;CustomIPTransport;vcldsnap;dxLayoutControlRS24;cxGridRS24;cxLibraryRS24;DAVBBoxCliD24;LDAPBBoxD24;bindcomp;appanalytics;SSHBBoxCliD24;DBXInformixDriver;IndyIPClient;dxDBXServerModeRS24;SMIMECAdESBBoxD24;bindcompvcl;PKIPDFBBoxD24;TeeUI;cxPageControlRS24;DsgnBBoxD24;cxEditorsRS24;FTPSBBoxSrvD24;dbxcds;VclSmp;SFTPBBoxCliD24;adortl;FireDACODBCDriver;dxComnRS24;DataSnapIndy10ServerTransport;PKIBBoxD24;DataSnapProviderClient;dsnapxml;dbrtl;FireDACMongoDBDriver;IndyProtocols;inetdbxpress;PGPMIMEBBoxD24;PDFBBoxD24;CloudBBoxD24;tmsdXE10;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -80,10 +81,10 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -93,138 +94,24 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Frame\FrmClientMain.pas">
-            <Form>fClientMain</Form>
+        <DCCReference Include="..\FrmRevScreenMain.pas">
+            <Form>fRevScreenMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="TCP\xTCPClient.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xCommBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xTCPClientBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xConsts.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xFunction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xTypes.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\VCL\xDBConn.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\VCL\xVCL_FMX.pas"/>
-        <DCCReference Include="..\Server\Exam\xClientType.pas"/>
-        <DCCReference Include="xClientControl.pas"/>
-        <DCCReference Include="xConfig.pas"/>
-        <DCCReference Include="UDP\FrmSelectTCPServer.pas">
-            <Form>fSelectTCPServer</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Comm\xUDPServerBase.pas"/>
-        <DCCReference Include="UDP\xUDPClient1.pas"/>
-        <DCCReference Include="Login\FrmLogin.pas">
-            <Form>fStudentLogin</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xDBActionBase.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\VCL\uStudentInfo.pas">
-            <Form>fStudentInfo</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\VCL\uStudentList.pas">
-            <Form>fStudentList</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentControl.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Student\xStudentTabelOutOrIn.pas"/>
-        <DCCReference Include="..\Server\Exercise\xExerciseAction.pas"/>
-        <DCCReference Include="..\Server\Exercise\xExerciseControl.pas"/>
-        <DCCReference Include="..\Server\Exercise\xExerciseInfo.pas"/>
-        <DCCReference Include="..\Server\Exercise\VCL\FrmExercise.pas">
-            <Form>fExercise</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xQuestionAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xQuestionInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortAction.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortControl.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\xSortInfo.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uQuestionInfo.pas">
-            <Form>fQuestionInfo</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uQuestionList.pas">
-            <Form>fQuestionList</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uSortInfo.pas">
-            <Form>fSortInfo</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\Question\VCL\uSortList.pas">
-            <Form>fSortList</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\Question\FrmQInfoC.pas">
-            <Form>fQInfo</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\Question\FrmQuestionListC.pas">
-            <Form>fQuestionListC</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\FrmErrorSelect.pas">
-            <Form>fErrorSelect</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\U_ERRORF_TO_WIRING.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\FrmWEDetails.pas">
-            <Form>fWEDetails</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\WiringError\FrmWEDetails2.pas">
-            <Form>fWEDetails2</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\WiringError\FrmWEPhaseColor.pas">
-            <Form>fWEPhaseColor</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\WiringError\FrmWESelect1.pas">
-            <Form>fWESelect1</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_DIAGRAM_TYPE.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_POWER_PHASE_MAP.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_POWER_STATUS.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_DIAGRAM.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_DIAGRAM2.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_EQUATION.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_EQUATION_DRAW.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_EQUATION_MATH.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_EXPRESSION.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_MAKE_LIST.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_PHASE_MAP.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WE_POWER_ANALYSIS.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\U_WIRING_ERROR.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\V2\U_WE_ORGAN.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\V2\U_WE_VECTOR_EQUATION.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\V2\U_WE_VECTOR_MAP.pas"/>
-        <DCCReference Include="..\Server\WiringError\WiringError\AnalysisMap\U_POWER_LIST_INFO.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_CKM_DEVICE.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_PUB_FUN.pas"/>
-        <DCCReference Include="..\..\..\FMX_Pub_src\xDataDictionary.pas"/>
-        <DCCReference Include="AnswerQuestion\FrmAnswerQuestion.pas">
-            <Form>fAnswerQuestion</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas"/>
-        <DCCReference Include="Exam\FrmExamReady.pas">
-            <Form>fExamReady</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="RevScreen\xUDPRevScreen.pas"/>
+        <DCCReference Include="..\xUDPRevScreen.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\Comm\xCommBase.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\Comm\xUDPServerBase.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\xConsts.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\xFunction.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\xTypes.pas"/>
+        <DCCReference Include="..\..\..\..\..\FMX_Pub_src\VCL\xVCL_FMX.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -243,13 +130,13 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Project13_Client.dpr</Source>
+                    <Source Name="MainSource">Project4.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\Project13_Client.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\Project4.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>Project13_Client.exe</RemoteName>
+                        <RemoteName>Project4.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

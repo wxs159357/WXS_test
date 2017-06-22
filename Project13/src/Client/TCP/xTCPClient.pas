@@ -55,6 +55,16 @@ type
     procedure SendStuState(AState : TClientState);
 
     /// <summary>
+    /// 学员机准备考试
+    /// </summary>
+    procedure StuReadyExam;
+
+
+
+
+  public
+
+    /// <summary>
     /// 学员登录事件
     /// </summary>
     property OnStuLogin : TNotifyEvent read FOnStuLogin write FOnStuLogin;
@@ -67,7 +77,7 @@ type
 
 
     /// <summary>
-    /// 学员准备事件
+    /// 学员准备进度事件
     /// </summary>
     property OnStuProgress : TStuProgressEvent read FOnStuProgress write FOnStuProgress;
 
@@ -245,7 +255,7 @@ begin
   begin
     aBuf := BuildData(aData);
 
-    SendPacksData(aBuf);
+    SendPacksDataBase(aBuf, '', '');
   end;
 end;
 
@@ -287,6 +297,16 @@ begin
   SendOrder(aBuf);
   Result := True;
 //  Result := WaitResult(2000);
+end;
+
+procedure TTCPClient.StuReadyExam;
+var
+  aBuf : Tbytes;
+begin
+  SetLength(aBuf, 1);
+  aBuf[0] := 8;
+
+  SendOrder(aBuf);
 end;
 
 procedure TTCPClient.WriteINI;
