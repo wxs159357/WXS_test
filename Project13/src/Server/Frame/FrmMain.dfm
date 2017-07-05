@@ -59,8 +59,8 @@ object fMain: TfMain
     Bands = <>
   end
   object btnSetExaminee: TButton
-    Left = 368
-    Top = 152
+    Left = 352
+    Top = 80
     Width = 75
     Height = 25
     Action = actSetExaminee
@@ -109,14 +109,6 @@ object fMain: TfMain
     Height = 25
     Caption = 'btn1'
     TabOrder = 4
-  end
-  object btn2: TButton
-    Left = 584
-    Top = 136
-    Width = 75
-    Height = 25
-    Caption = 'btn2'
-    TabOrder = 5
   end
   object actmgrMain: TActionManager
     ActionBars = <
@@ -272,12 +264,6 @@ object fMain: TfMain
       Hint = #24110#21161
       ImageIndex = 2
     end
-    object actMore: TAction
-      Caption = #26356#22810#20135#21697'...'
-    end
-    object actExercise: TAction
-      Caption = #32451#20064'...'
-    end
     object actRanking: TAction
       Caption = #25490#34892#27036'...'
       OnExecute = actRankingExecute
@@ -316,9 +302,6 @@ object fMain: TfMain
       Caption = #32771#35797#22521#35757
       object N15: TMenuItem
         Action = actTraining
-      end
-      object mntmExercise: TMenuItem
-        Action = actExercise
       end
       object mntmExerciseSetting: TMenuItem
         Action = actExerciseSetting
@@ -374,9 +357,6 @@ object fMain: TfMain
       object mntmN7: TMenuItem
         Caption = '-'
       end
-      object mntmMore: TMenuItem
-        Action = actMore
-      end
       object mntmRanking: TMenuItem
         Action = actCommitBug
       end
@@ -388,7 +368,7 @@ object fMain: TfMain
     Left = 208
     Top = 144
     Bitmap = {
-      494C01010A0013006C0220002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A001300800220002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1983,7 +1963,7 @@ object fMain: TfMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A000F006C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000F00800210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

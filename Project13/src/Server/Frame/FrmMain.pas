@@ -48,14 +48,10 @@ type
     clbr1: TCoolBar;
     mntmN3: TMenuItem;
     mntmExam: TMenuItem;
-    actMore: TAction;
-    actExercise: TAction;
     actRanking: TAction;
     actCommitBug: TAction;
-    mntmMore: TMenuItem;
     mntmRanking: TMenuItem;
     mntmOption: TMenuItem;
-    mntmExercise: TMenuItem;
     actExerciseSetting: TAction;
     mntmExerciseSetting: TMenuItem;
     mntmHelp: TMenuItem;
@@ -75,7 +71,6 @@ type
     idtcpsrvr1: TIdTCPServer;
     actSetExaminee: TAction;
     btn1: TButton;
-    btn2: TButton;
     img1: TImage;
     procedure FormDestroy(Sender: TObject);
     procedure actHelpOnAboutExecute(Sender: TObject);
@@ -211,7 +206,13 @@ procedure TfMain.actHelpOnAboutExecute(Sender: TObject);
 begin
   with TfAbout.Create( nil ) do
   begin
-    ShowAboutInfo(C_SYS_OBJECT_MODEL, C_SYS_OBJECT_NAME, C_SYS_COMPANY, C_SYS_WEB);
+    SetVersion('');
+    SetCompanyName(C_SYS_COMPANY);
+    SetCopyRight('');
+    SetWebSite(C_SYS_WEB);
+    ShowCode2(spubFilePath + 'MoreInfo.png');
+
+    ShowAboutInfo(C_SYS_OBJECT_MODEL, C_SYS_OBJECT_NAME);
     Free;
   end;
 end;

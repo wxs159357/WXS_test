@@ -10113,8 +10113,6 @@ object fAbout: TfAbout
     ItemHeight = 12
     TabOrder = 0
     OnDblClick = lstInfoDblClick
-    ExplicitWidth = 288
-    ExplicitHeight = 165
   end
   object pnl1: TPanel
     Left = 0
@@ -10145,8 +10143,6 @@ object fAbout: TfAbout
     Align = alRight
     TabOrder = 2
     Visible = False
-    ExplicitLeft = 288
-    ExplicitHeight = 165
     object imgMoreInfo: TImage
       Left = 1
       Top = 1
@@ -10156,7 +10152,7 @@ object fAbout: TfAbout
       Picture.Data = {
         0B546478504E47496D61676589504E470D0A1A0A0000000D49484452000000B8
         000000B80802000000DF51B190000000017352474200AECE1CE9000000046741
-        4D410000B18F0BFC6105000000097048597300000EC200000EC20115284A8000
+        4D410000B18F0BFC6105000000097048597300000EC100000EC101B8916BED00
         000A3049444154785EED9CED96D3480C0579FF9766C9D940E664ECA85CBEED09
         CCE5B75A1F5725753B0BFBE367FF5401A0C00F6053932AF0B3A01402A4404141
         32D5E819941F5FFA87F4E373829F4F9122482CE7D965988A456A27364FF91494
@@ -10255,8 +10251,6 @@ object fAbout: TfAbout
       Align = alBottom
       Caption = #25195#30721#20102#35299#26356#22810#20135#21697
       TabOrder = 0
-      ExplicitTop = 190
-      ExplicitWidth = 174
     end
   end
 end

@@ -4,7 +4,6 @@ uses
   Vcl.Forms,
   FrmExam in 'Exam\FrmExam.pas' {fExam},
   FrmExercise in 'Exercise\VCL\FrmExercise.pas' {fExercise},
-  FrmAbout in 'Frame\FrmAbout.pas' {fAbout},
   FrmLoadForm in 'Frame\FrmLoadForm.pas' {fLoadform},
   FrmMain in 'Frame\FrmMain.pas' {fMain},
   FrmLog in 'Log\FrmLog.pas' {fLog},
@@ -84,7 +83,8 @@ uses
   xProtocolSendScreen in 'SendScreen\xProtocolSendScreen.pas',
   xTrainQuestionInfo in 'Training\xTrainQuestionInfo.pas',
   xTrainQuestionAction in 'Training\xTrainQuestionAction.pas',
-  xTrainQuestionControl in 'Training\xTrainQuestionControl.pas';
+  xTrainQuestionControl in 'Training\xTrainQuestionControl.pas',
+  FrmAbout in '..\..\..\FMX_Pub_src\About\VCL\FrmAbout.pas' {fAbout};
 
 {$R *.res}
 
@@ -92,5 +92,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfAbout, fAbout);
   Application.Run;
 end.
