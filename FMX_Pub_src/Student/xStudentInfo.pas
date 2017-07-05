@@ -84,14 +84,14 @@ type
     constructor Create;
 
     /// <summary>
+    /// 清空信息
+    /// </summary>
+    procedure Clear;
+
+    /// <summary>
     /// 复制对象
     /// </summary>
     procedure Assign(Source : TPersistent); override;
-
-    /// <summary>
-    /// 初始化数据
-    /// </summary>
-    procedure stuDataInio;
   end;
 implementation
 
@@ -113,12 +113,7 @@ begin
   FstuNote1  := TStuDentInfo(Source).stuNote1;
 end;
 
-constructor TStuDentInfo.Create;
-begin
-  stuDataInio;
-end;
-
-procedure TStuDentInfo.stuDataInio;
+procedure TStudentInfo.Clear;
 begin
   FstuTel    := '';
   FstuNumber := 0;
@@ -130,6 +125,11 @@ begin
   FstuIdCard := '';
   FstuNote2  := '';
   FstuNote1  := '';
+end;
+
+constructor TStuDentInfo.Create;
+begin
+  Clear;
 end;
 
 end.

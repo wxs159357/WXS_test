@@ -37,6 +37,7 @@ type
     procedure lvExercisesContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
     procedure pmn1Popup(Sender: TObject);
+    procedure actReNameExecute(Sender: TObject);
   private
     { Private declarations }
     FQuestionList : TfQuestionListC;
@@ -108,6 +109,29 @@ begin
 
   ExerciseControl.LoadExercise(ExerciseControl.CurrentPath);
   RefurshExercise;
+end;
+
+procedure TfExercise.actReNameExecute(Sender: TObject);
+var
+  sName : string;
+  AExerciseInfo : TExerciseInfo;
+begin
+  if lvExercises.ItemIndex <> -1 then
+  begin
+    AExerciseInfo := TExerciseInfo(lvExercises.Items[lvExercises.ItemIndex].Data);
+
+    sName := InputBox('输入','目录名称', AExerciseInfo.Ename);
+
+    if not ExerciseControl.IsExist(sName) then
+    begin
+      ExerciseControl.ReName(AExerciseInfo, sName);
+      RefurshExercise;
+    end
+    else
+    begin
+      Application.MessageBox('目录已存在！', '', MB_OK + MB_ICONINFORMATION);
+    end;
+  end;
 end;
 
 procedure TfExercise.actSelectQuestionExecute(Sender: TObject);
@@ -215,9 +239,9 @@ begin
           begin
             ShowInfoReadOnly(AQInfo);
             ShowModal;
+            Free;
           end;
         end;
-
 
         AQInfo.Free;
       end;

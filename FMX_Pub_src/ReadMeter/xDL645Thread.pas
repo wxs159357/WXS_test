@@ -21,9 +21,10 @@ type
     /// <summary>
     /// 接收数据
     /// </summary>
-    procedure Rve645Data( A645data : TStringList );
-    procedure SetMeterAddr(const Value: string);
+    procedure Rve645Data( A645data : TStringList ); virtual;
+
   protected
+    procedure SetMeterAddr(const Value: string); virtual;
 
   public
     constructor Create(CreateSuspended: Boolean);override;
@@ -228,8 +229,9 @@ begin
   SetProrocolType(dl645pt2007);
 
   TProtocolDL645(FProtocol).OnRev645Data := Rve645Data;
+  FProtocol.OrderTimeOut := 2000;
 
-  FMeterAddr := '999999999999';
+  FMeterAddr := 'AAAAAAAAAAAA';
 
   FDL645_97BaudRate:= '1200';
   FDL645_07BaudRate:= '2400';
@@ -390,6 +392,10 @@ end;
 procedure TDL645Thread.SetProrocolType(const Value: TDL645_PROTOCOL_TYPE);
 begin
   FProrocolType := Value;
+
+  if Assigned(FProtocol) then
+    TProtocolDL645(FProtocol).ProrocolType := FProrocolType;
+
 end;
 
 procedure TDL645Thread.SetWOutType(AType: TMOUT_TYPE);

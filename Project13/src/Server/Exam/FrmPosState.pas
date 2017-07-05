@@ -87,6 +87,7 @@ end;
 
 procedure TfPosState.FormDestroy(Sender: TObject);
 begin
+  ExamControl.OnClinetChanged := nil;
   WriteINI;
 end;
 

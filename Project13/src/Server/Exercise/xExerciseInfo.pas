@@ -22,7 +22,7 @@ type
     /// </summary>
     property Path       : String     read FPath       write FPath      ;
     /// <summary>
-    /// 类型
+    /// 类型 0：目录 1：文件
     /// </summary>
     property Ptype      : Integer     read FPtype      write FPtype     ;
     /// <summary>

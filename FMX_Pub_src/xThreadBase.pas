@@ -191,6 +191,7 @@ constructor TThreadBase.Create(CreateSuspended: Boolean);
 begin
   inherited;
   FOrderList := TStringList.Create;
+  FTimeOrderList := TStringList.Create;
   FTimerOrderEnable := False;
   FTOWaitForSeconds := 3000;
   FIsStop := False;
@@ -199,7 +200,11 @@ end;
 
 destructor TThreadBase.Destroy;
 begin
+  SetExit;
+  Terminate;
   FOrderList.Free;
+  ClearStringList(FTimeOrderList);
+  FTimeOrderList.Free;
 
   if Assigned(FCommBase) then
     FCommBase.Free;
@@ -309,7 +314,7 @@ end;
 
 function TThreadBase.OrdersFinished: Boolean;
 begin
-  Result := True;
+  Result := FOrderList.Count = 0;
 end;
 
 procedure TThreadBase.SetCommBase(const Value: TCommBase);

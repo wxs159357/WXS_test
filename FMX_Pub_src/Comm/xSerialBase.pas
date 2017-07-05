@@ -11,7 +11,7 @@ uses xCommBase, System.Types, xTypes, System.Classes, xFunction,
 {$IFDEF MSWINDOWS}
   SPComm,
 {$ENDIF}
-  system.SysUtils, FMX.Forms;
+  system.SysUtils, Forms;
 
 type
   TSerialBase = class(TCommBase)
@@ -160,8 +160,9 @@ begin
     begin
       sStr := PacksToStr(aPacks);
     {$IFDEF MSWINDOWS}
-      Result := FCommPort.WriteCommData(PAnsiChar(AnsiString(sStr)), Length(aPacks));
-//      Result := FCommPort.WriteCommData(@aPacks[0], Length(aPacks));
+
+//      Result := FCommPort.WriteCommData(PAnsiChar(AnsiString(sStr)), Length(aPacks));
+      Result := FCommPort.WriteCommData(@aPacks[0], Length(aPacks));
     {$ENDIF}
 
     end
@@ -177,11 +178,15 @@ end;
 procedure TSerialBase.ReceiveData(Sender: TObject; Buffer: Pointer;
   BufferLength: Word);
 var
-  sData : string;
+//  sData : string;
+  APacks: TArray<Byte>;
 begin
-  sData := string(PAnsiChar(Buffer));
-  RevStrData(sData);
-  RevPacksData(StrToPacks(sData))
+  APacks := TBytes(Buffer);
+  SetLength(APacks, BufferLength);
+
+//  sData := string(PAnsiChar(Buffer));
+  RevStrData(PacksToStr(APacks));
+  RevPacksData(APacks)
 end;
 {$ENDIF}
 procedure TSerialBase.SetBaudRate(const Value: string);

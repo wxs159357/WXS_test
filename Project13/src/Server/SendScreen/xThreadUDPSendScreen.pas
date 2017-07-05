@@ -3,7 +3,7 @@ unit xThreadUDPSendScreen;
 interface
 
 uses System.Types,System.Classes, xFunction, system.SysUtils, xUDPServerBase,
-  xConsts, System.IniFiles, xClientType, Winapi.WinInet, winsock, Graphics,
+  xConsts, System.IniFiles,  winsock, Graphics,
   xThreadBase, xProtocolSendScreen, Vcl.Imaging.jpeg;
 
 type
@@ -11,23 +11,15 @@ type
 
   private
     FStream1 : TMemoryStream;
-    FStream2 : TMemoryStream;
     FCanClose : Boolean;
     FClose : Boolean;
-//    FJpeg : TJPEGImage;
-    FIsStream1 : Boolean;
     FOnLog: TGetStrProc;
+    FSendPort : Integer; // 发送端口
     FOnGetScreen: TNotifyEvent;
 
-    /// <summary>
-    /// 获取要发送的数据流
-    /// </summary>
-    function GetStream : TMemoryStream;
 
     procedure ReadINI;
     procedure WriteINI;
-    procedure SetSendSecreen(const Value: TJPEGImage);
-
     procedure GetScreen;
 
   protected
@@ -43,12 +35,6 @@ type
 
     procedure Connect;
     procedure DisConnect;
-
-
-    /// <summary>
-    /// 要发送的屏幕图片
-    /// </summary>
-    property SendSecreen : TJPEGImage write SetSendSecreen;
 
     /// <summary>
     /// 记录时间
@@ -76,7 +62,6 @@ constructor TThreadUDPSendScreen.Create(CreateSuspended: Boolean);
 begin
   inherited;
   FStream1 := TMemoryStream.Create;
-  FStream2 := TMemoryStream.Create;
   FCanClose := True;
 
   FProtocol := TProtocolSendScreen.Create;
@@ -95,10 +80,7 @@ begin
     WaitForSeconds(1);
   until (FCanClose);
 
-
-
   FStream1.Free;
-  FStream2.Free;
   FProtocol.Free;
   WriteINI;
   inherited;
@@ -110,29 +92,22 @@ begin
 end;
 
 procedure TThreadUDPSendScreen.ExecuteTimerOrder;
-var
-  AStream : TMemoryStream;
 begin
   if FClose then
     Exit;
 
-//  inherited;
   FCanClose := False;
-//  AStream := GetStream;
-
 
   Synchronize(GetScreen);
-
 
   FStream1.Position := 0;
 
   if FStream1.Size > 0 then
   begin
-
-    ExecuteOrder(C_SEND_SCREEN, FStream1, '255.255.255.255', 16101);
+    ExecuteOrder(C_SEND_SCREEN, FStream1, '255.255.255.255', FSendPort);
   end;
 
-  WaitForSeconds(200);
+  WaitForSeconds(10);
   FCanClose := True;
 end;
 
@@ -142,57 +117,14 @@ begin
     FOnGetScreen(FStream1);
 end;
 
-function TThreadUDPSendScreen.GetStream: TMemoryStream;
-var
-  s : string;
-begin
-  if FIsStream1 then
-  begin
-    Result := FStream1;
-    s := s + '取值FStream1';
-  end
-  else
-  begin
-    Result := FStream2;
-    s := s + '取值FStream2';
-  end;
-
-  if Assigned(FOnLog) then
-    FOnLog(s);
-end;
-
 procedure TThreadUDPSendScreen.ReadINI;
 begin
   with TIniFile.Create(sPubIniFileName) do
   begin
-
     TUDPServerBase(FCommBase).ListenPort := ReadInteger('UPDSendScreen', 'ListenPort', 16100);
+    FSendPort := ReadInteger('UPDSendScreen', 'SendPort', 16101);
     Free;
   end;
-end;
-
-procedure TThreadUDPSendScreen.SetSendSecreen(const Value: TJPEGImage);
-var
-  s : string;
-begin
-  if FIsStream1 then
-  begin
-    FStream2.Clear;
-    s := s + '赋值FStream2';
-    Value.SaveToStream(FStream2);
-    FIsStream1 := False;
-  end
-  else
-  begin
-    s := s + '赋值FStream1';
-    FStream1.Clear;
-    Value.SaveToStream(FStream1);
-    FIsStream1 := True;
-  end;
-  if Assigned(FOnLog) then
-    FOnLog('==============================');
-  if Assigned(FOnLog) then
-    FOnLog(s);
 end;
 
 procedure TThreadUDPSendScreen.WriteINI;
@@ -200,7 +132,7 @@ begin
   with TIniFile.Create(sPubIniFileName) do
   begin
     WriteInteger('UPDSendScreen', 'ListenPort', TUDPServerBase(FCommBase).ListenPort);
-
+    WriteInteger('UPDSendScreen', 'SendPort', FSendPort);
     Free;
   end;
 end;

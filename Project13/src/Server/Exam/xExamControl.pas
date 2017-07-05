@@ -3,7 +3,8 @@ unit xExamControl;
 interface
 
 uses xClientInfo, System.SysUtils, System.Classes, xFunction, System.IniFiles,
-  xTCPServer, xStudentInfo, xConsts, xClientType, xStudentControl;
+  xTCPServer, xStudentInfo, xConsts, xClientType, xStudentControl, Vcl.Dialogs,
+  Vcl.Forms, Windows;
 
 type
   /// <summary>
@@ -20,7 +21,6 @@ type
     FExamStartTime: TDateTime;
     FIsExamStart: Boolean;
 
-
     function GetClientInfo(nIndex: Integer): TClientInfo;
     procedure SetClinetCount(const Value: Integer);
     function GetClinetCount: Integer;
@@ -33,6 +33,8 @@ type
     procedure ExamReady(Sender: TObject);
     procedure RevPacksData(sIP: string; nPort :Integer;aPacks: TArray<Byte>);
     procedure ClientChange( AIP: string; nPort: Integer; AConnected: Boolean );
+    function GetTrainClientCount: Integer;
+
 
 //    procedure TCPPacksLog( sIP : string; nPort: Integer; aPacks: TArray<Byte>; bSend : Boolean);
 //    procedure TCPLog(const S: string);
@@ -49,6 +51,11 @@ type
     /// 客户端数量
     /// </summary>
     property ClinetCount : Integer read GetClinetCount write SetClinetCount;
+
+    /// <summary>
+    /// 培训状态的客户端列表
+    /// </summary>
+    property TrainClientCount : Integer read GetTrainClientCount;
 
     /// <summary>
     /// 列表
@@ -135,6 +142,14 @@ begin
       AClientInfo.ClientState := esConned
     else
       AClientInfo.ClientState := esDisconn
+  end
+  else
+  begin
+    if AConnected then
+    begin
+      Application.MessageBox(PWideChar(AIP + '连接服务器，在客户机列表中没有找到对应记录！'), '提示', MB_OK +
+        MB_ICONINFORMATION);
+    end;
   end;
 end;
 
@@ -251,6 +266,20 @@ begin
   Result := FClientList.Count;
 end;
 
+function TExamControl.GetTrainClientCount: Integer;
+var
+  i : Integer;
+begin
+  Result := 0;
+  for i := 0 to FClientList.Count - 1 do
+  begin
+    if TClientInfo(FClientList.Objects[i]).ClientState = esTrain then
+    begin
+      Inc(Result);
+    end;
+  end;
+end;
+
 procedure TExamControl.LoginEvent(Sender: TObject; nStuID: Integer);
 //var
 //  nIndex : Integer;
@@ -347,6 +376,7 @@ begin
     end;
   end;
 end;
+
 
 //procedure TExamControl.TCPLog(const S: string);
 //begin

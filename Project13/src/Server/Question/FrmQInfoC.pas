@@ -137,7 +137,13 @@ end;
 
 procedure TfQInfo.ShowInfo(AInfo: TQuestionInfo);
 begin
+  Enabled := Assigned(AInfo);
+  if not Assigned(AInfo) then
+    Exit;
+
+
   inherited;
+
   FError.ID := AInfo.QCode;
   chkIsElec.Checked := AInfo.QRemark2 = '1';
   if FError.PhaseType = ptfThree then

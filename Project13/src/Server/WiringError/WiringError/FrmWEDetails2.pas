@@ -7,7 +7,7 @@ uses
   Dialogs,  U_WE_EQUATION_DRAW, U_WE_DIAGRAM2, U_WE_EQUATION,
   U_WE_PHASE_MAP, StdCtrls, ExtCtrls, ImgList, ActnList, XPStyleActnCtrls,
   ActnMan, Menus, U_WIRING_ERROR, Buttons, ComCtrls, U_WE_VECTOR_MAP,
-  U_WE_ORGAN, U_PUB_FUN, U_WE_VECTOR_EQUATION, OleCtrls,
+  U_WE_ORGAN, U_WE_VECTOR_EQUATION, OleCtrls, xFunction,
   IniFiles, U_DIAGRAM_TYPE, System.Types;
 
 type

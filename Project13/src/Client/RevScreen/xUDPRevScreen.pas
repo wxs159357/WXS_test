@@ -21,8 +21,8 @@ type
     FRandom : Byte;
 
 
-    procedure ReadINI;
-    procedure WriteINI;
+//    procedure ReadINI;
+//    procedure WriteINI;
 
   protected
     procedure RevPacksData(sIP: string; nPort :Integer;aPacks: TArray<Byte>); override;
@@ -55,11 +55,6 @@ begin
   inherited;
 end;
 
-procedure TUDPRevScreen.ReadINI;
-begin
-
-end;
-
 procedure TUDPRevScreen.RevPacksData(sIP: string; nPort: Integer;
   aPacks: TArray<Byte>);
   /// <summary>
@@ -89,7 +84,9 @@ procedure TUDPRevScreen.RevPacksData(sIP: string; nPort: Integer;
   end;
 
 var
-  nPackIndex, nRandom, nPackSign, nPackCount : Integer;
+  nRandom, nPackSign : Integer;
+
+//  nPackIndex nPackCount : Integer;
 
   nLen1, nLen2 : Integer;
   i : Integer;
@@ -102,8 +99,8 @@ begin
     begin
       nRandom    := aPacks[3];
       nPackSign  := aPacks[4];
-      nPackIndex := aPacks[5];
-      nPackCount := aPacks[6];
+//      nPackIndex := aPacks[5];
+//      nPackCount := aPacks[6];
 
       if FRandom <> nRandom then
       begin
@@ -147,27 +144,6 @@ begin
       end;
     end;
   end;
-
-
-//          aSendBuf[0] := $FF;
-//          aSendBuf[1] := $AA;
-//          aSendBuf[2] := $55;
-//          aSendBuf[3] := nRandom;
-//          aSendBuf[4] := nPackSign;
-//          aSendBuf[5] := nPackIndex;
-//          aSendBuf[6] := nPackCount;
-
-
-
-
-
-
-
-end;
-
-procedure TUDPRevScreen.WriteINI;
-begin
-
 end;
 
 end.

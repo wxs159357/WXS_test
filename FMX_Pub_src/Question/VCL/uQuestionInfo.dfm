@@ -19,15 +19,11 @@ object fQuestionInfo: TfQuestionInfo
     Top = 0
     Width = 844
     Height = 590
-    ActivePage = tbsht2
+    ActivePage = tbsht1
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 788
-    ExplicitHeight = 457
     object tbsht1: TTabSheet
       Caption = #22522#26412#20449#24687
-      ExplicitWidth = 780
-      ExplicitHeight = 429
       object lbl1: TLabel
         Left = 24
         Top = 32
@@ -74,8 +70,6 @@ object fQuestionInfo: TfQuestionInfo
     object tbsht2: TTabSheet
       Caption = #35814#32454#20449#24687
       ImageIndex = 1
-      ExplicitWidth = 780
-      ExplicitHeight = 429
     end
   end
   object pnlBottom: TPanel
@@ -86,9 +80,6 @@ object fQuestionInfo: TfQuestionInfo
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 1
-    ExplicitTop = 456
-    ExplicitWidth = 375
     object pnlBR: TPanel
       Left = 624
       Top = 0
@@ -109,7 +100,6 @@ object fQuestionInfo: TfQuestionInfo
         Caption = #30830#23450'(&O)'
         ModalResult = 1
         TabOrder = 0
-        ExplicitLeft = 212
       end
       object btnCancel: TButton
         Left = 137
@@ -120,7 +110,6 @@ object fQuestionInfo: TfQuestionInfo
         Caption = #21462#28040'(&C)'
         ModalResult = 2
         TabOrder = 1
-        ExplicitLeft = 294
       end
     end
   end

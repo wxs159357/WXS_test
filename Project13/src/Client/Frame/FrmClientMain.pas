@@ -10,7 +10,8 @@ uses
   xDBConn, xClientControl, xUDPClient1, xClientType, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, xFunction, xTCPClient, FrmLogin,
   uStudentInfo, xExerciseControl, FrmExercise, System.IniFiles, xConsts,FrmExamReady,
-  xUDPRevScreen, Vcl.Imaging.jpeg;
+  xUDPRevScreen, Vcl.Imaging.jpeg, FrmRevScreenMain, FrmExamAnswer, Winapi.WinInet,
+  winsock, xDataDictionary, xSortControl ;
 const
   WM_FORM_LOADING = WM_USER + 1;
 type
@@ -35,17 +36,10 @@ type
     tmr1: TTimer;
     mnmnmm1: TMainMenu;
     mntmN1: TMenuItem;
-    mntmOption: TMenuItem;
     mntmExit: TMenuItem;
     mntmN8: TMenuItem;
     mntmTraining: TMenuItem;
     mntmExercise: TMenuItem;
-    mntmExerciseSetting: TMenuItem;
-    mntmExam: TMenuItem;
-    mntmN6: TMenuItem;
-    mntmExaminee1: TMenuItem;
-    mntmPaper1: TMenuItem;
-    mntmN3: TMenuItem;
     mntmRanking2: TMenuItem;
     mntmN2: TMenuItem;
     mntmDevLog: TMenuItem;
@@ -55,22 +49,16 @@ type
     mntmN4: TMenuItem;
     mntmHelpOnAbout: TMenuItem;
     mntmHelp: TMenuItem;
-    mntmN7: TMenuItem;
-    mntmMore: TMenuItem;
-    mntmRanking: TMenuItem;
     imglstil3: TImageList;
     imglstil1: TImageList;
     pnl1: TPanel;
-    btn1: TButton;
     tlbr1: TToolBar;
     pnl2: TPanel;
     imgStu: TImage;
     btnStu: TSpeedButton;
-    btnDevLog: TToolButton;
     btnExit: TToolButton;
-    btnHelp1: TToolButton;
+    tlbtnSavePaper: TToolButton;
     btnHelp: TToolButton;
-    btn3: TToolButton;
     btn7: TToolButton;
     idtcpclnt1: TIdTCPClient;
     spltr2: TSplitter;
@@ -82,6 +70,8 @@ type
     pmn1: TPopupMenu;
     mntmN5: TMenuItem;
     img1: TImage;
+    tlbtnTraining: TToolButton;
+    actSavePaper: TAction;
     procedure actExitExecute(Sender: TObject);
     procedure actAboutExecute(Sender: TObject);
     procedure actOptionExecute(Sender: TObject);
@@ -92,10 +82,11 @@ type
     procedure actExerciseExecute(Sender: TObject);
     procedure mntmN5Click(Sender: TObject);
     procedure pmn1Popup(Sender: TObject);
+    procedure actTrainingExecute(Sender: TObject);
   private
     { Private declarations }
     FExamReadyForm : TfExamReady;
-    FRevScreen : TUDPRevScreen;
+    FExamAnswerForm : TfExamAnswer;
     /// <summary>
     /// 系统启动处理
     /// </summary>
@@ -128,13 +119,11 @@ type
     procedure TCPConnect(Sender: TObject);
     procedure TCPDisconnect(Sender: TObject);
 
-    procedure RevJpg(Sender: TObject);
+
 
     procedure TCPLog(const S: string);
     procedure UDPLog(const S: string);
-    procedure TCPPacksLog(  aPacks: TBytes; bSend : Boolean);
     procedure UDPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
-    procedure UDPPacksLog1( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
     /// <summary>
     /// TCP连接
     /// </summary>
@@ -144,7 +133,6 @@ type
     procedure Login(Sender: TObject);
     procedure StuReady( nTotalCount : Integer);
     procedure StuProgress( nReadyCount, nTotalCount : Integer);
-
   public
     { Public declarations }
   end;
@@ -166,7 +154,12 @@ begin
   with TfExercise.Create(nil) do
   begin
     IsClientExercise := True;
+
+    ClientControl.WorkState := cwsPractise;
+
     ShowModal;
+    ClientControl.WorkState := cwsNot;
+
     Free;
   end;
 end;
@@ -179,6 +172,18 @@ end;
 procedure TfClientMain.actOptionExecute(Sender: TObject);
 begin
  //
+end;
+
+procedure TfClientMain.actTrainingExecute(Sender: TObject);
+begin
+  with TfRevScreenMain.Create(nil) do
+  begin
+    ClientControl.WorkState := cwsTrain;
+
+    ShowModal;
+    ClientControl.WorkState := cwsNot;
+    Free;
+  end;
 end;
 
 procedure TfClientMain.btnStuClick(Sender: TObject);
@@ -207,15 +212,7 @@ procedure TfClientMain.FormCreate(Sender: TObject);
 begin
   stsbrMain.Panels[1].Text := FormatDateTime('YYYY-MM-DD hh:mm:ss', Now);
   SetPubInfo;
-//  ReadsysINI;
-//  FError := TWIRINGF_ERROR.Create(nil);
-//  FError.PhaseType := ptfThree;
 
-//  clbr1.Visible := bPubIsCompany;
-
-
-//  Caption := C_SYS_OBJECT_MODEL + '  ' + C_SYS_OBJECT_NAME;
-//  fLoadform := TfLoadform.Create(Self);
 
   PostMessage( Handle, WM_FORM_LOADING, 0, 0 );
 end;
@@ -240,54 +237,93 @@ end;
 
 procedure TfClientMain.IniDBConn;
 begin
-  if TCPClient.serverIP <> '' then
+  ADBConn := TDBConn.Create;
+  if ClientControl.TCPClient.serverIP <> '' then
   begin
-    ADBConn := TDBConn.Create;
     ADBConn.ConnStr := 'DriverID=MSSQL;Database=test;Password=ckm2008byx;'+
-      'Server='+TCPClient.serverIP+';User_Name=sa';
+      'Server='+ClientControl.TCPClient.serverIP+';User_Name=sa';
+  end
+  else
+  begin
+    ADBConn.ConnStr := 'DriverID=MSSQL;Database=test;Password=ckm2008byx;'+
+      'Server=127.0.0.1;User_Name=sa';
   end;
-
 end;
 
 procedure TfClientMain.Load;
+  function GetLocalIP(var LocalIp: string): Boolean;
+
+  var
+    HostEnt: PHostEnt;
+    IP: String;
+    Addr: PAnsiChar;
+    Buffer: array [0..63] of Char;
+    WSData: TWSADATA;
+  begin
+    Result := False;
+    try
+      WSAStartUp(2, WSData);
+      GetHostName(@Buffer, SizeOf(Buffer));
+      // Buffer:='ZhiDa16';
+      HostEnt := GetHostByName(@Buffer);
+      if HostEnt = nil then
+        exit;
+      Addr := HostEnt^.h_addr_list^;
+      IP := Format('%d.%d.%d.%d', [Byte(Addr[0]), Byte(Addr[1]), Byte(Addr[2]),
+        Byte(Addr[3])]);
+      LocalIp := IP;
+      Result := True;
+    finally
+      WSACleanup;
+    end;
+  end;
+var
+  sIP : string;
+
 begin
   try
+    if not GetLocalIP(sIP) then
+      sIP := '127.0.0.1';
+
+    stsbrMain.Panels[5].Text := '本机：'+sIP;
+
+
     UDPClient := TUDPClient.Create;
     UDPClient.OnLog := UDPLog;
     UDPClient.OnIPSendRev := UDPPacksLog;
     UDPClient.Connect;
 
-    TCPClient := TTCPClient.Create;
-    TCPClient.OnConnected := TCPConnect;
-    TCPClient.OnDisconnect := TCPDisconnect;
-    TCPClient.OnLog := TCPLog;
-    TCPClient.OnSendRevPack := TCPPacksLog;
-    TCPClient.OnStuLogin := Login;
-    TCPClient.OnStuReady := StuReady;
-    TCPClient.OnStuProgress := StuProgress;
 
+
+    ClientControl := TClientControl.Create;
+    ClientControl.OnStateChange := StateChange;
+    ClientControl.OnConnected := TCPConnect;
+    ClientControl.OnDisconnect := TCPDisconnect;
+    ClientControl.OnLog := TCPLog;
+    ClientControl.OnStuLogin := Login;
+    ClientControl.OnStuReady := StuReady;
+    ClientControl.OnStuProgress := StuProgress;
 
     UDPClient.OnConnServer := ConnServer;
 
     TCPConn;
 
-    ClientControl := TClientControl.Create;
-    ClientControl.OnStateChange := StateChange;
-
-    if UDPClient.Active then
-      ClientControl.ClientState := esConned;
+    if ClientControl.TCPClient.Active then
+      ClientControl.ConnState := ccsConned
+    else
+      ClientControl.ConnState := ccsDisConn;
 
     IniDBConn;
 
-    FRevScreen := TUDPRevScreen.Create;
-    FRevScreen.ListenPort := 16101;
-    FRevScreen.Connect;
-    FRevScreen.OnRevJpg := RevJpg;
-    FRevScreen.OnIPSendRev := UDPPacksLog1;
+    SortControl := TSortControl.Create;
 
+    DataDict := TDataDictionary.Create;
 
     ExerciseControl := TExerciseControl.Create;
     FExamReadyForm := TfExamReady.Create(nil);
+    FExamAnswerForm := TfExamAnswer.Create(nil);
+    ClientControl.OnStartExam := FExamAnswerForm.StartExam;
+    ClientControl.OnStopExam := FExamAnswerForm.StopExam;
 
     with TIniFile.Create(sPubIniFileName) do
     begin
@@ -305,7 +341,7 @@ end;
 
 procedure TfClientMain.Login(Sender: TObject);
 begin
-  if ClientControl.ClientState < esLogin then
+  if ClientControl.LoginState = lsLogOut then
   begin
     with TfStudentLogin.Create(nil) do
     begin
@@ -322,23 +358,16 @@ end;
 
 procedure TfClientMain.mntmN5Click(Sender: TObject);
 begin
-  if ClientControl.ClientState = esLogin then
+  if ClientControl.LoginState = lsLogin then
   begin
-    if TCPClient.Active then
-    begin
-      ClientControl.ClientState := esConned;
-      TCPClient.SendStuState(ClientControl.ClientState);
-    end
-    else
-    begin
-      ClientControl.ClientState := esDisconn;
-    end;
+    ClientControl.LoginState := lsLogOut;
+    ClientControl.StudentInfo.Clear;
   end;
 end;
 
 procedure TfClientMain.pmn1Popup(Sender: TObject);
 begin
-  if ClientControl.ClientState = esLogin then
+  if ClientControl.LoginState = lsLogin then
   begin
     mntmN5.Visible := True;
   end
@@ -362,16 +391,6 @@ begin
   end;
 end;
 
-procedure TfClientMain.RevJpg(Sender: TObject);
-begin
-  if Sender is TJPEGImage then
-  begin
-    mmo2.Lines.Add('刷新图片' + IntToStr(TJPEGImage(Sender).Width) + ';' + IntToStr(TJPEGImage(Sender).Height));
-
-    img1.Picture.Bitmap.Assign(TJPEGImage(Sender));
-  end;
-end;
-
 procedure TfClientMain.SetPubInfo;
 begin
 
@@ -379,25 +398,41 @@ end;
 
 procedure TfClientMain.StateChange(Sender: TObject);
 begin
-  stsbrMain.Panels[2].Text := ClientStateStr(ClientControl.ClientState);
-  TCPClient.SendStuState(ClientControl.ClientState);
+  stsbrMain.Panels[2].Text := ClientConnStateStr(ClientControl.ConnState);
+  stsbrMain.Panels[3].Text := LoginStateStr(ClientControl.LoginState);
+  stsbrMain.Panels[4].Text := ClientWorkStateStr(ClientControl.WorkState);
 
-  if ClientControl.ClientState = esLogin then
+
+  if ClientControl.LoginState = lsLogin then
   begin
     btnStu.Caption := ClientControl.StudentInfo.stuName;
     imgStu.Picture.LoadFromFile('OnLine.bmp');
   end
-  else if ClientControl.ClientState in [esDisconn, esConned] then
+  else
   begin
     btnStu.Caption := '未登录';
     imgStu.Picture.LoadFromFile('OutLine.bmp');
   end;
 end;
 
+
 procedure TfClientMain.StuProgress(nReadyCount, nTotalCount: Integer);
 begin
-  FExamReadyForm.Show;
-  FExamReadyForm.ShowReadyProgress(nReadyCount, nTotalCount);
+  if nReadyCount >= nTotalCount then
+  begin
+    FExamReadyForm.ShowReadyProgress(nReadyCount, nTotalCount);
+    FExamReadyForm.Close;
+
+    if nReadyCount > 0 then
+    begin
+      FExamAnswerForm.Show;
+    end;
+  end
+  else
+  begin
+    FExamReadyForm.Show;
+    FExamReadyForm.ShowReadyProgress(nReadyCount, nTotalCount);
+  end;
 end;
 
 procedure TfClientMain.StuReady(nTotalCount: Integer);
@@ -416,28 +451,28 @@ procedure TfClientMain.TCPConn;
 
     if sIP <> '' then
     begin
-      TCPClient.ServerIP := sIP;
-      TCPClient.ServerPort := nPort;
+      ClientControl.TCPClient.ServerIP := sIP;
+      ClientControl.TCPClient.ServerPort := nPort;
       try
-        TCPClient.Connect;
+        ClientControl.TCPClient.Connect;
       finally
 
       end;
     end;
   end;
 begin
-  if not TCPClient.Active then
+  if not ClientControl.TCPClient.Active then
   begin
-    if TCPClient.ServerIP = '' then
+    if ClientControl.TCPClient.ServerIP = '' then
     begin
       Conn;
     end
     else
     begin
       try
-        TCPClient.Connect;
+        ClientControl.TCPClient.Connect;
       finally
-        if not TCPClient.Active then
+        if not ClientControl.TCPClient.Active then
           Conn;
       end;
     end;
@@ -448,15 +483,10 @@ procedure TfClientMain.TCPConnect(Sender: TObject);
 begin
   if Assigned(ClientControl) then
   begin
-    if ClientControl.ClientState in [esLogin] then
-    begin
-      TCPClient.StuLogin(ClientControl.StudentInfo.stuNumber);
-      TCPClient.SendStuState(ClientControl.ClientState);
-    end
-    else
-    begin
-      ClientControl.ClientState := esConned;
-    end;
+    ClientControl.ConnState := ccsConned;
+
+    if ClientControl.LoginState = lsLogin then
+      ClientControl.SendStuLogin(ClientControl.StudentInfo.stuNumber);
   end;
 end;
 
@@ -464,14 +494,7 @@ procedure TfClientMain.TCPDisconnect(Sender: TObject);
 begin
   if Assigned(ClientControl) then
   begin
-    if ClientControl.ClientState in [esLogin] then
-    begin
-
-    end
-    else
-    begin
-      ClientControl.ClientState := esDisconn;
-    end;
+    ClientControl.ConnState := ccsDisConn;
   end;
 end;
 
@@ -486,18 +509,6 @@ begin
     end;
     mmo1.Lines.Add(s);
   end;
-end;
-
-procedure TfClientMain.TCPPacksLog(aPacks: TBytes; bSend: Boolean);
-var
-  s : string;
-begin
-  if bsend then
-    s := '发送'
-  else
-    s := '接收';
-
-  TCPLog(FormatDateTime('hh:mm:ss:zzz', Now) + s  + ' ' + BCDPacksToStr(aPacks) );
 end;
 
 procedure TfClientMain.tmr1Timer(Sender: TObject);
@@ -531,46 +542,15 @@ begin
   UDPLog(FormatDateTime('hh:mm:ss:zzz', Now) + s + sIP +':' + IntToStr(nPort) + ' ' + PacksToStr(aPacks) );
 end;
 
-procedure TfClientMain.UDPPacksLog1(sIP: string; nPort: Integer; aPacks: TBytes;
-  bSend: Boolean);
-var
-  s : string;
-  aBuf : TBytes;
-begin
-  if bsend then
-    s := '发送'
-  else
-    s := '接收';
-
-
-  SetLength(aBuf, 10);
-
-  aBuf[0] := aPacks[0];
-  aBuf[1] := aPacks[1];
-  aBuf[2] := aPacks[2];
-  aBuf[3] := aPacks[3];
-  aBuf[4] := aPacks[4];
-  aBuf[5] := aPacks[5];
-  aBuf[6] := aPacks[6];
-  aBuf[7] := aPacks[7];
-  aBuf[8] := aPacks[Length(aPacks)-2];
-  aBuf[9] := aPacks[Length(aPacks)-1];
-
-
-
-
-
-  UDPLog(FormatDateTime('hh:mm:ss:zzz', Now) + s + sIP +':' + IntToStr(nPort) + ' ' + BCDPacksToStr(aBuf) );
-end;
-
 procedure TfClientMain.Unload;
 begin
   ClientControl.Free;
   UDPClient.Free;
-  TCPClient.Free;
   ExerciseControl.Free;
   FExamReadyForm.Free;
-  FRevScreen.Free;
+  FExamAnswerForm.Free;
+  DataDict.Free;
+  SortControl.Free;
 end;
 
 end.

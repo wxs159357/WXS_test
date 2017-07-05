@@ -14,12 +14,44 @@ type
                   esWorkReady,    // 准备好考试
                   esWorking,      // 正在考试
                   esWorkFinished, // 交卷
-                  esPractise      // 正在练习
+                  esPractise,     // 正在练习
+                  esTrain         // 正在培训
                   );
 /// <summary>
 /// 状态转换成字符串
 /// </summary>
 function ClientStateStr(AState : TClientState) : string;
+
+type
+  /// <summary>
+  /// 客户端连接状态
+  /// </summary>
+  TClientConnState = (ccsDisConn,  // 未连接
+                      ccsConned    // 已连接
+                      );
+function ClientConnStateStr(AState : TClientConnState) : string;
+
+type
+  /// <summary>
+  /// 登录状态
+  /// </summary>
+  TLoginState = (lsLogin, // 已登录
+                 lsLogOut // 未登录
+                 );
+function LoginStateStr(AState : TLoginState) : string;
+
+type
+  /// <summary>
+  /// 客户端登录状态
+  /// </summary>
+  TClientWorkState = (cwsNot,          // 未定义
+                      cwsTrain,        // 正在培训
+                      cwsPractise,     // 正在练习
+                      cwsExamReady,    // 准备好考试
+                      cwsExamDoing,    // 正在答卷
+                      cwsExamFinished  // 考试完成
+                      );
+function ClientWorkStateStr(AState : TClientWorkState) : string;
 
 /// <summary>
 /// 组包
@@ -32,6 +64,39 @@ function BuildData(aData: TBytes): TBytes;
 function AnalysisRevData(aRevData : TBytes) : TBytes;
 
 implementation
+
+function ClientWorkStateStr(AState : TClientWorkState) : string;
+begin
+  case AState of
+   cwsTrain :       Result := '正在培训';
+   cwsPractise:     Result := '正在练习';
+   cwsExamReady:    Result := '准备好考试';
+   cwsExamDoing:    Result := '正在答题';
+   cwsExamFinished: Result := '已交卷';
+  else
+    Result := '未定义';
+  end;
+end;
+
+function LoginStateStr(AState : TLoginState) : string;
+begin
+  case AState of
+   lsLogin : Result := '已登录';
+   lsLogOut: Result := '未登录';
+  else
+    Result := '未定义';
+  end;
+end;
+
+function ClientConnStateStr(AState : TClientConnState) : string;
+begin
+  case AState of
+   ccsDisConn : Result := '未连接';
+   ccsConned  : Result := '已连接';
+  else
+    Result := '未定义';
+  end;
+end;
 
 function BuildData(aData: TBytes): TBytes;
 
@@ -147,6 +212,7 @@ begin
    esWorking      :   Result := '正在考试';
    esWorkFinished :   Result := '交卷';
    esPractise     :   Result := '正在练习';
+   esTrain        :   Result := '正在培训';
   else
     Result := '未定义';
   end;

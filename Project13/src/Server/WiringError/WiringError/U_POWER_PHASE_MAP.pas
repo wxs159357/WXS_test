@@ -13,7 +13,7 @@ unit U_POWER_PHASE_MAP;
 interface
 
 uses SysUtils, Classes, Windows, Graphics, U_WE_EQUATION_DRAW, 
-  U_CKM_DEVICE, system.Types, system.UITypes, U_POWER_STATUS;
+  system.Types, system.UITypes, U_POWER_STATUS;
 
 CONST
   /// <summary>

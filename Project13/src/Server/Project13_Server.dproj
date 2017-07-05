@@ -145,15 +145,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_CKM_DEVICE.pas"/>
-        <DCCReference Include="..\..\..\Pub_src\U_PUB_FUN.pas"/>
         <DCCReference Include="WiringError\WiringError\FrmWEDetails2.pas">
             <Form>fWEDetails2</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="WiringError\WiringError\U_DIAGRAM_TYPE.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_POWER_PHASE_MAP.pas"/>
-        <DCCReference Include="WiringError\WiringError\U_POWER_STATUS.pas"/>
         <DCCReference Include="WiringError\WiringError\U_WE_EQUATION.pas"/>
         <DCCReference Include="WiringError\WiringError\U_WE_EQUATION_DRAW.pas"/>
         <DCCReference Include="WiringError\WiringError\U_WE_EQUATION_MATH.pas"/>
@@ -252,6 +248,9 @@
         <DCCReference Include="Answer\VectorMap\U_VECTOR_LIEN_INFO.pas"/>
         <DCCReference Include="UDP\xUDPServer.pas"/>
         <DCCReference Include="SendScreen\xProtocolSendScreen.pas"/>
+        <DCCReference Include="Training\xTrainQuestionInfo.pas"/>
+        <DCCReference Include="Training\xTrainQuestionAction.pas"/>
+        <DCCReference Include="Training\xTrainQuestionControl.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

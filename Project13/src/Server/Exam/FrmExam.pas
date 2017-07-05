@@ -99,6 +99,7 @@ begin
         RefurshQuestionList;
       end;
     end;
+    Free;
   end;
 end;
 

@@ -43,9 +43,14 @@ type
     procedure ClearExercise;
 
     /// <summary>
-    /// 加载
+    /// 加载指定目录
     /// </summary>
     procedure LoadExercise(sPath : string; slList :TStringList);
+
+    /// <summary>
+    /// 加载所有
+    /// </summary>
+    procedure LoadExerciseAll(slList :TStringList);
 
 
   end;
@@ -119,15 +124,15 @@ end;
 
 procedure TExerciseAction.EditExercise(AExercise: TExerciseInfo);
 const
-  C_SQL = 'update Exercise set ID = %d, Path = :Path, PType = :PType,' + #13#10 +
+  C_SQL = 'update Exercise set Path = :Path, PType = :PType,' + #13#10 +
          'EName = :EName, ImageIndex = %d, Code1 = :Code1,' + #13#10 +
-         'Code2 = :Code2, Remark = :Remark';
+         'Code2 = :Code2, Remark = :Remark where ID = %d';
 begin
   if Assigned(AExercise) then
   begin
     with AExercise, FQuery.Params do
     begin
-      FQuery.Sql.Text := Format( C_SQL, [ Id, Imageindex ] );
+      FQuery.Sql.Text := Format( C_SQL, [Imageindex, Id ] );
 
       ParamByName( 'Path'       ).Value := Path      ;
       ParamByName( 'PType'      ).Value := Ptype     ;
@@ -166,6 +171,39 @@ begin
     ClearStringList(slList);
 
     FQuery.Open(Format(C_SQL, [ sPath ]));
+
+    while not FQuery.Eof do
+    begin
+      AExerciseInfo := TExerciseInfo.Create;
+      with AExerciseInfo, FQuery do
+      begin
+        Id         := FieldByName( 'ID'         ).AsInteger;
+        Path       := FieldByName( 'Path'       ).AsString;
+        Ptype      := FieldByName( 'PType'      ).AsInteger;
+        Ename      := FieldByName( 'EName'      ).AsString;
+        Imageindex := FieldByName( 'ImageIndex' ).AsInteger;
+        Code1      := FieldByName( 'Code1'      ).AsString;
+        Code2      := FieldByName( 'Code2'      ).AsString;
+        Remark     := FieldByName( 'Remark'     ).AsString;
+      end;
+      slList.AddObject('', AExerciseInfo);
+      FQuery.Next;
+    end;
+    FQuery.Close;
+  end;
+end;
+
+procedure TExerciseAction.LoadExerciseAll(slList: TStringList);
+const
+  C_SQL = 'select * from Exercise';
+var
+  AExerciseInfo : TExerciseInfo;
+begin
+  if Assigned(slList) then
+  begin
+    ClearStringList(slList);
+
+    FQuery.Open(C_SQL);
 
     while not FQuery.Eof do
     begin

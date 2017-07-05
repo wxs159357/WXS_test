@@ -286,6 +286,8 @@ begin
   if not Assigned(ADevice) then
     Exit;
 
+  SetLength(FRev645Data, 0);
+
   if ADevice is TDL645_DATA then
   begin
     FDevice := TDL645_DATA(ADevice);

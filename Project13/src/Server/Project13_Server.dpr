@@ -14,12 +14,8 @@ uses
   FrmOptionBase in 'Option\FrmOptionBase.pas' {fOptionBase},
   FrmErrorSelect in 'WiringError\FrmErrorSelect.pas' {fErrorSelect},
   xWiringError in '..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas',
-  U_CKM_DEVICE in '..\..\..\Pub_src\U_CKM_DEVICE.pas',
-  U_PUB_FUN in '..\..\..\Pub_src\U_PUB_FUN.pas',
   FrmWEDetails2 in 'WiringError\WiringError\FrmWEDetails2.pas' {fWEDetails2},
   U_DIAGRAM_TYPE in 'WiringError\WiringError\U_DIAGRAM_TYPE.pas',
-  U_POWER_PHASE_MAP in 'WiringError\WiringError\U_POWER_PHASE_MAP.pas',
-  U_POWER_STATUS in 'WiringError\WiringError\U_POWER_STATUS.pas',
   U_WE_EQUATION in 'WiringError\WiringError\U_WE_EQUATION.pas',
   U_WE_EQUATION_DRAW in 'WiringError\WiringError\U_WE_EQUATION_DRAW.pas',
   U_WE_EQUATION_MATH in 'WiringError\WiringError\U_WE_EQUATION_MATH.pas',
@@ -85,7 +81,10 @@ uses
   U_VECTOR_CONTROL in 'Answer\VectorMap\U_VECTOR_CONTROL.pas',
   U_VECTOR_LIEN_INFO in 'Answer\VectorMap\U_VECTOR_LIEN_INFO.pas',
   xUDPServer in 'UDP\xUDPServer.pas',
-  xProtocolSendScreen in 'SendScreen\xProtocolSendScreen.pas';
+  xProtocolSendScreen in 'SendScreen\xProtocolSendScreen.pas',
+  xTrainQuestionInfo in 'Training\xTrainQuestionInfo.pas',
+  xTrainQuestionAction in 'Training\xTrainQuestionAction.pas',
+  xTrainQuestionControl in 'Training\xTrainQuestionControl.pas';
 
 {$R *.res}
 

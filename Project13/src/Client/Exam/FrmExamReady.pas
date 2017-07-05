@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, xTCPClient;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, xClientControl;
 
 type
   TfExamReady = class(TForm)
@@ -35,7 +35,7 @@ implementation
 
 procedure TfExamReady.btnReadyClick(Sender: TObject);
 begin
-  TCPClient.StuReadyExam;
+  ClientControl.StuReadyExam;
   btnReady.Enabled := False;
 end;
 
@@ -51,9 +51,6 @@ begin
   prgrsbr1.Max := nTotalCount;
   prgrsbr1.Position := nReadyCount;
   lbl1.Caption := IntToStr(nReadyCount) + '/' + IntToStr(nTotalCount);
-
-  if nTotalCount = nReadyCount then
-    Close;
 end;
 
 end.

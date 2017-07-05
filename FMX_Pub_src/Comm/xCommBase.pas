@@ -6,7 +6,7 @@ unit xCommBase;
 
 interface
 
-uses System.Types, xTypes, System.Classes, xFunction;
+uses System.Types, xTypes, System.Classes, xFunction, System.SysUtils;
 
 type
   TCommBase = class
@@ -249,6 +249,9 @@ begin
   if Assigned(FOnSendRevPack) then
     FOnSendRevPack(APacks, False);
 
+  if Assigned(FOnLog) then
+    FOnLog(FormatDateTime('hh:mm:ss:zzz', Now) + ' Ω” ’ ' + BCDPacksToStr(aPacks));
+
   if Assigned(FOnRevPacks) then
     FOnRevPacks(aPacks);
 end;
@@ -270,6 +273,9 @@ begin
 
   if Result and Assigned(FOnSendRevPack) then
     FOnSendRevPack(APacks, True);
+
+  if Assigned(FOnLog) then
+    FOnLog(FormatDateTime('hh:mm:ss:zzz', Now) + ' ∑¢ÀÕ ' + BCDPacksToStr(aPacks));
 
   AfterSend;
 end;

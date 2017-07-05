@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ExtCtrls,IniFiles, xFunction, xConsts,
-  xStudentAction, xStudentInfo, xClientControl, xClientType, xTCPClient;
+  xStudentAction, xStudentInfo, xClientControl, xClientType, xTCPClient,
+  xUDPClient1;
 
 const
   /// <summary>
@@ -44,6 +45,9 @@ implementation
 {$R *.dfm}
 
 procedure TfStudentLogin.btnLoginClick(Sender: TObject);
+var
+  sIP : string;
+  AStudentInfo : TStudentInfo;
 begin
   if edtName.Text = '' then
   begin
@@ -53,25 +57,41 @@ begin
     Exit;
   end;
 
-  if FStuAction.GetStuInfo(Trim(edtName.Text), Trim(edtPassword.Text),
-    ClientControl.StudentInfo) then
-  begin
-    TCPClient.StuLogin(ClientControl.StudentInfo.stuNumber);
-//    if  then
-//    begin
-      ClientControl.ClientState := esLogin;
-      ModalResult := mrOk;
-//    end
-//    else
-//    begin
-//      Application.MessageBox(PChar('服务器不允许登录，可能不在考试列表中，请联系老师！'),
-//       '', MB_OK + MB_ICONINFORMATION);
-//    end;
-  end
-  else
-  begin
-    Application.MessageBox(PChar('用户名或密码错误！'),
-       '', MB_OK + MB_ICONINFORMATION);
+  Screen.Cursor := crHourGlass;
+  btnLogin.Enabled := False;
+
+  try
+    AStudentInfo := TStudentInfo.create;
+
+    if FStuAction.GetStuInfo(Trim(edtName.Text), Trim(edtPassword.Text), AStudentInfo) then
+    begin
+
+      sIP := UDPClient.CheckLogin(AStudentInfo.stuNumber);
+
+      // 本学员已经在其他服务器上登录
+      if sIP <> '' then
+      begin
+        Application.MessageBox(PChar('用户已经在' + sIP + '上登录，不允许重复登录！'),
+         '', MB_OK + MB_ICONINFORMATION);
+      end
+      else
+      begin
+        ClientControl.StudentInfo.Assign(AStudentInfo);
+
+        ClientControl.LoginState := lsLogin;
+
+        ModalResult := mrOk;
+      end;
+    end
+    else
+    begin
+      Application.MessageBox(PChar('用户名或密码错误！'),
+         '', MB_OK + MB_ICONINFORMATION);
+    end;
+    AStudentInfo.Free;
+  finally
+    Screen.Cursor := crDefault;
+    btnLogin.Enabled := True;
   end;
 end;
 

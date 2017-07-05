@@ -59,22 +59,16 @@ type
     /// </summary>
     procedure StuReadyExam;
 
-
-
-
   public
-
     /// <summary>
     /// 学员登录事件
     /// </summary>
     property OnStuLogin : TNotifyEvent read FOnStuLogin write FOnStuLogin;
 
-
     /// <summary>
     /// 学员准备事件
     /// </summary>
     property OnStuReady : TStuReadyEvent read FOnStuReady write FOnStuReady;
-
 
     /// <summary>
     /// 学员准备进度事件
@@ -90,29 +84,7 @@ type
     /// 停止考试事件
     /// </summary>
     property OnStopExam : TNotifyEvent read FOnStopExam write FOnStopExam;
-//
-//    /// <summary>
-//    /// 开始考试
-//    /// </summary>
-//    procedure StartExam(sIP : string = ''; nPort : Integer = 0);
-//
-//    /// <summary>
-//    /// 停止考试
-//    /// </summary>
-//    procedure StopExam(sIP : string = ''; nPort : Integer = 0);
-//
-//    /// <summary>
-//    /// 返回登录结果
-//    /// </summary>
-//    procedure LoginResult(sIP : string; nPort : Integer; bResult : Boolean);
-  public
-//    /// <summary>
-//    /// 接收到学员机数据包
-//    /// </summary>
-//    property OnRevStuData : TRevStuData read FOnRevStuData write FOnRevStuData;
   end;
-var
-  TCPClient : TTCPClient;
 
 implementation
 

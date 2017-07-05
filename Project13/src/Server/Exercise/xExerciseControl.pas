@@ -47,9 +47,9 @@ type
 
 
     /// <summary>
-    /// 编辑
+    /// 重命名
     /// </summary>
-    procedure EditExercise(AExerciseInfo : TExerciseInfo);
+    procedure ReName(AExerciseInfo : TExerciseInfo; sNewName : string);
 
     /// <summary>
     /// 加载
@@ -150,9 +150,39 @@ begin
   inherited;
 end;
 
-procedure TExerciseControl.EditExercise(AExerciseInfo: TExerciseInfo);
+procedure TExerciseControl.ReName(AExerciseInfo: TExerciseInfo; sNewName : string);
+var
+  i : Integer;
+  slList : TStringList;
 begin
-  FExerciseAction.EditExercise(AExerciseInfo);
+  slList := TStringList.Create;
+  FExerciseAction.LoadExerciseAll(slList);
+  // 目录
+  if AExerciseInfo.Ptype = 0 then
+  begin
+
+    for i := 0 to slList.Count - 1 do
+    begin
+      with TExerciseInfo(slList.Objects[i]) do
+      begin
+        if Pos(AExerciseInfo.Path + '\' + AExerciseInfo.Ename, Path) = 1 then
+        begin
+          Path := StringReplace(Path,AExerciseInfo.Path + '\' + AExerciseInfo.Ename, AExerciseInfo.Path + '\' + sNewName, []) ;
+          FExerciseAction.EditExercise(TExerciseInfo(slList.Objects[i]));
+        end;
+      end;
+    end;
+
+    AExerciseInfo.Ename := sNewName;
+    FExerciseAction.EditExercise(AExerciseInfo);
+  end
+  else // 文件
+  begin
+    FExerciseAction.EditExercise(AExerciseInfo);
+  end;
+
+  ClearStringList(slList);
+  slList.Free;
 end;
 
 function TExerciseControl.GetExerciseInfo(nIndex: Integer): TExerciseInfo;

@@ -29,6 +29,10 @@ type
     FUnits  : string;
     FLength : Integer;
     FValue  : string;
+    FOnValueChanged: TNotifyEvent;
+    FTagString: string;
+    FTagInt: Integer;
+    FTagObject: TObject;
     procedure SetValue( Val : string );
   published
     /// <summary>
@@ -61,12 +65,20 @@ type
     /// </summary>
     property Value : string read FValue write SetValue;
 
+    property TagInt : Integer read FTagInt write FTagInt;
+    property TagString : string read FTagString write FTagString;
+    property TagObject : TObject read FTagObject write FTagObject;
     /// <summary>
     /// 对象赋值
     /// </summary>
     procedure Assign(Source: TPersistent); override;
   public
     function SignInHex : string;
+
+    /// <summary>
+    /// 值改变
+    /// </summary>
+    property OnValueChanged : TNotifyEvent read FOnValueChanged write fOnValueChanged;
   end;
 
 type
@@ -345,6 +357,10 @@ begin
   FUnits  := TMeterDataItem( Source ).Units ;
   FLength := TMeterDataItem( Source ).Length;
   FValue  := TMeterDataItem( Source ).Value ;
+  FTagInt := TMeterDataItem( Source ).TagInt;
+  FTagString := TMeterDataItem( Source ).TagString ;
+  FTagObject := TMeterDataItem( Source ).TagObject ;
+
 end;
 
 { TMeterData }
@@ -948,8 +964,13 @@ end;
 
 procedure TMeterDataItem.SetValue(Val: string);
 begin
-  if Val <> FValue then
+//  if Val <> FValue then
+//  begin
     FValue := Val;
+
+    if Assigned(FOnValueChanged) then
+      FOnValueChanged(self);
+//  end;
 end;
 
 function TMeterDataItem.SignInHex: string;
@@ -963,6 +984,84 @@ begin
 end;
 
 function VerifiedStr( const sData, sFormat : string; nLen : Integer ) : string;
+//  // 修正字符串长度
+//  procedure ChangeStrSize( var s : string; nLen : Integer );
+//  var
+//    i : Integer;
+//  begin
+//    if Length( s ) < nLen then
+//    begin
+//      for i := 1 to nLen - Length( s ) do
+//        s := '0' + s;
+//    end
+//    else if Length( s ) > nLen then
+//    begin
+//      s := Copy( s, Length( s ) - nLen + 1, nLen );
+//    end;
+//  end;
+//var
+//  nLenStr : Integer;
+//  dTemp : Double;
+//  s : string;
+//  aBuf : TBytes;
+//begin
+//  s := Trim( sData );
+//  s := StringReplace( s, ' ', '', [rfReplaceAll] );
+//  s := StringReplace( s, '-', '', [rfReplaceAll] );
+//  s := StringReplace( s, ':', '', [rfReplaceAll] );
+//
+//  if (sFormat <> EmptyStr) and (sFormat <> '00.0000YYMMDDhhmm') then   // 有数据格式的
+//  begin
+//    // 整理浮点数据
+//    if ( Pos( '0.0', sFormat ) > 0 ) then
+//    begin
+//      TryStrToFloat( s, dTemp );
+//      s := FormatFloat( sFormat, dTemp );
+//    end
+//    else
+//    begin
+//      if Pos('X', sFormat) > 0 then
+//      begin
+//        nLenStr := Round(Length( sFormat )/2);
+//        ChangeStrSize( s, nLenStr );
+//        aBuf := StrToPacks( s );
+//        s := BCDPacksToStr(aBuf);
+//
+//        s := StringReplace(s, ' ', '', [rfReplaceAll]);
+//      end
+//      else
+//      begin
+//        nLenStr := Length( sFormat );
+//        ChangeStrSize( s, nLenStr );
+//      end;
+//
+//    end;
+//  end
+//  else
+//  begin
+//    s := StringReplace( s, '.', '', [rfReplaceAll] );
+//    nLenStr := nLen * 2;    // 字节个数×2，因为是十六进制
+//    ChangeStrSize( s, nLenStr );
+//
+//    Insert('.',s, 3);
+//  end;
+//
+//  Result := s;
+
+function ReverseString(const AText: string): string;
+var
+  I: Integer;
+  P: PChar;
+begin
+  SetLength(Result, Length(AText));
+  P := PChar(Result);
+  for I := High(AText) downto Low(AText) do
+  begin
+    P^ := AText[I];
+    Inc(P);
+  end;
+end;
+
   // 修正字符串长度
   procedure ChangeStrSize( var s : string; nLen : Integer );
   var
@@ -972,57 +1071,44 @@ function VerifiedStr( const sData, sFormat : string; nLen : Integer ) : string;
     begin
       for i := 1 to nLen - Length( s ) do
         s := '0' + s;
-    end
-    else if Length( s ) > nLen then
-    begin
-      s := Copy( s, Length( s ) - nLen + 1, nLen );
     end;
   end;
 var
-  nLenStr : Integer;
+  nIndex, nLenStr : Integer;
   dTemp : Double;
-  s : string;
-  aBuf : TBytes;
+  s, sDF : string;
 begin
   s := Trim( sData );
-  s := StringReplace( s, ' ', '', [rfReplaceAll] );
-  s := StringReplace( s, '-', '', [rfReplaceAll] );
-  s := StringReplace( s, ':', '', [rfReplaceAll] );
 
-  if (sFormat <> EmptyStr) and (sFormat <> '00.0000YYMMDDhhmm') then   // 有数据格式的
+  sDF := Trim(sFormat);
+
+  if sDF <> EmptyStr then   // 有数据格式的
   begin
-    // 整理浮点数据
-    if ( Pos( '0.0', sFormat ) > 0 ) then
-    begin
-      TryStrToFloat( s, dTemp );
-      s := FormatFloat( sFormat, dTemp );
-    end
-    else
-    begin
-      if Pos('X', sFormat) > 0 then
-      begin
-        nLenStr := Round(Length( sFormat )/2);
-        ChangeStrSize( s, nLenStr );
-        aBuf := StrToPacks( s );
-        s := BCDPacksToStr(aBuf);
+    nLenStr := Length( sDF );
 
-        s := StringReplace(s, ' ', '', [rfReplaceAll]);
+    // 整理浮点数据
+    if ( Pos( '.', sDF ) > 0 ) then
+    begin
+      if ( Pos( '.', s ) = 0  ) and ( nLenStr = Length( s ) + 1 ) then
+      begin
+        nIndex := Pos( '.', ReverseString( sDF ) );
+        s := ReverseString( s );
+
+        s := Copy( s, 1, nIndex - 1 ) + '.' + Copy( s, nIndex, Length( s ) - nIndex + 1 );
+        s := ReverseString( s );
       end
       else
       begin
-        nLenStr := Length( sFormat );
-        ChangeStrSize( s, nLenStr );
+        TryStrToFloat( s, dTemp );
+        s := FormatFloat( sDF, dTemp );
       end;
-
     end;
+
+    ChangeStrSize( s, nLenStr );
   end
   else
   begin
-    s := StringReplace( s, '.', '', [rfReplaceAll] );
-    nLenStr := nLen * 2;    // 字节个数×2，因为是十六进制
-    ChangeStrSize( s, nLenStr );
-
-    Insert('.',s, 3);
+    ChangeStrSize( s, nLen * 2 )
   end;
 
   Result := s;

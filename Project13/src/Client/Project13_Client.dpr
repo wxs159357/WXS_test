@@ -46,11 +46,8 @@ uses
   U_ERRORF_TO_WIRING in '..\Server\WiringError\U_ERRORF_TO_WIRING.pas',
   FrmWEDetails in '..\Server\WiringError\WiringError\FrmWEDetails.pas' {fWEDetails},
   FrmWEDetails2 in '..\Server\WiringError\WiringError\FrmWEDetails2.pas' {fWEDetails2},
-  FrmWEPhaseColor in '..\Server\WiringError\WiringError\FrmWEPhaseColor.pas' {fWEPhaseColor},
   FrmWESelect1 in '..\Server\WiringError\WiringError\FrmWESelect1.pas' {fWESelect1},
   U_DIAGRAM_TYPE in '..\Server\WiringError\WiringError\U_DIAGRAM_TYPE.pas',
-  U_POWER_PHASE_MAP in '..\Server\WiringError\WiringError\U_POWER_PHASE_MAP.pas',
-  U_POWER_STATUS in '..\Server\WiringError\WiringError\U_POWER_STATUS.pas',
   U_WE_DIAGRAM in '..\Server\WiringError\WiringError\U_WE_DIAGRAM.pas',
   U_WE_DIAGRAM2 in '..\Server\WiringError\WiringError\U_WE_DIAGRAM2.pas',
   U_WE_EQUATION in '..\Server\WiringError\WiringError\U_WE_EQUATION.pas',
@@ -65,13 +62,13 @@ uses
   U_WE_VECTOR_EQUATION in '..\Server\WiringError\WiringError\V2\U_WE_VECTOR_EQUATION.pas',
   U_WE_VECTOR_MAP in '..\Server\WiringError\WiringError\V2\U_WE_VECTOR_MAP.pas',
   U_POWER_LIST_INFO in '..\Server\WiringError\WiringError\AnalysisMap\U_POWER_LIST_INFO.pas',
-  U_CKM_DEVICE in '..\..\..\Pub_src\U_CKM_DEVICE.pas',
-  U_PUB_FUN in '..\..\..\Pub_src\U_PUB_FUN.pas',
   xDataDictionary in '..\..\..\FMX_Pub_src\xDataDictionary.pas',
   FrmAnswerQuestion in 'AnswerQuestion\FrmAnswerQuestion.pas' {fAnswerQuestion},
   xWiringError in '..\..\..\FMX_Pub_src\ElectricityMeter\xWiringError.pas',
   FrmExamReady in 'Exam\FrmExamReady.pas' {fExamReady},
-  xUDPRevScreen in 'RevScreen\xUDPRevScreen.pas';
+  xUDPRevScreen in 'RevScreen\xUDPRevScreen.pas',
+  FrmRevScreenMain in 'RevScreen\FrmRevScreenMain.pas' {fRevScreenMain},
+  FrmExamAnswer in 'Exam\FrmExamAnswer.pas' {fExamAnswer};
 
 {$R *.res}
 
@@ -79,6 +76,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfClientMain, fClientMain);
-  Application.CreateForm(TfExamReady, fExamReady);
+  Application.CreateForm(TfExamAnswer, fExamAnswer);
   Application.Run;
 end.

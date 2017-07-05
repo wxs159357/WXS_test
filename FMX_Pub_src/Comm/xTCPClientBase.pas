@@ -8,7 +8,7 @@ interface
 
 uses xCommBase, System.Types, xTypes, System.Classes, xFunction,
   system.SysUtils, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdGlobal;
+  IdGlobal, Dialogs;
 
 type
   TCheckRevDataProc = reference to procedure(Sender: TObject);
@@ -28,7 +28,7 @@ type
 type
   TTCPClientBase = class(TCommBase)
   private
-    FTCPClient: TIdTCPClient;
+
     FServerPort: Integer;
     FServerIP: string;
     FRevThread : TRevDataThread;
@@ -59,6 +59,7 @@ type
     procedure RealDisconnect; override;
 
   public
+    FTCPClient: TIdTCPClient;
     constructor Create; override;
     destructor Destroy; override;
 
@@ -83,7 +84,7 @@ type
     property OnConnected : TNotifyEvent read FOnConnected write FOnConnected;
 
     /// <summary>
-    /// 连接事件
+    /// 断开连接事件
     /// </summary>
     property OnDisconnect : TNotifyEvent read FOnDisconnect write FOnDisconnect;
   end;
@@ -98,6 +99,8 @@ begin
   inherited;
   FRevThread := TRevDataThread.Create(False, RevData);
   FTCPClient:= TIdTCPClient.Create;
+  FTCPClient.ConnectTimeout := 1000;
+  FTCPClient.ReadTimeout := 1000;
 
 //  FTCPClient.OnConnected := TCPConnect;
 //  FTCPClient.OnDisconnected := TCPDisconnect;
@@ -123,17 +126,18 @@ begin
   FTCPClient.Port := FServerPort;
   try
     FTCPClient.Connect;
-  finally
-    Result := FTCPClient.Connected;
+  except
 
-    if Result then
-      s := '成功'
-    else
-      s := '失败';
-    Log(FormatDateTime('hh:mm:ss:zzz', Now) + ' 连接服务器'+FServerIP + ':' +
-      IntToStr(FServerPort)+s);
   end;
 
+  Result := FTCPClient.Connected;
+
+  if Result then
+    s := '成功'
+  else
+    s := '失败';
+  Log(FormatDateTime('hh:mm:ss:zzz', Now) + ' 连接服务器'+FServerIP + ':' +
+    IntToStr(FServerPort)+s);
 
 end;
 
@@ -147,12 +151,25 @@ begin
 end;
 
 function TTCPClientBase.RealSend(APacks: TArray<Byte>; sParam1,sParam2 : string): Boolean;
+var
+  ABuffer : TIdBytes;
+  i : Integer;
 begin
   Result := False;
   if FTCPClient.Connected then
   begin
     try
-      FTCPClient.IOHandler.Write(PacksToStr(APacks));
+
+      SetLength(ABuffer, Length(APacks));
+
+      for i := 0 to Length(APacks) - 1 do
+      begin
+        ABuffer[i] := APacks[i];
+      end;
+
+
+//      FTCPClient.IOHandler.Write(PacksToStr(APacks));
+      FTCPClient.IOHandler.Write(ABuffer);
       Result := True;
     except
 

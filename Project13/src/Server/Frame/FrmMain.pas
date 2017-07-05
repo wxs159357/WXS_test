@@ -10,10 +10,10 @@ uses
    ActnCtrls,  StdCtrls,
    System.Actions, FrmTrain, FrmExercise, FrmRanking, FrmLog,
   System.ImageList, FrmExam, FrmErrorSelect, xWiringError,
-  U_POWER_PHASE_MAP, U_WE_PHASE_MAP, xStudentControl, uStudentList,
+  U_WE_PHASE_MAP, xStudentControl, uStudentList,
   xExerciseControl, FrmPosState, xExamControl, xUDPServer, xFunction, xTCPServer,
   IdContext, IdBaseComponent, IdComponent, IdCustomTCPServer, IdTCPServer,
-  FrmExamineeList, xDataDictionary, xThreadUDPSendScreen, xUDPServerBase;
+  FrmExamineeList, xDataDictionary, xUDPServerBase;
 
 const
   WM_FORM_LOADING = WM_USER + 1;
@@ -100,8 +100,8 @@ type
   private
     { Private declarations }
 
-    Fullscreen:Tbitmap;
-    AJpeg : TJPEGImage;
+//    Fullscreen:Tbitmap;
+//    AJpeg : TJPEGImage;
 //    FUDPServer : TUDPServerBase;
 
     procedure ReadsysINI;
@@ -138,8 +138,6 @@ type
     procedure UDPLog(const S: string);
     procedure TCPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
     procedure UDPPacksLog( sIP : string; nPort: Integer; aPacks: TBytes; bSend : Boolean);
-
-    procedure GetSreen(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -274,15 +272,10 @@ end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
-  Fullscreen:=TBitmap.Create;
-  AJpeg := TJPEGImage.Create;
-  Fullscreen.PixelFormat := pf8bit;
-
   SetPubInfo;
   ReadsysINI;
 
   pnl1.Visible := bPubIsAdmin;
-//  clbr1.Visible := bPubIsCompany;
 
   IniDBConn;
   Caption := C_SYS_OBJECT_MODEL + '  ' + C_SYS_OBJECT_NAME;
@@ -309,18 +302,6 @@ begin
       EquationFont       := ReadInteger( 'PhaseMapColor', 'EquationFont', clBlack   );
     end;
 
-    with PowerPhaseMap do
-    begin
-      Background := ReadInteger( 'PowerPhaseMap', 'Background', clWhite );
-      DotLine    := ReadInteger( 'PowerPhaseMap', 'DotLine', $00D1D1D1 );
-      PhaseLine  := ReadInteger( 'PowerPhaseMap', 'PhaseLine', $005E5E5E );
-      PhaseAB    := ReadInteger( 'PowerPhaseMap', 'PhaseAB', $003D9DFE );
-      PhaseCB    := ReadInteger( 'PowerPhaseMap', 'PhaseCB', clRed     );
-      PhaseA     := ReadInteger( 'PowerPhaseMap', 'PhaseA', $003D9DFE );
-      PhaseB     := ReadInteger( 'PowerPhaseMap', 'PhaseB', $00009700 );
-      PhaseC     := ReadInteger( 'PowerPhaseMap', 'PhaseC', clRed     );
-      Font       := ReadInteger( 'PowerPhaseMap', 'Font', clBlack   );
-    end;
     Free;
   end;
 end;
@@ -329,8 +310,8 @@ procedure TfMain.FormDestroy(Sender: TObject);
 begin
   Screen.Cursor := crHourGlass;
   try
-    Fullscreen.Free;
-    AJpeg.Free;
+//    Fullscreen.Free;
+//    AJpeg.Free;
 
     WritesysINI;
 
@@ -340,29 +321,6 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
-end;
-
-procedure TfMain.GetSreen(Sender: TObject);
-var
-  Fullscreen:Tbitmap;
-  AJpeg : TJPEGImage;
-  SrcRect, DstRect : TRect;
-begin
-  Fullscreen:=TBitmap.Create;
-  Fullscreen.Width:=Self.Width;
-  Fullscreen.Height:=Self.Height;
-  SrcRect := Rect(0,0,Self.Width,Self.Height);
-  DstRect := Rect(0,0,Self.Width,Self.Height);
-  AJpeg := TJPEGImage.Create;
-  Fullscreen.Canvas.CopyRect(DstRect, Self.Canvas, SrcRect); //把整个屏幕复制到BITMAP中
-  Fullscreen.PixelFormat := pf8bit;
-  AJpeg.Assign( Fullscreen );
-
-  TMemoryStream(Sender).Clear;
-  AJpeg.SaveToStream(TMemoryStream(Sender));
-
-  fullscreen.free;
-  AJpeg.Free;
 end;
 
 procedure TfMain.IniDBConn;
@@ -397,10 +355,6 @@ begin
     UDPServer.SendConnServer;
 
     DataDict := TDataDictionary.Create;
-
-    UDPSendScreen := TThreadUDPSendScreen.Create(False);
-    UDPSendScreen.Connect;
-    UDPSendScreen.OnGetScreen :=  GetSreen;
 
     IniMapColor;
 
@@ -521,7 +475,6 @@ begin
     UDPServer.free;
     TCPServer.Free;
     DataDict.Free;
-    UDPSendScreen.Free;
 //    FUDPServer.Free;
   finally
 

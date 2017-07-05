@@ -3,7 +3,7 @@ unit xProtocolSendScreen;
 interface
 
 uses System.Types,System.Classes, xFunction, system.SysUtils, xUDPServerBase,
-  xConsts, System.IniFiles, xClientType, Winapi.WinInet, winsock, Graphics,
+  xConsts, System.IniFiles, Winapi.WinInet, winsock, Graphics,
   xProtocolBase, System.Math;
 
 const

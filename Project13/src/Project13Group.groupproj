@@ -9,9 +9,6 @@
         <Projects Include="Client\Project13_Client.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="E:\workspace\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -38,23 +35,14 @@
     <Target Name="Project13_Client:Make">
         <MSBuild Projects="Client\Project13_Client.dproj" Targets="Make"/>
     </Target>
-    <Target Name="CKM2008ES">
-        <MSBuild Projects="E:\workspace\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj"/>
-    </Target>
-    <Target Name="CKM2008ES:Clean">
-        <MSBuild Projects="E:\workspace\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="CKM2008ES:Make">
-        <MSBuild Projects="E:\workspace\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Project13_Server;Project13_Client;CKM2008ES"/>
+        <CallTarget Targets="Project13_Server;Project13_Client"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Project13_Server:Clean;Project13_Client:Clean;CKM2008ES:Clean"/>
+        <CallTarget Targets="Project13_Server:Clean;Project13_Client:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Project13_Server:Make;Project13_Client:Make;CKM2008ES:Make"/>
+        <CallTarget Targets="Project13_Server:Make;Project13_Client:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

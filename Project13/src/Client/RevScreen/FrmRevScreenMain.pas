@@ -4,19 +4,31 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, xUDPRevScreen, Vcl.Imaging.jpeg,
-  Vcl.ExtCtrls, Vcl.StdCtrls, xFunction, System.IniFiles, xConsts;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, xUDPRevScreen, Vcl.Imaging.jpeg, System.Types,
+  Vcl.ExtCtrls, Vcl.StdCtrls, xFunction, System.IniFiles, xConsts, System.DateUtils;
 
 type
   TfRevScreenMain = class(TForm)
     img1: TImage;
     mmo1: TMemo;
+    tmr1: TTimer;
+    scrlbx1: TScrollBox;
+    spltr1: TSplitter;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure tmr1Timer(Sender: TObject);
+    procedure img1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure img1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure img1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
+    FTempTime : Integer;
     FRevScreen : TUDPRevScreen;
     FShowLog : Boolean;
+    FCaption : string;
+    pBefore : TPoint;
     procedure ReadINI;
     procedure WriteINI;
 
@@ -43,6 +55,8 @@ begin
     FRevScreen.OnIPSendRev := UDPPacksLog1;
 
   mmo1.Visible := FShowLog;
+  pBefore.X := -1;
+  pBefore.Y := -1;
 end;
 procedure TfRevScreenMain.FormDestroy(Sender: TObject);
 begin
@@ -50,30 +64,77 @@ begin
   FRevScreen.Free;
 end;
 
+procedure TfRevScreenMain.img1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  pBefore.X := X;
+  pbefore.Y := Y;
+  Screen.Cursor := crSize;
+end;
+
+procedure TfRevScreenMain.img1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+var
+  nX, nY : Integer;
+begin
+  if ( pBefore.X > 0 ) and ( pBefore.Y > 0 ) then
+  begin
+    nX := pBefore.X - X;
+    nY := pBefore.Y - Y;
+    scrlbx1.VertScrollBar.Position := scrlbx1.VertScrollBar.Position + nY;
+    scrlbx1.HorzScrollBar.Position := scrlbx1.HorzScrollBar.Position + nX;
+  end;
+end;
+
+procedure TfRevScreenMain.img1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  pBefore := Point( -1, -1 );
+  Screen.Cursor := crDefault;
+end;
+
 procedure TfRevScreenMain.ReadINI;
 begin
   with TIniFile.Create(sPubIniFileName) do
   begin
-    FRevScreen.ListenPort := ReadInteger('Option', 'ListenPort', 16101);
+    FRevScreen.ListenPort := ReadInteger('OptionRevScreen', 'ListenPort', 16101);
     Caption := '接收屏幕端口：' + IntToStr(FRevScreen.ListenPort);
 
-    FShowLog := ReadBool('Option', 'ShowLog', False);
+    FShowLog := ReadBool('OptionRevScreen', 'ShowLog', False);
     Free;
   end;
 end;
 
 procedure TfRevScreenMain.RevJpg(Sender: TObject);
+var
+  nTemp : Integer;
 begin
   if Sender is TJPEGImage then
   begin
-    mmo1.Lines.Add('刷新图片' + IntToStr(TJPEGImage(Sender).Width) + ';' + IntToStr(TJPEGImage(Sender).Height));
+    if FShowLog then
+      mmo1.Lines.Add('刷新图片' + IntToStr(TJPEGImage(Sender).Width) + ';' + IntToStr(TJPEGImage(Sender).Height));
 
-    Self.Width := TJPEGImage(Sender).Width-11;
-    Self.Height := TJPEGImage(Sender).Height-31;
+    img1.Width := TJPEGImage(Sender).Width;
+    img1.Height := TJPEGImage(Sender).Height;
 
-    img1.Picture.Bitmap.Assign(TJPEGImage(Sender));
+    try
+      // 有时候会报错 jpg Error #61，报错后会一直报错，所以加下面处理
+      img1.Picture.Bitmap.Assign(TJPEGImage(Sender));
+    except
+      img1.Picture.Bitmap.FreeImage;
+    end;
+
+    nTemp := MilliSecondOfTheHour(Now);
+    FCaption := FormatFloat('0.00', 1000/(nTemp - FTempTime))+'侦/秒    ';
+    FTempTime:=nTemp;
   end;
 end;
+procedure TfRevScreenMain.tmr1Timer(Sender: TObject);
+begin
+  if FCaption <> '' then
+    Caption := FCaption;
+end;
+
 procedure TfRevScreenMain.UDPPacksLog1(sIP: string; nPort: Integer;
   aPacks: TBytes; bSend: Boolean);
 var
@@ -113,8 +174,8 @@ procedure TfRevScreenMain.WriteINI;
 begin
   with TIniFile.Create(sPubIniFileName) do
   begin
-    WriteInteger('Option', 'ListenPort', FRevScreen.ListenPort);
-    WriteBool('Option', 'ShowLog',FShowLog);
+    WriteInteger('OptionRevScreen', 'ListenPort', FRevScreen.ListenPort);
+    WriteBool('OptionRevScreen', 'ShowLog',FShowLog);
     Free;
   end;
 end;

@@ -24,7 +24,6 @@ object fExamReady: TfExamReady
     Height = 21
     Align = alTop
     Alignment = taRightJustify
-    Caption = 'lbl1'
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlue
     Font.Height = -21
@@ -32,8 +31,8 @@ object fExamReady: TfExamReady
     Font.Style = [fsBold]
     ParentFont = False
     Layout = tlCenter
-    ExplicitLeft = 570
-    ExplicitWidth = 48
+    ExplicitLeft = 606
+    ExplicitWidth = 12
   end
   object prgrsbr1: TProgressBar
     Left = 0
@@ -42,7 +41,6 @@ object fExamReady: TfExamReady
     Height = 33
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 608
   end
   object btnReady: TButton
     Left = 208

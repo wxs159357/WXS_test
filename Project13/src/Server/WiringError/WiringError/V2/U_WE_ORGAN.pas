@@ -10,7 +10,7 @@ unit U_WE_ORGAN;
 
 interface
 
-uses U_DIAGRAM_TYPE, SysUtils, Classes, U_WIRING_ERROR, U_PUB_FUN;
+uses U_DIAGRAM_TYPE, SysUtils, Classes, U_WIRING_ERROR, xFunction;
 
 type
   /// <summary>

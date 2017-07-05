@@ -12,7 +12,8 @@ unit xStudentAction;
 interface
 
 uses
-  System.Classes, System.SysUtils, xDBActionBase, system.Variants, xStudentInfo;
+  System.Classes, System.SysUtils, xDBActionBase, system.Variants, xStudentInfo,
+  FireDAC.Stan.Param;
 
 type
   /// <summary>
@@ -77,9 +78,23 @@ end;
 function TStudentAction.GetStuInfo(sLogName, sPWD: string;
   AStuInfo: TStudentInfo): Boolean;
 const
-  C_SQL = 'select * from SUDENT_INFO where STULogin = %s and STUPassword = %s';
+  C_SQL = 'select * from SUDENT_INFO where STULogin = :STULogin and STUPassword = :STUPassword';
 begin
-  FQuery.Open(Format(C_SQL, [sLogName, sPWD]));
+//  if sPWD = '' then
+//  begin
+//    FQuery.SQL.Text := Format(C_SQL, [sLogName, '''']);
+//  end
+//  else
+//  begin
+//    FQuery.SQL.Text := Format(C_SQL, [sLogName, sPWD]);
+//  end;
+//  FQuery.SQL.Text := 'select * from SUDENT_INFO where STULogin = 5 and STUPassword = null';
+
+  FQuery.SQL.Text := C_SQL;
+  FQuery.Params.ParamByName('STULogin').Value := sLogName;
+  FQuery.Params.ParamByName('STUPassword').Value := sPWD;
+
+  FQuery.Open;
 
   Result := FQuery.RecordCount > 0;
   if Result then

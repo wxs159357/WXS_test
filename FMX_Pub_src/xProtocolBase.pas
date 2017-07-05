@@ -236,6 +236,7 @@ end;
 
 procedure TProtocolBase.ParseData(RvdPack: TBytes);
 begin
+  FReplySate := C_REPLY_CORRECT;
   // nothing
 end;
 

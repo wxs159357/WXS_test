@@ -2,10 +2,10 @@ object fRevScreenMain: TfRevScreenMain
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsToolWindow
+  BorderStyle = bsSizeToolWin
   Caption = #25509#25910#23631#24149
-  ClientHeight = 446
-  ClientWidth = 639
+  ClientHeight = 495
+  ClientWidth = 645
   Color = clBtnFace
   DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
@@ -19,26 +19,48 @@ object fRevScreenMain: TfRevScreenMain
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object img1: TImage
+  object spltr1: TSplitter
     Left = 0
-    Top = 0
-    Width = 639
-    Height = 357
-    Align = alClient
-    ExplicitLeft = 64
-    ExplicitTop = 24
-    ExplicitWidth = 105
-    ExplicitHeight = 105
+    Top = 403
+    Width = 645
+    Height = 3
+    Cursor = crVSplit
+    Align = alBottom
+    ExplicitTop = 0
+    ExplicitWidth = 406
   end
   object mmo1: TMemo
     Left = 0
-    Top = 357
-    Width = 639
+    Top = 406
+    Width = 645
     Height = 89
     Align = alBottom
     Lines.Strings = (
       'mmo1')
     TabOrder = 0
     Visible = False
+  end
+  object scrlbx1: TScrollBox
+    Left = 0
+    Top = 0
+    Width = 645
+    Height = 403
+    Align = alClient
+    TabOrder = 1
+    object img1: TImage
+      Left = 0
+      Top = 0
+      Width = 641
+      Height = 401
+      Cursor = crHandPoint
+      OnMouseDown = img1MouseDown
+      OnMouseMove = img1MouseMove
+      OnMouseUp = img1MouseUp
+    end
+  end
+  object tmr1: TTimer
+    OnTimer = tmr1Timer
+    Left = 88
+    Top = 48
   end
 end

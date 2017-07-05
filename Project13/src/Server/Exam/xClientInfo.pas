@@ -194,7 +194,14 @@ begin
   case FClientState of
     esDisconn, esConned : Result := FClientIP;
   else
-    Result := StudentInfo.stuName;
+    if StudentInfo.stuName <> '' then
+    begin
+      Result := StudentInfo.stuName;
+    end
+    else
+    begin
+      Result := FClientIP;
+    end;
   end;
 end;
 
@@ -276,6 +283,12 @@ end;
 procedure TClientInfo.SetClientState(const Value: TClientState);
 begin
   FClientState := Value;
+
+  if FClientState = esConned then
+  begin
+    FStudentInfo.Clear;
+  end;
+
   if Assigned(FOnChanged) then
   begin
     FOnChanged(Self);

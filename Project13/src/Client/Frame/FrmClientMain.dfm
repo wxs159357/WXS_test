@@ -1,9 +1,9 @@
 object fClientMain: TfClientMain
   Left = 0
   Top = 0
-  Caption = 'fClientMain'
+  Caption = #20027#30028#38754
   ClientHeight = 496
-  ClientWidth = 725
+  ClientWidth = 794
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fClientMain: TfClientMain
   object spltr2: TSplitter
     Left = 0
     Top = 283
-    Width = 725
+    Width = 794
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -30,7 +30,7 @@ object fClientMain: TfClientMain
   object img1: TImage
     Left = 0
     Top = 38
-    Width = 725
+    Width = 794
     Height = 245
     Align = alClient
     Stretch = True
@@ -42,7 +42,7 @@ object fClientMain: TfClientMain
   object stsbrMain: TStatusBar
     Left = 0
     Top = 477
-    Width = 725
+    Width = 794
     Height = 19
     DoubleBuffered = True
     Panels = <
@@ -55,19 +55,27 @@ object fClientMain: TfClientMain
         Width = 150
       end
       item
-        Text = #22312#32447
+        Text = #26410#36830#25509
         Width = 80
       end
       item
-        Text = '192.168.10.1'
-        Width = 200
+        Text = #26410#30331#24405
+        Width = 150
+      end
+      item
+        Text = '...'
+        Width = 100
+      end
+      item
+        Text = '127.0.0.1'
+        Width = 50
       end>
     ParentDoubleBuffered = False
   end
   object pnl1: TPanel
     Left = 0
     Top = 0
-    Width = 725
+    Width = 794
     Height = 38
     Align = alTop
     BevelOuter = bvNone
@@ -75,7 +83,7 @@ object fClientMain: TfClientMain
     object tlbr1: TToolBar
       Left = 0
       Top = 0
-      Width = 592
+      Width = 704
       Height = 38
       Align = alClient
       ButtonHeight = 38
@@ -83,126 +91,78 @@ object fClientMain: TfClientMain
       Caption = 'tlbr1'
       Images = imglstil3
       TabOrder = 0
-      object btnDevLog: TToolButton
-        Left = 0
-        Top = 0
-        Action = actOption
-      end
-      object btn3: TToolButton
-        Left = 39
-        Top = 0
-        Width = 8
-        Caption = 'btn3'
-        ImageIndex = 4
-        Style = tbsSeparator
-      end
       object btnExercise: TToolButton
-        Left = 47
+        Left = 0
         Top = 0
         Action = actExercise
       end
-      object btnHelp1: TToolButton
-        Left = 86
+      object tlbtnTraining: TToolButton
+        Left = 39
         Top = 0
-        Action = actHelp
+        Action = actTraining
+      end
+      object tlbtnSavePaper: TToolButton
+        Left = 78
+        Top = 0
+        Action = actSavePaper
       end
       object btn7: TToolButton
-        Left = 125
+        Left = 117
         Top = 0
-        Width = 8
+        Width = 7
         Caption = 'btn7'
         ImageIndex = 4
         Style = tbsSeparator
       end
       object btnHelp: TToolButton
-        Left = 133
+        Left = 124
         Top = 0
         Action = actAbout
       end
       object btnExit: TToolButton
-        Left = 172
+        Left = 163
         Top = 0
         Action = actExit
       end
     end
     object pnl2: TPanel
-      Left = 592
+      Left = 704
       Top = 0
-      Width = 133
+      Width = 90
       Height = 38
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
       object imgStu: TImage
-        Left = 92
-        Top = 0
-        Width = 41
-        Height = 38
-        Align = alRight
-        Picture.Data = {
-          07544269746D617036030000424D360300000000000036000000280000001000
-          0000100000000100180000000000000300000000000000000000000000000000
-          0000FF00FFFF00FFFF00FFFF88FFFEAADFF6E3B4EFCB96EEC588EFC78CF4DE94
-          FDB9B8FF28FBFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFDD1DBDED58EC5AC
-          82C5AC9CCCBDB6CBBDB7CCBDB6C5AE9EC5A87BE4C85EFBB69FFF00FFFF00FFFF
-          00FFFF00FFFF85E0CCBA79C4B3ACD9CAC2D2C2B8CAB9ADC8B7ABCAB9ADD2C2B8
-          D8CBC3C4B6B1D0B264F460A7FF00FFFF00FFFF00FFED4FAABEBEA4CFBFB5C8B6
-          AAC9B8ACCAB9ADCAB9ADCAB9ADC9B8ACC8B6AACFBFB5BEBEA6F958A8FF00FFFF
-          00FFFF00FFF15BB1C2BFA8CDBCB1CDBCB1CDBCB1CDBCB1CDBCB1CDBCB1CDBCB1
-          CDBCB1CDBCB1C1C0A9F95DAFFF00FFFF00FFFF00FFF05BADCFCEB4D3C2B8CEBC
-          B1CFBEB3D0BEB3D0BFB3D0BEB3CFBEB3CFBEB3CFBEB3C8C5AFFD6CA5FF00FFFF
-          00FFFF00FFFE23E4D3D99BEDE1DAE1D2C7D8C7BED6C6BCD7C7BDD7C7BDD6C6BC
-          D9C8BFDFD2C9D6DEA2FF27D7FF00FFFF00FFFF00FFFF00FFE29796ECE9DCF4E9
-          DFF5EBE1DCCEC4D2C3B8DCCEC5F5EAE0F4EADFF3EEE1EAB1B6FF00FFFF00FFFF
-          00FFFF00FFFF00FFDD17F2D5DC99F2E7E0BCA89DCCBAB0D2C1B7CCBAB0BCA89C
-          F3E9E0D7E5ABFF22EBFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFD3849DC1B5
-          A3D7C6BDD4C3B9D3C2B8D4C3B9D7C6BCC3B5A2AB7FAEFF00FFFF00FFFF00FFFF
-          00FFFF00FFFF00FFFF00FFCBCF77D4C4BED4C3B9D6C6BCD7C8BDD7C6BDD4C3BA
-          DDC5B663C0C4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFDEE6ABDCCE
-          C4DACBC0DFD1C6E2D3C9E0D2C7DACCC0E3D0C4B0E4CCFF00FFFF00FFFF00FFFF
-          00FFFF00FFFF00FFFF00FFE0F2A8EFE5DEF0E3DAEDDFD6EBDFD5EEE0D8F1E4DB
-          F7E8DEACE3BFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFF0B0B5FAF8
-          EBFAEEE5FFF6EDFFF9EFFFF7EEFCF0E8FAF8E9F6BAC4FF00FFFF00FFFF00FFFF
-          00FFFF00FFFF00FFFF00FFFF22ECEEFFB9FFFEFAFFFFFAFFFFFBFFFFFBFFFFFB
-          EEFFC4FF27F4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF13
-          F1F2F4C3F4E9DBF6F0E8F4E8DBF2EBABFF14F2FF00FFFF00FFFF00FFFF00FFFF
-          00FF}
+        AlignWithMargins = True
+        Left = 25
+        Top = 1
+        Width = 39
+        Height = 36
         Stretch = True
-        ExplicitLeft = 120
-        ExplicitTop = 24
-        ExplicitHeight = 41
       end
       object btnStu: TSpeedButton
         Left = 0
         Top = 0
-        Width = 92
+        Width = 90
         Height = 38
         Align = alClient
-        Caption = #30331#24405
+        Caption = #26410#30331#24405
         Flat = True
         PopupMenu = pmn1
         OnClick = btnStuClick
-        ExplicitLeft = 24
-        ExplicitWidth = 124
-        ExplicitHeight = 41
+        ExplicitLeft = 48
+        ExplicitWidth = 85
       end
     end
-  end
-  object btn1: TButton
-    Left = 344
-    Top = 184
-    Width = 75
-    Height = 25
-    Caption = 'btn1'
-    TabOrder = 2
   end
   object pnl3: TPanel
     Left = 0
     Top = 286
-    Width = 725
+    Width = 794
     Height = 191
     Align = alBottom
-    TabOrder = 3
+    TabOrder = 2
     object spltr1: TSplitter
       Left = 473
       Top = 1
@@ -224,7 +184,7 @@ object fClientMain: TfClientMain
     object mmo2: TMemo
       Left = 476
       Top = 1
-      Width = 248
+      Width = 317
       Height = 189
       Align = alClient
       Lines.Strings = (
@@ -353,12 +313,13 @@ object fClientMain: TfClientMain
     object actTraining: TAction
       Caption = #22521#35757'...'
       Hint = #22521#35757
-      ImageIndex = 5
+      ImageIndex = 4
+      OnExecute = actTrainingExecute
     end
     object actExam: TAction
       Caption = #32771#35797'...'
       Hint = #32771#35797
-      ImageIndex = 4
+      ImageIndex = 5
     end
     object actQuestion: TAction
       Caption = #39064#24211#31649#29702'...'
@@ -385,7 +346,7 @@ object fClientMain: TfClientMain
     end
     object actExercise: TAction
       Caption = #32451#20064'...'
-      ImageIndex = 9
+      ImageIndex = 5
       OnExecute = actExerciseExecute
     end
     object actRanking: TAction
@@ -396,6 +357,10 @@ object fClientMain: TfClientMain
     end
     object actExerciseSetting: TAction
       Caption = #20064#39064#35774#32622'...'
+    end
+    object actSavePaper: TAction
+      Caption = #20132#21367
+      ImageIndex = 6
     end
   end
   object tmr1: TTimer
@@ -408,39 +373,18 @@ object fClientMain: TfClientMain
     Left = 112
     Top = 144
     object mntmN1: TMenuItem
-      Caption = #35774#32622
-      object mntmOption: TMenuItem
-        Action = actOption
-      end
+      Caption = #31995#32479
       object mntmExit: TMenuItem
         Action = actExit
       end
     end
     object mntmN8: TMenuItem
-      Caption = #32771#35797#22521#35757
+      Caption = #21151#33021
       object mntmTraining: TMenuItem
         Action = actTraining
       end
       object mntmExercise: TMenuItem
         Action = actExercise
-      end
-      object mntmExerciseSetting: TMenuItem
-        Action = actExerciseSetting
-      end
-      object mntmExam: TMenuItem
-        Action = actExam
-      end
-    end
-    object mntmN6: TMenuItem
-      Caption = #26723#26696#31649#29702
-      object mntmExaminee1: TMenuItem
-        Action = actExaminee
-      end
-      object mntmPaper1: TMenuItem
-        Action = actPaper
-      end
-      object mntmN3: TMenuItem
-        Action = actQuestion
       end
       object mntmRanking2: TMenuItem
         Action = actRanking
@@ -473,15 +417,6 @@ object fClientMain: TfClientMain
       object mntmHelp: TMenuItem
         Action = actHelp
       end
-      object mntmN7: TMenuItem
-        Caption = '-'
-      end
-      object mntmMore: TMenuItem
-        Action = actMore
-      end
-      object mntmRanking: TMenuItem
-        Action = actCommitBug
-      end
     end
   end
   object imglstil3: TImageList
@@ -490,7 +425,7 @@ object fClientMain: TfClientMain
     Left = 208
     Top = 144
     Bitmap = {
-      494C01010A0013005C0220002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A0013006C0220002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2085,7 +2020,7 @@ object fClientMain: TfClientMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A000F005C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000F006C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
