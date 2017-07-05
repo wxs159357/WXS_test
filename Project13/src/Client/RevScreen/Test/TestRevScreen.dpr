@@ -1,4 +1,4 @@
-program Project4;
+program TestRevScreen;
 
 uses
   Vcl.Forms,
