@@ -3,7 +3,7 @@
         <ProjectGuid>{B6006E7C-C219-47E0-9547-E51A39BA3132}</ProjectGuid>
         <ProjectVersion>18.2</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
-        <MainSource>testAbout.dpr</MainSource>
+        <MainSource>testAboutFMX.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -78,7 +78,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <SanitizedProjectName>testAbout</SanitizedProjectName>
+        <SanitizedProjectName>testAboutFMX</SanitizedProjectName>
         <AUP_INTERNET>true</AUP_INTERNET>
         <AUP_READ_EXTERNAL_STORAGE>true</AUP_READ_EXTERNAL_STORAGE>
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
@@ -308,21 +308,16 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\uAbout.pas">
-            <Form>fAbout</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="..\xFileVersion.pas"/>
         <DCCReference Include="TestMain.pas">
             <Form>Form2</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\xFunction.pas"/>
-        <DCCReference Include="..\..\FMX\xBaseForm.pas">
-            <Form>fBaseForm</Form>
+        <DCCReference Include="..\..\FMX\uAbout.pas">
+            <Form>fAbout</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\FMX\xVCL_FMX.pas"/>
+        <DCCReference Include="..\..\..\xFunction.pas"/>
+        <DCCReference Include="..\..\..\FMX\xVCL_FMX.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -341,7 +336,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">testAbout.dpr</Source>
+                    <Source Name="MainSource">testAboutFMX.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k240.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -360,9 +355,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\testAbout.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\testAboutFMX.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>testAbout.exe</RemoteName>
+                        <RemoteName>testAboutFMX.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
