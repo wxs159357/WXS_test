@@ -13,7 +13,6 @@ object fSimpleInfo: TfSimpleInfo
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -38,9 +37,6 @@ object fSimpleInfo: TfSimpleInfo
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 56
-    ExplicitTop = 240
-    ExplicitWidth = 185
     DesignSize = (
       471
       41)

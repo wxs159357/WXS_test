@@ -1,24 +1,27 @@
-unit FrmTestMain;
+unit xTestMain;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, xSimpleInfoControl, uSimpleInfoList, xDBConn,
-  Vcl.StdCtrls;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
+  FMX.ListView, FMX.Menus, System.Rtti, FMX.Grid.Style, FMX.Grid,
+  FMX.Controls.Presentation, FMX.ScrollBox, FMX.TMSListView,
+  xSimpleInfoControl, uSimpleInfoList, xDBConn, FMX.StdCtrls;
 
 type
-  TfTestMain = class(TForm)
+  TForm8 = class(TForm)
     btn1: TButton;
     btn2: TButton;
     btn3: TButton;
     btn4: TButton;
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
     procedure btn4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,13 +29,13 @@ type
   end;
 
 var
-  fTestMain: TfTestMain;
+  Form8: TForm8;
 
 implementation
 
-{$R *.dfm}
+{$R *.fmx}
 
-procedure TfTestMain.btn1Click(Sender: TObject);
+procedure TForm8.btn1Click(Sender: TObject);
 begin
   with TfSimpleInfoList.Create(nil) do
   begin
@@ -43,7 +46,7 @@ begin
   end;
 end;
 
-procedure TfTestMain.btn2Click(Sender: TObject);
+procedure TForm8.btn2Click(Sender: TObject);
 var
   AInfo : TSimpleInfo;
 begin
@@ -66,7 +69,7 @@ begin
   end;
 end;
 
-procedure TfTestMain.btn3Click(Sender: TObject);
+procedure TForm8.btn3Click(Sender: TObject);
 var
   AInfo : TSimpleInfo;
 begin
@@ -89,7 +92,7 @@ begin
   end;
 end;
 
-procedure TfTestMain.btn4Click(Sender: TObject);
+procedure TForm8.btn4Click(Sender: TObject);
 begin
   with TfSimpleInfoList.Create(nil) do
   begin
@@ -100,7 +103,7 @@ begin
   end;
 end;
 
-procedure TfTestMain.FormCreate(Sender: TObject);
+procedure TForm8.FormCreate(Sender: TObject);
 begin
 
   ADBConn := TDBConn.Create;
@@ -109,7 +112,7 @@ begin
 
 end;
 
-procedure TfTestMain.FormDestroy(Sender: TObject);
+procedure TForm8.FormDestroy(Sender: TObject);
 begin
   ADBConn.Free;
 end;

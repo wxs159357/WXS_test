@@ -13,6 +13,8 @@ object fSimpleInfoList: TfSimpleInfoList
   OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlBottom: TPanel
@@ -23,9 +25,6 @@ object fSimpleInfoList: TfSimpleInfoList
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -19
-    ExplicitTop = 380
-    ExplicitWidth = 614
     DesignSize = (
       575
       41)
@@ -38,7 +37,6 @@ object fSimpleInfoList: TfSimpleInfoList
       Caption = #21462#28040
       ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 504
     end
     object btnSelect: TButton
       Left = 410
@@ -50,14 +48,13 @@ object fSimpleInfoList: TfSimpleInfoList
       Default = True
       ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 423
     end
     object btnAddPerson: TButton
       Left = 16
       Top = 9
       Width = 75
       Height = 25
-      Action = actAddPerson
+      Action = actAdd
       Images = imglstil1
       TabOrder = 2
     end
@@ -66,7 +63,7 @@ object fSimpleInfoList: TfSimpleInfoList
       Top = 9
       Width = 75
       Height = 25
-      Action = actEditInfo
+      Action = actEdit
       Images = imglstil1
       TabOrder = 3
     end
@@ -75,7 +72,7 @@ object fSimpleInfoList: TfSimpleInfoList
       Top = 9
       Width = 75
       Height = 25
-      Action = actDelPerson
+      Action = actDel
       Images = imglstil1
       TabOrder = 4
     end
@@ -116,27 +113,23 @@ object fSimpleInfoList: TfSimpleInfoList
     TabOrder = 1
     ViewStyle = vsReport
     OnDblClick = lvSimpleInfoListDblClick
-    ExplicitLeft = -5
-    ExplicitTop = 3
-    ExplicitWidth = 609
-    ExplicitHeight = 380
   end
   object actnmngractmgr1: TActionManager
     ActionBars = <
       item
         Items = <
           item
-            Action = actAddPerson
+            Action = actAdd
             Caption = #28155#21152'(&Z)'
             ImageIndex = 0
           end
           item
-            Action = actDelPerson
+            Action = actDel
             Caption = #21024#38500'(&Y)'
             ImageIndex = 1
           end
           item
-            Action = actEditInfo
+            Action = actEdit
             Caption = #20462#25913'(&X)'
             ImageIndex = 2
           end
@@ -151,20 +144,20 @@ object fSimpleInfoList: TfSimpleInfoList
     Left = 504
     Top = 56
     StyleName = 'XP Style'
-    object actAddPerson: TAction
+    object actAdd: TAction
       Caption = #28155#21152
       ImageIndex = 0
-      OnExecute = actAddPersonExecute
+      OnExecute = actAddExecute
     end
-    object actDelPerson: TAction
+    object actDel: TAction
       Caption = #21024#38500
       ImageIndex = 1
-      OnExecute = actDelPersonExecute
+      OnExecute = actDelExecute
     end
-    object actEditInfo: TAction
+    object actEdit: TAction
       Caption = #20462#25913
       ImageIndex = 2
-      OnExecute = actEditInfoExecute
+      OnExecute = actEditExecute
     end
     object actSearch: TAction
       Caption = #26597#35810
@@ -180,16 +173,13 @@ object fSimpleInfoList: TfSimpleInfoList
     Left = 464
     Top = 56
     object mntmAddPerson: TMenuItem
-      Action = actAddPerson
+      Action = actAdd
     end
     object mntmEditInfo: TMenuItem
-      Action = actEditInfo
+      Action = actEdit
     end
     object mntmDelPerson: TMenuItem
-      Action = actDelPerson
-    end
-    object mntmImport: TMenuItem
-      Action = actImport
+      Action = actDel
     end
   end
   object dlgOpen1: TOpenDialog
@@ -200,7 +190,7 @@ object fSimpleInfoList: TfSimpleInfoList
     Left = 464
     Top = 120
     Bitmap = {
-      494C0101050009000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       000000000000000000000000000000000000000000004A667C00BE9596000000
       0000000000000000000000000000000000000000000000000000000000000000

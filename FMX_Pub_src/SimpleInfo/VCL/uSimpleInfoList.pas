@@ -1,4 +1,4 @@
-unit FrmSimpleInfoList;
+unit uSimpleInfoList;
 
 interface
 
@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.ImageList, Vcl.ImgList,
   Vcl.Menus, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnPopup, System.Actions,
   Vcl.ActnList, Vcl.XPStyleActnCtrls, Vcl.ActnMan, Vcl.ComCtrls, Vcl.StdCtrls,
-  Vcl.ExtCtrls, xSimpleInfoControl, FrmSimpleInfo;
+  Vcl.ExtCtrls, xSimpleInfoControl, uSimpleInfo;
 
 type
   TfSimpleInfoList = class(TForm)
@@ -16,27 +16,31 @@ type
     btnSelect: TButton;
     lvSimpleInfoList: TListView;
     actnmngractmgr1: TActionManager;
-    actAddPerson: TAction;
-    actDelPerson: TAction;
-    actEditInfo: TAction;
+    actAdd: TAction;
+    actDel: TAction;
+    actEdit: TAction;
     actSearch: TAction;
     actImport: TAction;
     pctnbr1: TPopupActionBar;
     mntmAddPerson: TMenuItem;
     mntmEditInfo: TMenuItem;
     mntmDelPerson: TMenuItem;
-    mntmImport: TMenuItem;
     dlgOpen1: TOpenDialog;
     imglstil1: TImageList;
     btnAddPerson: TButton;
     btnEditInfo: TButton;
     btnDelPerson: TButton;
-    procedure actAddPersonExecute(Sender: TObject);
-    procedure actEditInfoExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure actDelPersonExecute(Sender: TObject);
+    procedure actAddExecute(Sender: TObject);
+    procedure actEditExecute(Sender: TObject);
+    procedure actDelExecute(Sender: TObject);
     procedure lvSimpleInfoListDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
+    FSimpleInfoName: string;
+    FSimpleInfoDBName: string;
+    FSimpleInfoControl : TSimpleInfoControl;
     { Private declarations }
 
     /// <summary>
@@ -54,6 +58,17 @@ type
     /// 选择信息
     /// </summary>
     function SelectInfo : TSimpleInfo;
+
+    /// <summary>
+    /// 简单信息名称  show 之前赋值
+    /// </summary>
+    property SimpleInfoName : string read FSimpleInfoName write FSimpleInfoName;
+
+    /// <summary>
+    /// 简单信息数据库表名称 show 之前赋值
+    /// </summary>
+    property SimpleInfoDBName : string read FSimpleInfoDBName write FSimpleInfoDBName;
+
   end;
 
 var
@@ -65,7 +80,7 @@ implementation
 
 { TfSimpleInfoList }
 
-procedure TfSimpleInfoList.actAddPersonExecute(Sender: TObject);
+procedure TfSimpleInfoList.actAddExecute(Sender: TObject);
 var
   AInfo : TSimpleInfo;
 begin
@@ -73,12 +88,13 @@ begin
 
   with TfSimpleInfo.Create(Self) do
   begin
+    Caption := FSimpleInfoControl.SimpleInfoName;
     ShowInfo(AInfo);
     if ShowModal = mrOk then
     begin
       SaveInfo;
 
-      if Assigned(ASimpleInfoControl.GetInfoByName(AInfo.SIName)) then
+      if Assigned(FSimpleInfoControl.GetInfoByName(AInfo.SIName)) then
       begin
         Application.MessageBox('名称重复，请重新用其他名称！', '警告', MB_OK +
           MB_ICONINFORMATION);
@@ -93,7 +109,7 @@ begin
           SubItems.Add('');
           Data := AInfo;
         end;
-        ASimpleInfoControl.AddInfo(AInfo);
+        FSimpleInfoControl.AddInfo(AInfo);
         RefurshLV(lvSimpleInfoList.Items.Count-1);
       end;
     end
@@ -106,7 +122,7 @@ begin
   end;
 end;
 
-procedure TfSimpleInfoList.actDelPersonExecute(Sender: TObject);
+procedure TfSimpleInfoList.actDelExecute(Sender: TObject);
 var
   AInfo : TSimpleInfo;
   nIndex : Integer;
@@ -126,7 +142,7 @@ begin
       begin
         AInfo := TSimpleInfo(lvSimpleInfoList.Items[i].Data);
         lvSimpleInfoList.Items.Delete(i);
-        ASimpleInfoControl.DelInfo(AInfo.SIID);
+        FSimpleInfoControl.DelInfo(AInfo.SIID);
         nIndex := i;
       end;
     end;
@@ -136,7 +152,7 @@ begin
   end;
 end;
 
-procedure TfSimpleInfoList.actEditInfoExecute(Sender: TObject);
+procedure TfSimpleInfoList.actEditExecute(Sender: TObject);
 var
   AInfo : TSimpleInfo;
 begin
@@ -147,11 +163,12 @@ begin
 
   with TfSimpleInfo.Create(Self) do
   begin
+    Caption := FSimpleInfoControl.SimpleInfoName;
     ShowInfo(AInfo);
     if ShowModal = mrOk then
     begin
 
-      if Assigned(ASimpleInfoControl.GetInfoByName(edtSIName.Text, AInfo)) then
+      if Assigned(FSimpleInfoControl.GetInfoByName(edtSIName.Text, AInfo)) then
       begin
         Application.MessageBox('修改失败！名称已存在，请重新用其他名称！', '警告', MB_OK +
           MB_ICONINFORMATION);
@@ -160,7 +177,7 @@ begin
       begin
         SaveInfo;
 
-        ASimpleInfoControl.EditInfo(AInfo);
+        FSimpleInfoControl.EditInfo(AInfo);
         RefurshLV(lvSimpleInfoList.ItemIndex);
       end;
     end;
@@ -170,8 +187,29 @@ end;
 
 procedure TfSimpleInfoList.FormCreate(Sender: TObject);
 begin
-  Caption := ASimpleInfoControl.SimpleInfoName + '列表';
+  FSimpleInfoControl := TSimpleInfoControl.Create;
+end;
+
+procedure TfSimpleInfoList.FormDestroy(Sender: TObject);
+begin
+  FSimpleInfoControl.Free;
+end;
+
+procedure TfSimpleInfoList.FormShow(Sender: TObject);
+begin
+  FSimpleInfoControl.SimpleInfoName := FSimpleInfoName;
+
+  if FSimpleInfoDBName = '' then
+  begin
+    ShowMessage('显示界面先要赋值数据库表名称！');
+    Exit;
+  end;
+
+  FSimpleInfoControl.LoadList(FSimpleInfoDBName);
+
+  Caption := FSimpleInfoControl.SimpleInfoName + '列表';
   LoadList;
+
 end;
 
 procedure TfSimpleInfoList.LoadList;
@@ -180,17 +218,17 @@ var
 begin
   lvSimpleInfoList.Items.Clear;
 
-  if not Assigned(ASimpleInfoControl) then
+  if not Assigned(FSimpleInfoControl) then
     Exit;
 
-  for i := 0 to ASimpleInfoControl.SimpleInfoList.Count - 1 do
+  for i := 0 to FSimpleInfoControl.SimpleInfoList.Count - 1 do
   begin
     with lvSimpleInfoList.Items.Add do
     begin
       Caption := '';
       SubItems.Add('');
       SubItems.Add('');
-      Data := ASimpleInfoControl.SimpleInfoList.Objects[i];
+      Data := FSimpleInfoControl.SimpleInfoList.Objects[i];
     end;
     RefurshLV(i);
   end;
@@ -198,7 +236,7 @@ end;
 
 procedure TfSimpleInfoList.lvSimpleInfoListDblClick(Sender: TObject);
 begin
-  actEditInfoExecute(nil);
+  actEditExecute(nil);
 end;
 
 procedure TfSimpleInfoList.RefurshLV(nIndex: Integer);
@@ -230,3 +268,4 @@ begin
 end;
 
 end.
+

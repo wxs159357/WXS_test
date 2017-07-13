@@ -55,8 +55,12 @@ type
     FDBTableName : string;
 
   public
-    constructor Create(sDBTableName : string); overload;
+    constructor Create; overload;
     destructor Destroy; override;
+    /// <summary>
+    /// 数据库表名称
+    /// </summary>
+    property DBTableName : string read FDBTableName write FDBTableName;
 
     /// <summary>
     /// 添加
@@ -99,10 +103,11 @@ type
     function GetMaxID : Integer;
 
   public
-    constructor Create(sDBTableName : string);
+    constructor Create;
     destructor Destroy; override;
 
   public
+
     /// <summary>
     /// 信息列表
     /// </summary>
@@ -117,6 +122,11 @@ type
     /// <param name="aNotInfo">排除的信息</param>
     /// <returns>获取的信息，不等于排除信息</returns>
     function GetInfoByName(sInfoName : string; aNotInfo : TSimpleInfo = nil) : TSimpleInfo;
+
+    /// <summary>
+    /// 根据编号获取信息
+    /// </summary>
+    function GetInfoByID(nID : Integer): TSimpleInfo;
 
     /// <summary>
     /// 添加
@@ -139,13 +149,18 @@ type
     procedure ClearInfo;
 
     /// <summary>
+    /// 加载列表
+    /// </summary>
+    procedure LoadList(sDBTableName : string);
+
+    /// <summary>
     /// 简单信息名称
     /// </summary>
     property SimpleInfoName : string read FSimpleInfoName write FSimpleInfoName;
 
   end;
-var
-  ASimpleInfoControl : TSimpleInfoControl;
+//var
+//  ASimpleInfoControl : TSimpleInfoControl;
 
 
 implementation
@@ -214,10 +229,10 @@ begin
   ExecSQL;
 end;
 
-constructor TSimpleInfoAction.Create(sDBTableName: string);
+constructor TSimpleInfoAction.Create;
 begin
   inherited Create;
-  FDBTableName := sDBTableName;
+//  FDBTableName := sDBTableName;
 
 end;
 
@@ -305,12 +320,12 @@ begin
   ClearStringList(FSimpleInfoList);
 end;
 
-constructor TSimpleInfoControl.Create(sDBTableName: string);
+constructor TSimpleInfoControl.Create;
 begin
-  FAction := TSimpleInfoAction.Create(sDBTableName);
+  FAction := TSimpleInfoAction.Create;
   FSimpleInfoList:= TStringList.Create;
 
-  FAction.LoadInfo(FSimpleInfoList);
+
   FSimpleInfoName := '基本信息';
 end;
 
@@ -346,6 +361,24 @@ end;
 procedure TSimpleInfoControl.EditInfo(AInfo: TSimpleInfo);
 begin
   FAction.EditInfo(AInfo);
+end;
+
+function TSimpleInfoControl.GetInfoByID(nID: Integer): TSimpleInfo;
+var
+   i : Integer;
+  AInfo : TSimpleInfo;
+begin
+  Result := nil;
+  for i := 0 to FSimpleInfoList.Count - 1 do
+  begin
+    AInfo := TSimpleInfo(FSimpleInfoList.Objects[i]);
+
+    if (AInfo.SIID = nID) then
+    begin
+      Result := AInfo;
+      Break;
+    end;
+  end;
 end;
 
 function TSimpleInfoControl.GetInfoByName(sInfoName: string; aNotInfo : TSimpleInfo): TSimpleInfo;
@@ -393,6 +426,12 @@ begin
   begin
     Result := nil;
   end;
+end;
+
+procedure TSimpleInfoControl.LoadList(sDBTableName : string);
+begin
+  FAction.DBTableName := sDBTableName;
+  FAction.LoadInfo(FSimpleInfoList);
 end;
 
 end.

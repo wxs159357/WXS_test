@@ -1,0 +1,53 @@
+object Form8: TForm8
+  Left = 0
+  Top = 0
+  Caption = 'Form8'
+  ClientHeight = 193
+  ClientWidth = 407
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btn1: TButton
+    Position.X = 80.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = #32771#35797' '#20449#24687#31649#29702
+    OnClick = btn1Click
+  end
+  object btn2: TButton
+    Position.X = 208.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = #32771#35797' '#20449#24687#36873#25321
+    OnClick = btn2Click
+  end
+  object btn3: TButton
+    Position.X = 208.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = #31456#33410' '#20449#24687#36873#25321
+    OnClick = btn3Click
+  end
+  object btn4: TButton
+    Position.X = 80.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = #31456#33410' '#20449#24687#31649#29702
+    OnClick = btn4Click
+  end
+end

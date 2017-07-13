@@ -1,22 +1,23 @@
-unit FrmSimpleInfo;
+unit uSImpleInfo;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, xSimpleInfoControl;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, xSimpleInfoControl,
+  FMX.Layouts, FMX.ScrollBox, FMX.Memo, FMX.Edit, FMX.Controls.Presentation,
+  FMX.StdCtrls, FMX.Objects;
 
 type
   TfSimpleInfo = class(TForm)
     lbl1: TLabel;
     lbl2: TLabel;
-    pnl1: TPanel;
-    btn1: TButton;
-    btn2: TButton;
-    bvl1: TBevel;
     edtSIName: TEdit;
     mmoSIRemark: TMemo;
-    procedure FormCreate(Sender: TObject);
+    lyt1: TLayout;
+    ln1: TLine;
+    btn1: TButton;
+    btn2: TButton;
   private
     { Private declarations }
     FInfo : TSimpleInfo;
@@ -24,7 +25,6 @@ type
     { Public declarations }
     procedure ShowInfo(AInfo : TSimpleInfo);
     procedure SaveInfo;
-
   end;
 
 var
@@ -32,15 +32,7 @@ var
 
 implementation
 
-{$R *.dfm}
-
-{ TfSimpleInfo }
-
-procedure TfSimpleInfo.FormCreate(Sender: TObject);
-begin
-  if Assigned(ASimpleInfoControl ) then
-    Caption := ASimpleInfoControl.SimpleInfoName;
-end;
+{$R *.fmx}
 
 procedure TfSimpleInfo.SaveInfo;
 begin
