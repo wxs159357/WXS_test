@@ -34,7 +34,6 @@ object fTrain: TfTrain
     Height = 567
     Align = alRight
     TabOrder = 0
-    ExplicitHeight = 507
     object spltr2: TSplitter
       Left = 1
       Top = 390
@@ -53,7 +52,6 @@ object fTrain: TfTrain
       Align = alClient
       Caption = #30446#24405
       TabOrder = 0
-      ExplicitHeight = 248
       object pnl3: TPanel
         Left = 2
         Top = 371
@@ -61,7 +59,6 @@ object fTrain: TfTrain
         Height = 16
         Align = alBottom
         TabOrder = 0
-        ExplicitTop = 230
         object btn6: TSpeedButton
           Left = 1
           Top = 1
@@ -128,7 +125,6 @@ object fTrain: TfTrain
         ReadOnly = True
         TabOrder = 1
         OnClick = tv1Click
-        ExplicitHeight = 129
       end
     end
     object grp2: TGroupBox
@@ -139,12 +135,11 @@ object fTrain: TfTrain
       Align = alBottom
       Caption = #25805#20316
       TabOrder = 1
-      ExplicitTop = 352
       object lbl1: TLabel
         Left = 2
         Top = 15
         Width = 217
-        Height = 42
+        Height = 17
         Align = alTop
         Alignment = taCenter
         Caption = #22521#35757#20154#25968#65306'23/56'
@@ -154,10 +149,11 @@ object fTrain: TfTrain
         Font.Name = #23435#20307
         Font.Style = []
         ParentFont = False
+        ExplicitWidth = 130
       end
       object btn1: TButton
         Left = 2
-        Top = 57
+        Top = 32
         Width = 217
         Height = 41
         Align = alTop
@@ -170,7 +166,6 @@ object fTrain: TfTrain
         ParentFont = False
         TabOrder = 0
         OnClick = btn1Click
-        ExplicitTop = 32
       end
     end
   end
@@ -185,9 +180,15 @@ object fTrain: TfTrain
     object tbsht3: TTabSheet
       Caption = #23458#25143#26426#29366#24577
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tbsht1: TTabSheet
       Caption = #32771#39064#20449#24687
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 563
       ExplicitHeight = 477
       object img1: TImage
@@ -23639,8 +23640,6 @@ object fTrain: TfTrain
     object tbsht2: TTabSheet
       Caption = #31572#39064#25805#20316
       ImageIndex = 1
-      ExplicitLeft = 52
-      ExplicitTop = 56
     end
   end
   object imglstil1: TImageList
@@ -23649,7 +23648,7 @@ object fTrain: TfTrain
     Left = 464
     Top = 24
     Bitmap = {
-      494C010105000900280020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009002C0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000FDF6
@@ -24716,7 +24715,7 @@ object fTrain: TfTrain
     Left = 469
     Top = 137
     Bitmap = {
-      494C01010B000C001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000C00200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       000000000000000000000000000000000000FFFFFF00A09D9A004E4940004E49
       40004E4940004E4940004E4940004E4940004E4940004E4940004E4940004E49

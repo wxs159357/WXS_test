@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ImgList, Vcl.ComCtrls,
   Vcl.StdCtrls, System.ImageList, xExerciseControl, xExerciseInfo,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  Vcl.Menus, FrmQuestionListC, xQuestionInfo, FrmQInfoC, Vcl.Buttons;
+  Vcl.Menus, FrmQuestionListC, xQuestionInfo, FrmQInfoC, Vcl.Buttons, xSortControl;
 
 type
   TfExercise = class(TForm)
@@ -98,17 +98,21 @@ var
   i : Integer;
   AExerciseInfo : TExerciseInfo;
 begin
-  for i := 0 to lvExercises.Items.Count - 1 do
+  if Application.MessageBox('确定要删除选择记录（记录下的内容全部删除）！', '提示', MB_OKCANCEL +
+    MB_ICONQUESTION) = IDOK then
   begin
-    if lvExercises.Items[i].Selected then
+    for i := 0 to lvExercises.Items.Count - 1 do
     begin
-      AExerciseInfo := TExerciseInfo(lvExercises.Items[i].Data);
-      ExerciseControl.DelExercise(AExerciseInfo, True);
+      if lvExercises.Items[i].Selected then
+      begin
+        AExerciseInfo := TExerciseInfo(lvExercises.Items[i].Data);
+        ExerciseControl.DelExercise(AExerciseInfo, True);
+      end;
     end;
-  end;
 
-  ExerciseControl.LoadExercise(ExerciseControl.CurrentPath);
-  RefurshExercise;
+    ExerciseControl.LoadExercise(ExerciseControl.CurrentPath);
+    RefurshExercise;
+  end;
 end;
 
 procedure TfExercise.actReNameExecute(Sender: TObject);
@@ -152,7 +156,7 @@ begin
       AExerciseInfo.Ename := AQInfo.QName;
       AExerciseInfo.Code1 := AQInfo.QCode;
       AExerciseInfo.Code2 := AQInfo.QRemark2;
-
+      AExerciseInfo.Remark := IntToStr(AQInfo.QID);
       ExerciseControl.AddExercise(AExerciseInfo);
     end
     else

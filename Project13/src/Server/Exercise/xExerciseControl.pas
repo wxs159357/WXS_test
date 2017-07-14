@@ -2,7 +2,8 @@ unit xExerciseControl;
 
 interface
 
-uses xExerciseInfo, System.SysUtils, System.Classes, xFunction, xExerciseAction;
+uses xExerciseInfo, System.SysUtils, System.Classes, xFunction, xExerciseAction,
+  xSortControl, xQuestionInfo;
 
 type
   /// <summary>
@@ -224,9 +225,41 @@ begin
 end;
 
 procedure TExerciseControl.LoadExercise(sPath : string);
+var
+  AQuestionInfo : TQuestionInfo;
+  nID : Integer;
+  i : Integer;
+  AInfo : TExerciseInfo;
 begin
   FCurrentPath := sPath;
   FExerciseAction.LoadExercise(sPath, FExerciseList);
+
+  for i := FExerciseList.Count - 1 downto 0 do
+  begin
+    AInfo := TExerciseInfo(FExerciseList.Objects[i]);
+
+    if AInfo.Ptype = 1 then
+    begin
+      TryStrToInt(AInfo.Remark, nID);
+
+      AQuestionInfo := SortControl.GetQInfo(nID);
+
+      // 如果题库中不存在则不加载练习题,并删到数据库中的考题
+      if not Assigned(AQuestionInfo) then
+      begin
+        FExerciseAction.DelExercise(AInfo.Id);
+        AInfo.Free;
+        FExerciseList.Delete(i);
+      end
+      else
+      begin
+        AInfo.Ename := AQuestionInfo.QName;
+        AInfo.Code1 := AQuestionInfo.QCode;
+        AInfo.Code2 := AQuestionInfo.QRemark2;
+        AInfo.Remark := IntToStr(AQuestionInfo.QID);
+      end;
+    end;
+  end;
 end;
 
 procedure TExerciseControl.LoadPreviousPath;

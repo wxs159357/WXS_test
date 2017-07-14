@@ -15,6 +15,7 @@ type
     spltr1: TSplitter;
     tbcntrl1: TTabControl;
     chkIsElec: TCheckBox;
+    lbl1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -63,6 +64,7 @@ procedure TfQInfo.chkIsElecClick(Sender: TObject);
 begin
   inherited;
   mmoQuestionDescribe.Text := FError.GetDescription + GetIsElecStr;
+  lbl1.Caption := mmoQuestionDescribe.Text;
 end;
 
 procedure TfQInfo.ErrorChange(Sender: TObject);
@@ -71,6 +73,8 @@ begin
 
   mmoQuestionDescribe.Text := FError.GetDescription + GetIsElecStr;
   FFormDetail.LoadEquation(FWError, 20);
+
+  lbl1.Caption := mmoQuestionDescribe.Text;
 end;
 
 procedure TfQInfo.FormCreate(Sender: TObject);
@@ -179,6 +183,7 @@ begin
   tbcntrl1.Enabled := False;
   tbsht1.Enabled := False;
   pnl1.Enabled := False;
+  pnl1.Visible := False;
   ShowInfo(AInfo);
 end;
 

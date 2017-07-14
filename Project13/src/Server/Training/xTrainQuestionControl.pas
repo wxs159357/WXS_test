@@ -2,7 +2,8 @@ unit xTrainQuestionControl;
 
 interface
 
-uses xTrainQuestionInfo, System.SysUtils, System.Classes, xFunction, xTrainQuestionAction;
+uses xTrainQuestionInfo, System.SysUtils, System.Classes, xFunction,
+  xTrainQuestionAction, xSortControl, xQuestionInfo;
 
 type
   /// <summary>
@@ -171,8 +172,40 @@ begin
 end;
 
 procedure TTrainQuestionControl.LoadTrainQuestion;
+var
+  i, nID : Integer;
+  AInfo : TTrainQuestion;
+  AQuestionInfo : TQuestionInfo;
 begin
+
   FTrainQuestionAction.LoadInfo( FTrainQuestionList);
+
+  for i := FTrainQuestionList.Count - 1 downto 0 do
+  begin
+    AInfo := TTrainQuestion(FTrainQuestionList.Objects[i]);
+
+    if AInfo.Tqtype = 1 then
+    begin
+      TryStrToInt(AInfo.Tqremark, nID);
+
+      AQuestionInfo := SortControl.GetQInfo(nID);
+
+      // 如果题库中不存在则不加载练习题,并删到数据库中的考题
+      if not Assigned(AQuestionInfo) then
+      begin
+        FTrainQuestionAction.DelInfo(AInfo.Tqid);
+        AInfo.Free;
+        FTrainQuestionList.Delete(i);
+      end
+      else
+      begin
+        AInfo.Tqqname := AQuestionInfo.QName;
+        AInfo.Tqcode1 := AQuestionInfo.QCode;
+        AInfo.TqCode2 := AQuestionInfo.QRemark2;
+        AInfo.TqRemark := IntToStr(AQuestionInfo.QID);
+      end;
+    end;
+  end;
 end;
 
 procedure TTrainQuestionControl.Rename(ATrainQuestion: TTrainQuestion; sNewName : string);

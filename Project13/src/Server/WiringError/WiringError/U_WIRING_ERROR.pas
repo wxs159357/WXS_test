@@ -743,7 +743,7 @@ begin
   AText.Clear;
 
   if FUSequence <> stABC then
-      AText.Add( '电压表尾接线错:U' +  GetSequenceTypeStr( FUSequence, Fabc ) );
+      AText.Add( 'U' +  GetSequenceTypeStr( FUSequence, Fabc ) );
 
   if FPhaseType = ptFour then
   begin
@@ -787,7 +787,7 @@ begin
         if FUnBroken then s := s + 'Un,';
       end;  }
 
-      AText.Add( '电压断相:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add( Copy( s, 1, Length( s ) - 1 )  + '电压断');
     end;
   end
   else  if  FPhaseType = ptThree then
@@ -827,7 +827,7 @@ begin
         if FUbBroken then s := s + 'V相,';
         if FUcBroken then s := s + 'W相,';
       end; }
-      AText.Add( 'PT一次断相:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add( Copy( s, 1, Length( s ) - 1 )  + ' 一次失压');
     end;
 
     if FUsaBroken or FUsbBroken or FUscBroken then
@@ -866,8 +866,10 @@ begin
         end;      
       end;
 
-      AText.Add( 'PT二次断相:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add(  Copy( s, 1, Length( s ) - 1 ) + '二次失压');
     end;
+
+    if FGroundBroken then  AText.Add('电压接地断开');
 
     if FPT1Reverse or FPT2Reverse then
     begin
@@ -884,7 +886,7 @@ begin
         if FPT2Reverse then s := s + 'TV2,';
       end;
 
-      AText.Add( 'PT二次极性反:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add( Copy( s, 1, Length( s ) - 1 ) + '极性反' );
     end;
   end
   else if FPhaseType = ptFourPT then
@@ -926,7 +928,7 @@ begin
         end;     
       end;
 
-      AText.Add( 'PT一次断相:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add( Copy( s, 1, Length( s ) - 1 ) + '一次失压' );
     end;
 
     if FUsaBroken or FUsbBroken or FUscBroken or
@@ -965,13 +967,15 @@ begin
           if FUscBroken then s := s + '3相,';
         end;  
       end;
-
       if FUsnBroken then s := s + 'n相,';
-        if FGroundBroken then  s := s + '地线,';
+      AText.Add(Copy( s, 1, Length( s ) - 1 ) + '二次失压');
 
-      AText.Add( 'PT二次断相:' + Copy( s, 1, Length( s ) - 1 ) );
+
+
+
+
     end;
-
+    if FGroundBroken then  AText.Add('电压接地断开');
     if FPT1Reverse or FPT2Reverse or FPT3Reverse then
     begin
       s := EmptyStr;
@@ -989,7 +993,7 @@ begin
         if FPT3Reverse then s := s + 'TV3,';
       end;
 
-      AText.Add( 'PT二次极性反:' + Copy( s, 1, Length( s ) - 1 ) );
+      AText.Add( Copy( s, 1, Length( s ) - 1 ) + '极性反' );
     end;
   end;
 
@@ -1021,7 +1025,7 @@ begin
       s := s + ' 元件3反接';
 
     if s <> EmptyStr then
-      AText.Add( '电流表尾接线错:' +  s );
+      AText.Add( s );
 
 
 
@@ -1128,7 +1132,7 @@ begin
 //        GetPhaseLineTypeStr( FI2Out ) ] );
 
     if s <> EmptyStr then
-      AText.Add( '电流表尾接线错:' +  s );
+      AText.Add(  s );
   end;
 
   if FCT1Reverse or FCT2Reverse or FCT3Reverse then
@@ -1148,7 +1152,7 @@ begin
     end;
 
 
-    AText.Add( 'CT二次极性反:' + Copy( s, 1, Length( s ) - 1 ) );
+    AText.Add(Copy( s, 1, Length( s ) - 1 ) + '极性反');
   end;
 
   if FCT1Short or FCT2Short or FCT3Short then
@@ -1168,7 +1172,7 @@ begin
     end;
 
 
-    AText.Add( 'CT二次短路:' + Copy( s, 1, Length( s ) - 1 ) );
+    AText.Add(Copy( s, 1, Length( s ) - 1 ) + '短路');
   end;
 
   if FIaBroken or FIbBroken or FIcBroken or FInBroken then
@@ -1212,7 +1216,7 @@ begin
       end;  
     end;
 
-    AText.Add( '电流开路:' + Copy( s, 1, Length( s ) - 1 ) );
+    AText.Add( Copy( s, 1, Length( s ) - 1 ) + '开路' );
   end;
 
   if FIaGroundBroken or FIbGroundBroken or FIcGroundBroken or FIGroundBroken then
@@ -1224,7 +1228,7 @@ begin
     if FIcGroundBroken then s := s + 'Ic,';
 //    if FIcGroundBroken then s := s + '全部,';
 
-    AText.Add( '电流接地断开:' + Copy( s, 1, Length( s ) - 1 ) );
+    AText.Add( Copy( s, 1, Length( s ) - 1 ) + '接地断开' );
   end;
 
 end;

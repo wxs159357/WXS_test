@@ -61,5 +61,16 @@ object fQInfo: TfQInfo
     Height = 655
     Align = alClient
     TabOrder = 1
+    object lbl1: TLabel
+      Left = 1
+      Top = 641
+      Width = 685
+      Height = 13
+      Align = alBottom
+      Caption = 'lbl1'
+      ExplicitLeft = 288
+      ExplicitTop = 608
+      ExplicitWidth = 16
+    end
   end
 end

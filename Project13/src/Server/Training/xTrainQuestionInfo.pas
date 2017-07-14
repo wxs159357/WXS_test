@@ -25,6 +25,9 @@ type
     property Tqqname  : String     read FTqqname  write FTqqname ;
     property Tqcode1  : String     read FTqcode1  write FTqcode1 ;
     property Tqcode2  : String     read FTqcode2  write FTqcode2 ;
+    /// <summary>
+    /// ¥Ê¥¢øºÃ‚±‡∫≈
+    /// </summary>
     property Tqremark : String     read FTqremark write FTqremark;
   end;
 

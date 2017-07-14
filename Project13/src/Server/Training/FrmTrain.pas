@@ -275,7 +275,7 @@ begin
       AInfo.Tqqname := AQInfo.QName;
       AInfo.Tqcode1 := AQInfo.QCode;
       AInfo.Tqcode2 := AQInfo.QRemark2;
-
+      AInfo.Tqremark := IntToStr(AQInfo.QID);
       ANoteTemp.Data := AInfo;
       FTCControl.AddTrainQuestion(AInfo);
     end;

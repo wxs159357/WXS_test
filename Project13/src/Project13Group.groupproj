@@ -9,6 +9,12 @@
         <Projects Include="Client\Project13_Client.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\..\..\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\..\CKM\srcXE7\TS_C03\Server\TS_C03.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +41,32 @@
     <Target Name="Project13_Client:Make">
         <MSBuild Projects="Client\Project13_Client.dproj" Targets="Make"/>
     </Target>
+    <Target Name="CKM2008ES">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj"/>
+    </Target>
+    <Target Name="CKM2008ES:Clean">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CKM2008ES:Make">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\CKM2008ES\CKM2008ES.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TS_C03">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\TS_C03\Server\TS_C03.dproj"/>
+    </Target>
+    <Target Name="TS_C03:Clean">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\TS_C03\Server\TS_C03.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TS_C03:Make">
+        <MSBuild Projects="..\..\..\..\CKM\srcXE7\TS_C03\Server\TS_C03.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Project13_Server;Project13_Client"/>
+        <CallTarget Targets="Project13_Server;Project13_Client;CKM2008ES;TS_C03"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Project13_Server:Clean;Project13_Client:Clean"/>
+        <CallTarget Targets="Project13_Server:Clean;Project13_Client:Clean;CKM2008ES:Clean;TS_C03:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Project13_Server:Make;Project13_Client:Make"/>
+        <CallTarget Targets="Project13_Server:Make;Project13_Client:Make;CKM2008ES:Make;TS_C03:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

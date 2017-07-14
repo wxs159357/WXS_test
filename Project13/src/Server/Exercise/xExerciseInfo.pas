@@ -42,7 +42,7 @@ type
     /// </summary>
     property Code2      : String     read FCode2      write FCode2     ;
     /// <summary>
-    /// ±¸×¢
+    /// ±¸×¢  ´æ´¢¿¼Ìâ±àºÅ
     /// </summary>
     property Remark     : String     read FRemark     write FRemark    ;
   end;

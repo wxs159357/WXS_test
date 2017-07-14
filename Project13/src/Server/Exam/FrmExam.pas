@@ -8,7 +8,7 @@ uses
   Vcl.ComCtrls, Vcl.StdCtrls, System.ImageList, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, FrmPosState, xExamControl,
   xTCPServer, xDataDictionary, xQuestionInfo, xSortControl, uQuestionList, uExamInfo,
-  Vcl.Buttons;
+  Vcl.Buttons, FrmQInfoC;
 
 type
   TfExam = class(TForm)
@@ -63,6 +63,7 @@ type
     procedure actEditExamExecute(Sender: TObject);
     procedure pnlExamNameDblClick(Sender: TObject);
     procedure tmr1Timer(Sender: TObject);
+    procedure lvSubListDblClick(Sender: TObject);
   private
     { Private declarations }
     FromPosState : TfPosState;
@@ -189,6 +190,20 @@ end;
 procedure TfExam.FormShow(Sender: TObject);
 begin
   FromPosState.Show;
+end;
+
+procedure TfExam.lvSubListDblClick(Sender: TObject);
+begin
+  if lvSubList.ItemIndex <> -1 then
+  begin
+    with TfQInfo.Create(nil) do
+    begin
+      ShowInfoReadOnly(TQuestionInfo(lvSubList.Items[lvSubList.ItemIndex].Data));
+      ShowModal;
+      Free;
+    end;
+  end;
+
 end;
 
 procedure TfExam.pnlExamNameDblClick(Sender: TObject);
