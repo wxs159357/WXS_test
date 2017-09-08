@@ -13,9 +13,9 @@ type
     tbsht1: TTabSheet;
     tbsht2: TTabSheet;
     pnlBottom: TPanel;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    lbl3: TLabel;
+    lblQuestionName: TLabel;
+    lblQuestionDescribe: TLabel;
+    lblQuestionRemark: TLabel;
     edtQuestionName: TEdit;
     mmoQuestionDescribe: TMemo;
     mmoQuestionRemark: TMemo;

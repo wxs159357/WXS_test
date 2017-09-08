@@ -5,7 +5,6 @@ uses
   FMX.Forms,
   Unit2 in 'Unit2.pas' {Form2},
   xDBActionBase in '..\xDBActionBase.pas',
-  xDBConn in '..\xDBConn.pas',
   xDBUpdate in '..\xDBUpdate.pas',
   xFunction in '..\xFunction.pas',
   xConsts in '..\xConsts.pas';

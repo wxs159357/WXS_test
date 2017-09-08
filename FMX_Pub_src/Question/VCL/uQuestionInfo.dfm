@@ -24,21 +24,21 @@ object fQuestionInfo: TfQuestionInfo
     TabOrder = 0
     object tbsht1: TTabSheet
       Caption = #22522#26412#20449#24687
-      object lbl1: TLabel
+      object lblQuestionName: TLabel
         Left = 24
         Top = 32
         Width = 48
         Height = 13
         Caption = #32771#39064#21517#31216
       end
-      object lbl2: TLabel
+      object lblQuestionDescribe: TLabel
         Left = 24
         Top = 64
         Width = 48
         Height = 13
         Caption = #32771#39064#25551#36848
       end
-      object lbl3: TLabel
+      object lblQuestionRemark: TLabel
         Left = 24
         Top = 166
         Width = 48
